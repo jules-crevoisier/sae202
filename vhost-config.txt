@@ -1,0 +1,15 @@
+<VirtualHost *:80>
+    ServerName sae202.local
+    ServerAlias www.sae202.local
+    DocumentRoot "/path/to/sae202"
+    
+    <Directory "/path/to/sae202">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+        DirectoryIndex index.php
+    </Directory>
+    
+    ErrorLog ${APACHE_LOG_DIR}/sae202_error.log
+    CustomLog ${APACHE_LOG_DIR}/sae202_access.log combined
+</VirtualHost>
