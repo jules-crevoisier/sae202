@@ -7,27 +7,6 @@ RewriteEngine On
 # Empêcher l'accès direct aux fichiers de configuration et modèles
 RewriteRule ^(conf|model)/ - [F,L]
 
-# Protection des routes d'administration
-RewriteCond %{REQUEST_URI} ^/gestion [NC]
-RewriteCond %{REMOTE_ADDR} !^195\.83\.128\.43$
-RewriteCond %{REMOTE_ADDR} !^194\.199\.63\.200$
-RewriteCond %{REMOTE_ADDR} !^194\.199\.63\.199$
-RewriteRule ^gestion - [E=REQUIRE_AUTH:1]
-
-# Authentification pour les routes protégées
-<RequireAll>
-    Require env !REQUIRE_AUTH
-    Require all granted
-</RequireAll>
-
-<RequireAll>
-    Require env REQUIRE_AUTH
-    AuthType Basic
-    AuthName "Administration SAE202 - Murder Party"
-    AuthUserFile /home/mmi24c01/htpassword.mmi
-    Require valid-user
-</RequireAll>
-
 # Routage principal : rediriger tout vers index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

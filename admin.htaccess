@@ -1,0 +1,12 @@
+# Protection du dossier admin
+AuthType Basic
+AuthName "Administration SAE202 - Murder Party"
+AuthUserFile /home/mmi24c01/htpassword.mmi
+
+# Apache 2.4 syntax
+<RequireAny>
+    Require ip 195.83.128.43
+    Require ip 194.199.63.200
+    Require ip 194.199.63.199
+    Require valid-user
+</RequireAny> 
