@@ -695,7 +695,7 @@
                         </li>
                         <?php if (isAdmin()): ?>
                             <li class="nav-item">
-                                <a class="nav-link nav-link-admin" href="/gestion" aria-label="Administration">
+                                <a class="nav-link nav-link-admin" href="/admin" aria-label="Administration">
                                     <i class="fas fa-cog" aria-hidden="true"></i>Administration
                                 </a>
                             </li>

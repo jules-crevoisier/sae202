@@ -269,7 +269,7 @@
     <!-- Navigation principale -->
     <nav class="navbar navbar-expand-lg admin-navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/gestion">
+            <a class="navbar-brand" href="/admin">
                 <i class="fas fa-skull-crossbones me-2"></i>
                 Murder Party Admin
             </a>
@@ -283,7 +283,7 @@
                             </div>
                             <div class="d-none d-md-block">
                                 <small class="d-block opacity-75">Administrateur</small>
-                                <strong><?= htmlspecialchars($_SESSION['prenom'] ?? 'Admin') ?></strong>
+                                <strong><?= htmlspecialchars($_SESSION['user_prenom'] ?? 'Admin') ?></strong>
                             </div>
                         </div>
                         <i class="fas fa-chevron-down ms-2"></i>
@@ -317,17 +317,17 @@
                 </div>
                 
                 <nav class="nav flex-column">
-                    <a href="/gestion" class="sidebar-item <?= ($admin_active ?? '') === 'dashboard' ? 'active' : '' ?>">
+                    <a href="/admin" class="sidebar-item <?= ($admin_active ?? '') === 'dashboard' ? 'active' : '' ?>">
                         <i class="fas fa-chart-line"></i>
                         <span>Tableau de bord</span>
                     </a>
                     
-                    <a href="/gestion/utilisateurs" class="sidebar-item <?= ($admin_active ?? '') === 'utilisateurs' ? 'active' : '' ?>">
+                    <a href="/admin/utilisateurs" class="sidebar-item <?= ($admin_active ?? '') === 'utilisateurs' ? 'active' : '' ?>">
                         <i class="fas fa-users"></i>
                         <span>Utilisateurs</span>
                     </a>
                     
-                    <a href="/gestion/commentaires" class="sidebar-item <?= ($admin_active ?? '') === 'commentaires' ? 'active' : '' ?>">
+                    <a href="/admin/commentaires" class="sidebar-item <?= ($admin_active ?? '') === 'commentaires' ? 'active' : '' ?>">
                         <i class="fas fa-comments"></i>
                         <span>Commentaires</span>
                         <?php if (isset($nb_commentaires_attente) && $nb_commentaires_attente > 0): ?>
@@ -335,7 +335,7 @@
                         <?php endif; ?>
                     </a>
                     
-                    <a href="/gestion/messages" class="sidebar-item <?= ($admin_active ?? '') === 'messages' ? 'active' : '' ?>">
+                    <a href="/admin/messages" class="sidebar-item <?= ($admin_active ?? '') === 'messages' ? 'active' : '' ?>">
                         <i class="fas fa-envelope"></i>
                         <span>Messages</span>
                         <?php if (isset($nb_messages_non_lus) && $nb_messages_non_lus > 0): ?>

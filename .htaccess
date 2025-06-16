@@ -1,44 +1,36 @@
-#---------------------------------------------------
-# .htaccess – racine du projet /var/www/sae202
-#---------------------------------------------------
-
 RewriteEngine On
 
-# --- (1) Redirection HTTPS en production ------------
-# Uncomment pour forcer HTTPS
+# Redirection vers HTTPS en production (décommenter si nécessaire)
 # RewriteCond %{HTTPS} off
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# --- (2) Bloquer l'accès direct à conf/ et model/ ---
+# Empêcher l'accès direct aux fichiers de configuration et modèles
 RewriteRule ^(conf|model)/ - [F,L]
 
-# --- (3) Routage principal vers index.php/<path> ----
-# On ignore les vrais fichiers et dossiers
-RewriteCond %{REQUEST_FILENAME} -f [OR]
-RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^ - [L]
+# Routage principal : rediriger tout vers index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
 
-# Tout le reste : on conserve le chemin après index.php
-RewriteRule ^(.+)$ index.php/$1 [QSA,L]
-
-# --- (4) Cacher les fichiers commençant par un point -
+# Sécurité : cacher les fichiers sensibles
 <Files ~ "^\.">
-    Require all denied
+    Order allow,deny
+    Deny from all
 </Files>
 
-# --- (5) Cache pour les ressources statiques ----------
+# Configuration du cache pour les ressources statiques
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresByType text/css               "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
-    ExpiresByType image/png              "access plus 1 month"
-    ExpiresByType image/jpg              "access plus 1 month"
-    ExpiresByType image/jpeg             "access plus 1 month"
-    ExpiresByType image/gif              "access plus 1 month"
-    ExpiresByType image/ico              "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/ico "access plus 1 month"
 </IfModule>
 
-# --- (6) Compression gzip -----------------------------
+# Compression gzip
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -49,4 +41,4 @@ RewriteRule ^(.+)$ index.php/$1 [QSA,L]
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
-</IfModule>
+</IfModule> 

@@ -1,0 +1,21 @@
+RewriteEngine On
+
+# Redirection vers index.php pour toutes les requêtes qui ne correspondent pas à un fichier existant
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Protection des fichiers sensibles
+<Files "*.php">
+    <RequireAll>
+        Require all granted
+    </RequireAll>
+</Files>
+
+# Désactiver l'affichage des répertoires
+Options -Indexes
+
+# Sécurité supplémentaire
+<Files ".htaccess">
+    Require all denied
+</Files> 
