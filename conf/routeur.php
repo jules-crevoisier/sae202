@@ -22,6 +22,52 @@ if (empty($items[0]) || $items[0] === '') {
     $controller = $items[0];
 }
 
+// PROTECTION DES ROUTES D'ADMINISTRATION
+if ($controller === 'gestion') {
+    // IPs autorisées (MMI Troyes)
+    $authorized_ips = [
+        '195.83.128.43',
+        '194.199.63.200', 
+        '194.199.63.199'
+    ];
+    
+    $client_ip = $_SERVER['REMOTE_ADDR'];
+    
+    // Si l'IP n'est pas autorisée, demander l'authentification
+    if (!in_array($client_ip, $authorized_ips)) {
+        // Vérifier si l'authentification HTTP Basic est fournie
+        if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])) {
+            // Demander l'authentification
+            header('WWW-Authenticate: Basic realm="Administration SAE202 - Murder Party"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo '<h1>Accès refusé</h1>';
+            echo '<p>Vous devez vous authentifier pour accéder à cette section.</p>';
+            exit;
+        }
+        
+        // Vérifier les identifiants (vous pouvez adapter selon vos besoins)
+        $valid_users = [
+            'admin' => 'password123',
+            'prof' => 'mmi2024',
+            'sae202' => 'murderparty'
+        ];
+        
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+        
+        if (!isset($valid_users[$username]) || $valid_users[$username] !== $password) {
+            // Identifiants incorrects
+            header('WWW-Authenticate: Basic realm="Administration SAE202 - Murder Party"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo '<h1>Identifiants incorrects</h1>';
+            echo '<p>Nom d\'utilisateur ou mot de passe invalide.</p>';
+            exit;
+        }
+        
+        // Authentification réussie, continuer
+    }
+}
+
 // ETAPE 3: Détermination de l'action
 if (empty($items[1]) || $items[1] === '') {
     $action = 'index';
