@@ -1,7 +1,7 @@
 <?php
 $title = "Tableau de bord - Administration";
 $admin_active = "dashboard";
-include_once('view/admin/header.php');
+include_once('header.php');
 ?>
 
 <style>
@@ -246,7 +246,7 @@ include_once('view/admin/header.php');
                     <div class="stats-icon primary">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h2 class="stats-number"><?= htmlspecialchars($nb_utilisateurs) ?></h2>
+                    <h2 class="stats-number"><?= htmlspecialchars($stats['total_utilisateurs']) ?></h2>
                     <p class="stats-label">Utilisateurs inscrits</p>
                     <div class="mt-3">
                         <small class="text-success">
@@ -264,10 +264,10 @@ include_once('view/admin/header.php');
                     <div class="stats-icon warning">
                         <i class="fas fa-comments"></i>
                     </div>
-                    <h2 class="stats-number"><?= htmlspecialchars($nb_commentaires_attente) ?></h2>
+                    <h2 class="stats-number"><?= htmlspecialchars($stats['commentaires_en_attente']) ?></h2>
                     <p class="stats-label">Commentaires en attente</p>
                     <div class="mt-3">
-                        <?php if ($nb_commentaires_attente > 0): ?>
+                        <?php if ($stats['commentaires_en_attente'] > 0): ?>
                             <small class="text-warning">
                                 <i class="fas fa-clock me-1"></i>
                                 Action requise
@@ -289,10 +289,10 @@ include_once('view/admin/header.php');
                     <div class="stats-icon info">
                         <i class="fas fa-envelope"></i>
                     </div>
-                    <h2 class="stats-number"><?= htmlspecialchars($nb_messages_non_lus) ?></h2>
+                    <h2 class="stats-number"><?= htmlspecialchars($stats['messages_non_lus']) ?></h2>
                     <p class="stats-label">Messages non lus</p>
                     <div class="mt-3">
-                        <?php if ($nb_messages_non_lus > 0): ?>
+                        <?php if ($stats['messages_non_lus'] > 0): ?>
                             <small class="text-info">
                                 <i class="fas fa-bell me-1"></i>
                                 Nouveaux messages
@@ -341,7 +341,7 @@ include_once('view/admin/header.php');
                 <div class="card-body pt-3">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="/gestion/utilisateurs" class="action-btn primary">
+                            <a href="/admin/utilisateurs" class="action-btn primary">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-users fa-2x"></i>
@@ -355,7 +355,7 @@ include_once('view/admin/header.php');
                         </div>
                         
                         <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="/gestion/commentaires" class="action-btn warning">
+                            <a href="/admin/commentaires" class="action-btn warning">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-comments fa-2x"></i>
@@ -363,8 +363,8 @@ include_once('view/admin/header.php');
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 fw-bold">Commentaires</h6>
                                         <small class="opacity-75">Modération</small>
-                                        <?php if ($nb_commentaires_attente > 0): ?>
-                                            <span class="badge bg-warning pulse-badge ms-2"><?= $nb_commentaires_attente ?></span>
+                                        <?php if ($stats['commentaires_en_attente'] > 0): ?>
+                                            <span class="badge bg-warning pulse-badge ms-2"><?= $stats['commentaires_en_attente'] ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -372,7 +372,7 @@ include_once('view/admin/header.php');
                         </div>
                         
                         <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="/gestion/messages" class="action-btn info">
+                            <a href="/admin/messages" class="action-btn info">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-envelope fa-2x"></i>
@@ -380,8 +380,8 @@ include_once('view/admin/header.php');
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 fw-bold">Messages</h6>
                                         <small class="opacity-75">Messagerie</small>
-                                        <?php if ($nb_messages_non_lus > 0): ?>
-                                            <span class="badge bg-info pulse-badge ms-2"><?= $nb_messages_non_lus ?></span>
+                                        <?php if ($stats['messages_non_lus'] > 0): ?>
+                                            <span class="badge bg-info pulse-badge ms-2"><?= $stats['messages_non_lus'] ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -450,14 +450,14 @@ include_once('view/admin/header.php');
                             </div>
                             <div class="ms-3">
                                 <div class="btn-group">
-                                    <a href="/gestion/commentaires/approuver/<?= $commentaire['id'] ?>" 
+                                    <a href="/admin/commentaires/approuver/<?= $commentaire['id'] ?>" 
                                        class="btn btn-success btn-sm"
                                        data-bs-toggle="tooltip"
                                        title="Approuver ce commentaire"
                                        data-confirm="Approuver ce commentaire ?">
                                         <i class="fas fa-check"></i>
                                     </a>
-                                    <a href="/gestion/commentaires/rejeter/<?= $commentaire['id'] ?>" 
+                                    <a href="/admin/commentaires/rejeter/<?= $commentaire['id'] ?>" 
                                        class="btn btn-danger btn-sm"
                                        data-bs-toggle="tooltip"
                                        title="Rejeter ce commentaire"
@@ -472,7 +472,7 @@ include_once('view/admin/header.php');
                     
                     <?php if (count($commentaires_en_attente) > 3): ?>
                     <div class="text-center pt-3">
-                        <a href="/gestion/commentaires" class="btn btn-primary btn-lg">
+                        <a href="/admin/commentaires" class="btn btn-primary btn-lg">
                             <i class="fas fa-eye me-2"></i>
                             Voir tous les commentaires (<?= count($commentaires_en_attente) ?>)
                         </a>
@@ -497,4 +497,4 @@ include_once('view/admin/header.php');
     <?php endif; ?>
 </div>
 
-<?php include_once('view/admin/footer.php'); ?> 
+<?php include_once('footer.php'); ?> 

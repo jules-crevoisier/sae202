@@ -1,7 +1,7 @@
 <?php
 $title = "Gestion de la messagerie - Administration";
 $admin_active = "messages";
-include_once('view/admin/header.php');
+include_once('header.php');
 ?>
 
 <div class="container mt-4">
@@ -148,14 +148,14 @@ include_once('view/admin/header.php');
                         </div>
                         
                         <div class="btn-group">
-                            <a href="/gestion/messages/voir/<?= $message['id'] ?>" 
+                            <a href="/admin/message?id=<?= $message['id'] ?>" 
                                class="btn btn-outline-primary btn-sm">
                                 <i class="fas fa-eye me-1"></i>
                                 Voir
                             </a>
                             
                             <?php if (empty($message['reponse'])): ?>
-                                <a href="/gestion/messages/repondre/<?= $message['id'] ?>" 
+                                <a href="/admin/message-repondre?id=<?= $message['id'] ?>" 
                                    class="btn btn-primary btn-sm">
                                     <i class="fas fa-reply me-1"></i>
                                     Répondre
@@ -168,7 +168,7 @@ include_once('view/admin/header.php');
                                 Email
                             </a>
                             
-                            <a href="/gestion/messages/supprimer/<?= $message['id'] ?>" 
+                            <a href="/admin/message-supprimer?id=<?= $message['id'] ?>" 
                                class="btn btn-outline-danger btn-sm"
                                data-confirm="Supprimer définitivement ce message ?">
                                 <i class="fas fa-trash me-1"></i>
@@ -274,4 +274,4 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<?php include_once('view/admin/footer.php'); ?> 
+<?php include_once('footer.php'); ?> 

@@ -4,15 +4,11 @@
  * Toutes les pages de ce dossier sont protégées par Apache Basic Auth
  */
 
-// Démarrage de la session
-session_start();
-
 // Inclusion des fichiers de configuration et modèles
-require_once('../conf/conf.php');
-require_once('../model/lib/database.php');
-require_once('../model/lib/user.php');
-require_once('../model/lib/message.php');
-require_once('../model/lib/commentaire.php');
+require_once('../conf/config.php');
+require_once('../model/User.php');
+require_once('../model/Message.php');
+require_once('../model/Comment.php');
 
 // Vérification que l'utilisateur est connecté ET administrateur
 if (!isLoggedIn() || !isAdmin()) {
@@ -46,23 +42,24 @@ switch ($path) {
     case '':
         // Dashboard principal
         $stats = [
-            'total_utilisateurs' => getTotalUsers(),
-            'total_messages' => getTotalMessages(),
-            'total_commentaires' => getTotalComments(),
-            'messages_non_lus' => getUnreadMessagesCount(),
-            'commentaires_en_attente' => getPendingCommentsCount()
+            'total_utilisateurs' => count(User::getAll()),
+            'total_messages' => count(Message::getAll()),
+            'total_commentaires' => count(Comment::getAll()),
+            'messages_non_lus' => Message::countUnread(),
+            'commentaires_en_attente' => count(Comment::getPending())
         ];
         
-        $recent_messages = getRecentMessages(5);
-        $recent_comments = getRecentComments(5);
-        $recent_users = getRecentUsers(5);
+        $recent_messages = array_slice(Message::getAll(), 0, 5);
+        $recent_comments = array_slice(Comment::getAll(), 0, 5);
+        $recent_users = array_slice(User::getAll(), 0, 5);
+        $commentaires_en_attente = Comment::getPending();
         
         include 'dashboard.php';
         break;
         
     case 'utilisateurs':
         // Liste des utilisateurs
-        $utilisateurs = getAllUsers();
+        $utilisateurs = User::getAll();
         include 'utilisateurs.php';
         break;
         
@@ -70,7 +67,7 @@ switch ($path) {
         // Détail d'un utilisateur
         if (isset($_GET['id'])) {
             $user_id = (int)$_GET['id'];
-            $utilisateur = getUserById($user_id);
+            $utilisateur = User::getById($user_id);
             
             if (!$utilisateur) {
                 http_response_code(404);
@@ -78,8 +75,8 @@ switch ($path) {
                 exit;
             }
             
-            $commentaires_utilisateur = getCommentsByUserId($user_id);
-            $messages_utilisateur = getMessagesByUserId($user_id);
+            $commentaires_utilisateur = Comment::getByUser($user_id);
+            $messages_utilisateur = Message::getByUser($user_id);
             
             include 'utilisateur_detail.php';
         } else {
@@ -90,7 +87,7 @@ switch ($path) {
         
     case 'messages':
         // Liste des messages
-        $messages = getAllMessages();
+        $messages = Message::getAll();
         include 'messages.php';
         break;
         
@@ -98,7 +95,7 @@ switch ($path) {
         // Détail d'un message
         if (isset($_GET['id'])) {
             $message_id = (int)$_GET['id'];
-            $message = getMessageById($message_id);
+            $message = Message::getById($message_id);
             
             if (!$message) {
                 http_response_code(404);
@@ -107,7 +104,7 @@ switch ($path) {
             }
             
             // Marquer le message comme lu
-            markMessageAsRead($message_id);
+            Message::markAsRead($message_id);
             
             include 'message_detail.php';
         } else {
@@ -120,7 +117,7 @@ switch ($path) {
         // Répondre à un message
         if (isset($_GET['id'])) {
             $message_id = (int)$_GET['id'];
-            $message = getMessageById($message_id);
+            $message = Message::getById($message_id);
             
             if (!$message) {
                 http_response_code(404);
@@ -132,7 +129,7 @@ switch ($path) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reponse'])) {
                 $reponse = trim($_POST['reponse']);
                 if (!empty($reponse)) {
-                    if (replyToMessage($message_id, $reponse)) {
+                    if (Message::reply($message_id, $reponse)) {
                         header('Location: /admin/message?id=' . $message_id);
                         exit;
                     } else {
@@ -152,7 +149,7 @@ switch ($path) {
         
     case 'commentaires':
         // Liste des commentaires
-        $commentaires = getAllComments();
+        $commentaires = Comment::getAll();
         include 'commentaires.php';
         break;
         
@@ -160,7 +157,7 @@ switch ($path) {
         // Approuver un commentaire
         if (isset($_GET['id'])) {
             $comment_id = (int)$_GET['id'];
-            if (approveComment($comment_id)) {
+            if (Comment::approve($comment_id)) {
                 header('Location: /admin/commentaires?success=approved');
             } else {
                 header('Location: /admin/commentaires?error=approve_failed');
@@ -175,7 +172,7 @@ switch ($path) {
         // Rejeter un commentaire
         if (isset($_GET['id'])) {
             $comment_id = (int)$_GET['id'];
-            if (rejectComment($comment_id)) {
+            if (Comment::reject($comment_id)) {
                 header('Location: /admin/commentaires?success=rejected');
             } else {
                 header('Location: /admin/commentaires?error=reject_failed');

@@ -42,7 +42,7 @@ function utilisateurs() {
     if ($action === 'detail' && $utilisateur_id > 0) {
         $utilisateur = User::getById($utilisateur_id);
         if (!$utilisateur) {
-            redirect('/gestion/utilisateurs');
+            redirect('/admin/utilisateurs');
         }
         
         // Récupérer les commentaires de l'utilisateur
@@ -96,7 +96,7 @@ function messages() {
         
         $message = Message::getById($message_id);
         if (!$message) {
-            redirect('/gestion/messages');
+            redirect('/admin/messages');
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -123,7 +123,7 @@ function messages() {
     
     if ($action === 'supprimer' && $message_id > 0) {
         Message::delete($message_id);
-        redirect('/gestion/messages');
+        redirect('/admin/messages');
     }
     
     // Affichage de la liste des messages
@@ -153,12 +153,12 @@ function commentaires() {
     // Traitement des actions
     if ($action === 'approuver' && $commentaire_id > 0) {
         Comment::approve($commentaire_id);
-        redirect('/gestion/commentaires');
+        redirect('/admin/commentaires');
     }
     
     if ($action === 'rejeter' && $commentaire_id > 0) {
         Comment::reject($commentaire_id);
-        redirect('/gestion/commentaires');
+        redirect('/admin/commentaires');
     }
     
     // Affichage de la liste des commentaires

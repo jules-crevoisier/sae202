@@ -1,7 +1,7 @@
 <?php
 $title = "Gestion des utilisateurs - Administration";
 $admin_active = "utilisateurs";
-include_once('view/admin/header.php');
+include_once('header.php');
 ?>
 
 <style>
@@ -322,7 +322,7 @@ include_once('view/admin/header.php');
                                                 <i class="fas fa-envelope"></i>
                                             </a>
                                             <?php if (!($utilisateur['is_admin'] ?? false)): ?>
-                                            <a href="/gestion/utilisateurs/detail/<?= $utilisateur['id'] ?>" 
+                                            <a href="/admin/utilisateur?id=<?= $utilisateur['id'] ?>" 
                                                class="action-btn view" 
                                                data-bs-toggle="tooltip"
                                                title="Voir les détails">
@@ -406,4 +406,4 @@ include_once('view/admin/header.php');
     </div>
 </div>
 
-<?php include_once('view/admin/footer.php'); ?> 
+<?php include_once('footer.php'); ?> 

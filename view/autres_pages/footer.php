@@ -98,7 +98,7 @@
                         </a></li>
                         <?php endif; ?>
                         <?php if (isAdmin()): ?>
-                        <li><a href="/gestion" class="footer-link footer-link-admin">
+                        <li><a href="/admin" class="footer-link footer-link-admin">
                             <i class="fas fa-cog me-2" aria-hidden="true"></i>Administration
                         </a></li>
                         <?php endif; ?>
