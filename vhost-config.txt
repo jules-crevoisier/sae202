@@ -1,13 +1,36 @@
 <VirtualHost *:80>
-    ServerName sae202.local
-    ServerAlias www.sae202.local
-    DocumentRoot "/path/to/sae202"
+    ServerName MMI.sae202.ovh
+    ServerAdmin prof@mmi-troyes.fr
+    DocumentRoot /var/www/sae202
+    DirectoryIndex index.php
     
-    <Directory "/path/to/sae202">
+    # Protection Apache Basic Auth pour l'administration (EN PREMIER)
+    <Directory /var/www/sae202/admin>
+        AuthType Basic
+        AuthBasicProvider file
+        AuthName "Administration sae202"
+        AuthUserFile "/home/MMI/htpassword.mmi"
+        <RequireAny>
+            Require ip 195.83.128.43 194.199.63.200 194.199.63.199
+            Require valid-user
+        </RequireAny>
+        
+        # Permettre les .htaccess dans le dossier admin
+        AllowOverride All
+        Options Indexes FollowSymLinks
+    </Directory>
+    
+    <Directory /var/www/sae202>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
-        DirectoryIndex index.php
+        
+        RewriteEngine On
+        # Exclure explicitement le dossier /admin ET ses sous-dossiers
+        RewriteCond %{REQUEST_URI} !^/admin(/.*)?$
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^([^/]+) index.php/$1 [L]
     </Directory>
     
     ErrorLog ${APACHE_LOG_DIR}/sae202_error.log

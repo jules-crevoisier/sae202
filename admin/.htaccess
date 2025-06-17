@@ -1,3 +1,9 @@
+# Authentification Apache Basic (solution de secours)
+AuthType Basic
+AuthName "Administration sae202"
+AuthUserFile "/home/mmi24c01/htpassword.mmi"
+Require valid-user
+
 RewriteEngine On
 
 # Redirection vers index.php pour toutes les requêtes qui ne correspondent pas à un fichier existant

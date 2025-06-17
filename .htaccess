@@ -7,10 +7,11 @@ RewriteEngine On
 # Empêcher l'accès direct aux fichiers de configuration et modèles
 RewriteRule ^(conf|model)/ - [F,L]
 
-# Routage principal : rediriger tout vers index.php
+# Exclure le dossier /admin de la réécriture
+RewriteCond %{REQUEST_URI} !^/admin(/.*)?$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php [QSA,L]
+RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
 
 # Sécurité : cacher les fichiers sensibles
 <Files ~ "^\.">
@@ -41,4 +42,20 @@ RewriteRule ^(.*)$ index.php [QSA,L]
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/x-javascript
-</IfModule> 
+</IfModule>
+
+# Sécurité : bloquer l'accès aux fichiers sensibles
+<Files "*.md">
+    Require all denied
+</Files>
+
+<Files "*.sql">
+    Require all denied
+</Files>
+
+<Files "*.txt">
+    Require all denied
+</Files>
+
+# Bloquer l'accès au dossier .git
+RedirectMatch 404 /\.git 
