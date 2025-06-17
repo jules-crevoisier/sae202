@@ -11,7 +11,7 @@ RewriteRule ^(conf|model)/ - [F,L]
 RewriteCond %{REQUEST_URI} !^/admin(/.*)?$
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
+RewriteRule ^(.*)$ index.php [QSA,L]
 
 # Sécurité : cacher les fichiers sensibles
 <Files ~ "^\.">
