@@ -3,6 +3,311 @@ $page_title = 'Connexion - Murder Party';
 require_once('view/autres_pages/header.php'); 
 ?>
 
+<style>
+    /* Styles pour la page de connexion avec la nouvelle palette */
+    .min-vh-80 {
+        min-height: 80vh;
+    }
+    
+    .auth-header {
+        margin-bottom: 3rem;
+    }
+    
+    .auth-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--gradient-primary);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-light);
+        font-size: 2rem;
+        margin: 0 auto;
+        box-shadow: var(--shadow-wine);
+        animation: pulse-mystery 3s ease-in-out infinite;
+    }
+    
+    .auth-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+    }
+    
+    .auth-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-secondary);
+        line-height: 1.6;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .auth-card {
+        background: var(--bg-primary);
+        border-radius: 24px;
+        box-shadow: var(--shadow-xl);
+        border: 1px solid rgba(175, 116, 129, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .auth-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-secondary);
+    }
+    
+    .auth-card-body {
+        padding: 3rem 2.5rem;
+    }
+    
+    .form-group-modern {
+        position: relative;
+    }
+    
+    .form-label-modern {
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .form-label-modern i {
+        color: var(--old-rose);
+    }
+    
+    .input-wrapper {
+        position: relative;
+    }
+    
+    .form-control-modern {
+        width: 100%;
+        padding: 1rem 3rem 1rem 1rem;
+        border: 2px solid rgba(175, 116, 129, 0.2);
+        border-radius: 12px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-size: 1rem;
+        transition: var(--transition-smooth);
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .form-control-modern:focus {
+        outline: none;
+        border-color: var(--old-rose);
+        box-shadow: 0 0 0 3px rgba(175, 116, 129, 0.1);
+        background: var(--bg-primary);
+    }
+    
+    .form-control-modern::placeholder {
+        color: var(--text-muted);
+    }
+    
+    .input-icon {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--old-rose);
+        font-size: 0.9rem;
+        pointer-events: none;
+    }
+    
+    .password-toggle {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: var(--transition-smooth);
+        cursor: pointer;
+    }
+    
+    .password-toggle:hover {
+        color: var(--old-rose);
+        background: rgba(175, 116, 129, 0.1);
+    }
+    
+    .form-text {
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+    
+    .auth-footer {
+        margin-top: 2rem;
+    }
+    
+    .auth-footer-text {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        margin: 0;
+    }
+    
+    .auth-link {
+        color: var(--rust);
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition-smooth);
+    }
+    
+    .auth-link:hover {
+        color: var(--rust-light);
+        text-decoration: underline;
+    }
+    
+    /* Compte de démonstration */
+    .demo-card {
+        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
+        border: 1px solid rgba(175, 116, 129, 0.2);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        box-shadow: var(--shadow-sm);
+    }
+    
+    .demo-header {
+        display: flex;
+        align-items: center;
+        color: var(--wine);
+        font-weight: 600;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+    }
+    
+    .demo-header i {
+        color: var(--rust);
+    }
+    
+    .demo-account {
+        background: var(--bg-primary);
+        border: 1px solid rgba(175, 116, 129, 0.1);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .demo-account:last-of-type {
+        margin-bottom: 1rem;
+    }
+    
+    .demo-label {
+        color: var(--text-primary);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .demo-label i {
+        color: var(--old-rose);
+    }
+    
+    .demo-credentials {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'Courier New', monospace;
+        font-size: 0.85rem;
+    }
+    
+    .demo-email {
+        color: var(--rust);
+        background: rgba(169, 72, 3, 0.1);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+    
+    .demo-password {
+        color: var(--wine);
+        background: rgba(122, 41, 58, 0.1);
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-weight: 500;
+    }
+    
+    .demo-separator {
+        color: var(--text-muted);
+        font-weight: bold;
+    }
+    
+    .demo-note {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+        font-style: italic;
+        display: block;
+        text-align: center;
+        margin-top: 0.5rem;
+    }
+    
+    /* Animations et effets */
+    .form-control-modern:focus + .input-icon {
+        color: var(--old-rose);
+        transform: translateY(-50%) scale(1.1);
+    }
+    
+    .btn-modern-primary:hover {
+        transform: translateY(-2px);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .auth-card-body {
+            padding: 2rem 1.5rem;
+        }
+        
+        .auth-title {
+            font-size: 2rem;
+        }
+        
+        .auth-subtitle {
+            font-size: 1rem;
+        }
+        
+        .demo-credentials {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.25rem;
+        }
+        
+        .demo-separator {
+            display: none;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .auth-icon {
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+        }
+        
+        .auth-title {
+            font-size: 1.75rem;
+        }
+        
+        .form-control-modern {
+            padding: 0.875rem 2.5rem 0.875rem 0.875rem;
+        }
+    }
+</style>
+
 <div class="container">
     <div class="row justify-content-center align-items-center min-vh-80">
         <div class="col-md-8 col-lg-6 col-xl-5">
@@ -147,350 +452,21 @@ require_once('view/autres_pages/header.php');
     </div>
 </div>
 
-<style>
-    /* Styles pour la page de connexion */
-    .min-vh-80 {
-        min-height: 80vh;
-    }
-    
-    .auth-header {
-        margin-bottom: 3rem;
-    }
-    
-    .auth-icon {
-        width: 80px;
-        height: 80px;
-        background: var(--gradient-primary);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-light);
-        font-size: 2rem;
-        margin: 0 auto;
-        box-shadow: var(--shadow-lg);
-        animation: pulse-mystery 3s ease-in-out infinite;
-    }
-    
-    .auth-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-    }
-    
-    .auth-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    .auth-card {
-        background: var(--bg-light);
-        border-radius: 24px;
-        box-shadow: var(--shadow-xl);
-        border: 1px solid rgba(212, 175, 55, 0.1);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .auth-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: var(--gradient-accent);
-    }
-    
-    .auth-card-body {
-        padding: 3rem 2.5rem;
-    }
-    
-    .form-group-modern {
-        position: relative;
-    }
-    
-    .form-label-modern {
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 0.75rem;
-        display: flex;
-        align-items: center;
-        font-size: 0.95rem;
-    }
-    
-    .input-wrapper {
-        position: relative;
-    }
-    
-    .form-control-modern {
-        width: 100%;
-        padding: 1rem 1rem 1rem 3.5rem;
-        border: 2px solid #e2e8f0;
-        border-radius: 16px;
-        font-size: 1rem;
-        transition: var(--transition-smooth);
-        background: var(--bg-light);
-        color: var(--text-primary);
-    }
-    
-    .form-control-modern:focus {
-        outline: none;
-        border-color: var(--accent-gold);
-        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
-        transform: translateY(-2px);
-    }
-    
-    .form-control-modern::placeholder {
-        color: var(--text-muted);
-    }
-    
-    .input-icon {
-        position: absolute;
-        left: 1.25rem;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-muted);
-        font-size: 1.1rem;
-        transition: var(--transition-smooth);
-        pointer-events: none;
-    }
-    
-    .form-control-modern:focus + .input-icon {
-        color: var(--accent-gold);
-    }
-    
-    .password-toggle {
-        position: absolute;
-        right: 1.25rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        color: var(--text-muted);
-        font-size: 1.1rem;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-        padding: 0.5rem;
-        border-radius: 8px;
-    }
-    
-    .password-toggle:hover {
-        color: var(--accent-gold);
-        background: rgba(212, 175, 55, 0.1);
-    }
-    
-    .password-toggle:focus {
-        outline: 2px solid var(--accent-gold);
-        outline-offset: 2px;
-    }
-    
-    .form-text {
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .auth-footer-text {
-        color: var(--text-secondary);
-        font-size: 1rem;
-        margin: 0;
-    }
-    
-    .auth-link {
-        color: var(--accent-gold);
-        text-decoration: none;
-        font-weight: 600;
-        transition: var(--transition-smooth);
-        padding: 0.25rem 0.5rem;
-        border-radius: 8px;
-    }
-    
-    .auth-link:hover {
-        color: var(--accent-gold-dark);
-        background: rgba(212, 175, 55, 0.1);
-        text-decoration: none;
-        transform: translateY(-1px);
-    }
-    
-    .auth-link:focus {
-        outline: 2px solid var(--accent-gold);
-        outline-offset: 2px;
-    }
-    
-    .demo-card {
-        background: var(--bg-light-alt);
-        border-radius: 16px;
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        margin-top: 2rem;
-        overflow: hidden;
-        transition: var(--transition-smooth);
-    }
-    
-    .demo-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-md);
-    }
-    
-    .demo-header {
-        background: var(--gradient-accent);
-        color: var(--text-primary);
-        padding: 1rem 1.5rem;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-    }
-    
-    .demo-content {
-        padding: 1.5rem;
-    }
-    
-    .demo-account {
-        margin-bottom: 1.5rem;
-    }
-    
-    .demo-account:last-of-type {
-        margin-bottom: 1rem;
-    }
-    
-    .demo-label {
-        font-weight: 600;
-        color: var(--text-primary);
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
-        font-size: 0.9rem;
-    }
-    
-    .demo-credentials {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        font-family: 'Courier New', monospace;
-        background: var(--bg-light);
-        padding: 0.75rem 1rem;
-        border-radius: 8px;
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        font-size: 0.9rem;
-    }
-    
-    .demo-email {
-        color: var(--accent-gold-dark);
-        font-weight: 600;
-    }
-    
-    .demo-separator {
-        color: var(--text-muted);
-    }
-    
-    .demo-password {
-        color: var(--text-secondary);
-        font-weight: 600;
-    }
-    
-    .demo-note {
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        font-style: italic;
-        display: block;
-        text-align: center;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 767.98px) {
-        .auth-card-body {
-            padding: 2rem 1.5rem;
-        }
-        
-        .auth-title {
-            font-size: 2rem;
-        }
-        
-        .auth-subtitle {
-            font-size: 1rem;
-        }
-        
-        .form-control-modern {
-            padding: 0.875rem 0.875rem 0.875rem 3rem;
-        }
-        
-        .input-icon {
-            left: 1rem;
-        }
-        
-        .password-toggle {
-            right: 1rem;
-        }
-        
-        .demo-credentials {
-            flex-direction: column;
-            gap: 0.5rem;
-            text-align: center;
-        }
-        
-        .demo-separator {
-            display: none;
-        }
-    }
-    
-    /* Animation pour les erreurs */
-    .alert-modern.alert-danger {
-        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-        border: 1px solid #f87171;
-        color: #dc2626;
-    }
-    
-    .alert-modern.alert-danger i {
-        color: #dc2626;
-    }
-</style>
-
 <script>
-    // Fonction pour afficher/masquer le mot de passe
     function togglePassword() {
-        const passwordInput = document.getElementById('mot_de_passe');
+        const passwordField = document.getElementById('mot_de_passe');
         const toggleIcon = document.getElementById('password-toggle-icon');
         
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
             toggleIcon.classList.remove('fa-eye');
             toggleIcon.classList.add('fa-eye-slash');
         } else {
-            passwordInput.type = 'password';
+            passwordField.type = 'password';
             toggleIcon.classList.remove('fa-eye-slash');
             toggleIcon.classList.add('fa-eye');
         }
     }
-    
-    // Animation des champs au focus
-    document.querySelectorAll('.form-control-modern').forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-        
-        input.addEventListener('blur', function() {
-            this.parentElement.classList.remove('focused');
-        });
-    });
-    
-    // Validation en temps réel
-    document.getElementById('email').addEventListener('input', function() {
-        const email = this.value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (email && !emailRegex.test(email)) {
-            this.style.borderColor = '#f87171';
-        } else {
-            this.style.borderColor = '#e2e8f0';
-        }
-    });
 </script>
 
 <?php require_once('view/autres_pages/footer.php'); ?> 
