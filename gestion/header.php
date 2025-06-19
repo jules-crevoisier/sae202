@@ -40,6 +40,8 @@
             backdrop-filter: blur(10px);
             border: none;
             padding: 1rem 0;
+            position: relative;
+            z-index: 1030;
         }
 
         .navbar-brand {
@@ -182,6 +184,8 @@
             padding: 0.5rem;
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(10px);
+            z-index: 9999 !important;
+            position: absolute !important;
         }
 
         .dropdown-item {
@@ -212,6 +216,29 @@
         .nav-link:hover {
             background: rgba(255,255,255,0.1);
             color: white !important;
+        }
+
+        /* Dropdown container */
+        .nav-item.dropdown {
+            position: relative;
+            z-index: 1040;
+        }
+
+        /* Assurer que le dropdown soit au-dessus de tout */
+        .dropdown.show .dropdown-menu {
+            z-index: 10000 !important;
+        }
+
+        /* Pour éviter tout problème de débordement sur les cartes et autres éléments */
+        .card, .alert, .table-responsive, .admin-content > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* S'assurer que le dropdown reste cliquable */
+        .dropdown-menu {
+            pointer-events: auto !important;
+            user-select: auto !important;
         }
 
         /* Responsive */
