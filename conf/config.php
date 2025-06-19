@@ -42,9 +42,19 @@ function getDB() {
     return $db;
 }
 
-// Fonction de sécurisation des données
+// Fonction de nettoyage des données (pour stockage en base)
+function nettoyer($data) {
+    return trim($data);
+}
+
+// Fonction de sécurisation des données (pour affichage HTML)
 function securise($data) {
     return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
+}
+
+// Fonction pour décoder les entités HTML (pour les données déjà stockées)
+function decoder($data) {
+    return html_entity_decode(trim($data), ENT_QUOTES, 'UTF-8');
 }
 
 // Fonction de redirection

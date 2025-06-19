@@ -15,9 +15,9 @@ function index() {
     $user = User::getById($_SESSION['user_id']);
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nom = securise($_POST['nom'] ?? '');
-        $prenom = securise($_POST['prenom'] ?? '');
-        $telephone = securise($_POST['telephone'] ?? '');
+        $nom = nettoyer($_POST['nom'] ?? '');
+        $prenom = nettoyer($_POST['prenom'] ?? '');
+        $telephone = nettoyer($_POST['telephone'] ?? '');
         $age = intval($_POST['age'] ?? 0);
         
         // Validations

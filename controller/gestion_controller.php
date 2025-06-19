@@ -100,7 +100,7 @@ function messages() {
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $reponse = securise($_POST['reponse'] ?? '');
+            $reponse = nettoyer($_POST['reponse'] ?? '');
             
             if (empty($reponse)) {
                 $erreurs[] = "La réponse est requise";

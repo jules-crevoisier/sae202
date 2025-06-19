@@ -12,12 +12,12 @@ function inscription() {
     $succes = false;
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nom = securise($_POST['nom'] ?? '');
-        $prenom = securise($_POST['prenom'] ?? '');
-        $email = securise($_POST['email'] ?? '');
+        $nom = nettoyer($_POST['nom'] ?? '');
+        $prenom = nettoyer($_POST['prenom'] ?? '');
+        $email = nettoyer($_POST['email'] ?? '');
         $mot_de_passe = $_POST['mot_de_passe'] ?? '';
         $mot_de_passe_confirm = $_POST['mot_de_passe_confirm'] ?? '';
-        $telephone = securise($_POST['telephone'] ?? '');
+        $telephone = nettoyer($_POST['telephone'] ?? '');
         $age = intval($_POST['age'] ?? 0);
         
         // Validations
@@ -46,7 +46,7 @@ function connexion() {
     $erreurs = [];
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $email = securise($_POST['email'] ?? '');
+        $email = nettoyer($_POST['email'] ?? '');
         $mot_de_passe = $_POST['mot_de_passe'] ?? '';
         
         if (empty($email)) $erreurs[] = "L'email est requis";

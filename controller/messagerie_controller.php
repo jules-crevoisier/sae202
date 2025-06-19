@@ -24,8 +24,8 @@ function nouveau() {
     $succes = false;
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $sujet = securise($_POST['sujet'] ?? '');
-        $contenu = securise($_POST['contenu'] ?? '');
+        $sujet = nettoyer($_POST['sujet'] ?? '');
+        $contenu = nettoyer($_POST['contenu'] ?? '');
         
         // Validations
         if (empty($sujet)) $erreurs[] = "Le sujet est requis";

@@ -88,5 +88,33 @@ class Message {
         $result = $stmt->fetch();
         return $result['count'];
     }
+    
+    // Corriger l'encodage des messages existants (migration)
+    public static function fixEncoding() {
+        $db = getDB();
+        
+        // Récupérer tous les messages
+        $stmt = $db->query("SELECT id, sujet, contenu, reponse FROM messages");
+        $messages = $stmt->fetchAll();
+        
+        $count = 0;
+        foreach ($messages as $message) {
+            $sujet_decode = html_entity_decode($message['sujet'], ENT_QUOTES, 'UTF-8');
+            $contenu_decode = html_entity_decode($message['contenu'], ENT_QUOTES, 'UTF-8');
+            $reponse_decode = $message['reponse'] ? html_entity_decode($message['reponse'], ENT_QUOTES, 'UTF-8') : null;
+            
+            // Mettre à jour seulement si c'est différent (éviter les mises à jour inutiles)
+            if ($sujet_decode !== $message['sujet'] || 
+                $contenu_decode !== $message['contenu'] || 
+                ($message['reponse'] && $reponse_decode !== $message['reponse'])) {
+                
+                $update_stmt = $db->prepare("UPDATE messages SET sujet = ?, contenu = ?, reponse = ? WHERE id = ?");
+                $update_stmt->execute([$sujet_decode, $contenu_decode, $reponse_decode, $message['id']]);
+                $count++;
+            }
+        }
+        
+        return $count;
+    }
 }
 ?> 

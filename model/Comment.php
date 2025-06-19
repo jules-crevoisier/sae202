@@ -86,5 +86,28 @@ class Comment {
         $stmt->execute([$utilisateur_id]);
         return $stmt->fetchAll();
     }
+    
+    // Corriger l'encodage des commentaires existants (migration)
+    public static function fixEncoding() {
+        $db = getDB();
+        
+        // Récupérer tous les commentaires
+        $stmt = $db->query("SELECT id, contenu FROM commentaires");
+        $commentaires = $stmt->fetchAll();
+        
+        $count = 0;
+        foreach ($commentaires as $commentaire) {
+            $contenu_decode = html_entity_decode($commentaire['contenu'], ENT_QUOTES, 'UTF-8');
+            
+            // Mettre à jour seulement si c'est différent
+            if ($contenu_decode !== $commentaire['contenu']) {
+                $update_stmt = $db->prepare("UPDATE commentaires SET contenu = ? WHERE id = ?");
+                $update_stmt->execute([$contenu_decode, $commentaire['id']]);
+                $count++;
+            }
+        }
+        
+        return $count;
+    }
 }
 ?> 

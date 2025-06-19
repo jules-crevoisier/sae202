@@ -12,7 +12,7 @@ function index() {
     $succes = false;
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $contenu = securise($_POST['contenu'] ?? '');
+        $contenu = nettoyer($_POST['contenu'] ?? '');
         
         // Validations
         if (empty($contenu)) $erreurs[] = "Le commentaire est requis";
