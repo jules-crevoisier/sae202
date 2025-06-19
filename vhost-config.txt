@@ -5,17 +5,17 @@
     DirectoryIndex index.php
     
     # Protection Apache Basic Auth pour l'administration (EN PREMIER)
-    <Directory /var/www/sae202/admin>
+    <Directory /var/www/sae202/gestion>
         AuthType Basic
         AuthBasicProvider file
-        AuthName "Administration sae202"
+        AuthName "Administration sae202 - Gestion"
         AuthUserFile "/home/mmi24c01/htpassword.mmi"
         <RequireAny>
             Require ip 195.83.128.43 194.199.63.200 194.199.63.199
             Require valid-user
         </RequireAny>
         
-        # Permettre les .htaccess dans le dossier admin
+        # Permettre les .htaccess dans le dossier gestion
         AllowOverride All
         Options Indexes FollowSymLinks
     </Directory>
@@ -26,8 +26,8 @@
         Require all granted
         
         RewriteEngine On
-        # Exclure explicitement le dossier /admin ET ses sous-dossiers
-        RewriteCond %{REQUEST_URI} !^/admin(/.*)?$
+        # Exclure explicitement le dossier /gestion ET ses sous-dossiers
+        RewriteCond %{REQUEST_URI} !^/gestion(/.*)?$
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteCond %{REQUEST_FILENAME} !-d
         RewriteRule ^([^/]+) index.php/$1 [L]
