@@ -110,6 +110,35 @@ require_once('view/autres_pages/header.php');
         text-transform: uppercase;
     }
 
+    /* Messages d'alerte */
+    .alert {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        border: 1px solid;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .alert ul {
+        margin: 0;
+        padding-left: 1.2rem;
+    }
+
+    .alert p {
+        margin: 0;
+    }
+
     .form-group {
         margin-bottom: 1.5rem;
     }
@@ -295,6 +324,23 @@ require_once('view/autres_pages/header.php');
                 <div class="form-section">
                     <h2 class="form-title">Inscription</h2>
                     
+                    <?php if (!empty($erreurs)): ?>
+                        <div class="alert alert-danger">
+                            <ul>
+                                <?php foreach ($erreurs as $erreur): ?>
+                                    <li><?php echo htmlspecialchars($erreur); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (isset($succes) && $succes): ?>
+                        <div class="alert alert-success">
+                            <p><strong>Félicitations !</strong> Votre compte a été créé avec succès. Vous pouvez maintenant <a href="/auth/connexion">vous connecter</a>.</p>
+                        </div>
+                    <?php endif; ?>
+                    
+                    <?php if (!isset($succes) || !$succes): ?>
                     <form method="POST" action="/auth/inscription">
                         <div class="form-row">
                             <div class="form-group">
@@ -413,6 +459,7 @@ require_once('view/autres_pages/header.php');
                     <div class="auth-footer">
                         <p>Déjà un compte ? <a href="/auth/connexion">Se connecter</a></p>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

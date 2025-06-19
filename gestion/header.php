@@ -269,7 +269,7 @@
     <!-- Navigation principale -->
     <nav class="navbar navbar-expand-lg admin-navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/admin">
+            <a class="navbar-brand" href="/gestion">
                 <i class="fas fa-skull-crossbones me-2"></i>
                 Murder Party Admin
             </a>
@@ -317,17 +317,17 @@
                 </div>
                 
                 <nav class="nav flex-column">
-                    <a href="/admin" class="sidebar-item <?= ($admin_active ?? '') === 'dashboard' ? 'active' : '' ?>">
+                    <a href="/gestion" class="sidebar-item <?= ($admin_active ?? '') === 'dashboard' ? 'active' : '' ?>">
                         <i class="fas fa-chart-line"></i>
                         <span>Tableau de bord</span>
                     </a>
                     
-                    <a href="/admin/utilisateurs" class="sidebar-item <?= ($admin_active ?? '') === 'utilisateurs' ? 'active' : '' ?>">
+                    <a href="/gestion/utilisateurs" class="sidebar-item <?= ($admin_active ?? '') === 'utilisateurs' ? 'active' : '' ?>">
                         <i class="fas fa-users"></i>
                         <span>Utilisateurs</span>
                     </a>
                     
-                    <a href="/admin/commentaires" class="sidebar-item <?= ($admin_active ?? '') === 'commentaires' ? 'active' : '' ?>">
+                    <a href="/gestion/commentaires" class="sidebar-item <?= ($admin_active ?? '') === 'commentaires' ? 'active' : '' ?>">
                         <i class="fas fa-comments"></i>
                         <span>Commentaires</span>
                         <?php if (isset($nb_commentaires_attente) && $nb_commentaires_attente > 0): ?>
@@ -335,7 +335,7 @@
                         <?php endif; ?>
                     </a>
                     
-                    <a href="/admin/messages" class="sidebar-item <?= ($admin_active ?? '') === 'messages' ? 'active' : '' ?>">
+                    <a href="/gestion/messages" class="sidebar-item <?= ($admin_active ?? '') === 'messages' ? 'active' : '' ?>">
                         <i class="fas fa-envelope"></i>
                         <span>Messages</span>
                         <?php if (isset($nb_messages_non_lus) && $nb_messages_non_lus > 0): ?>

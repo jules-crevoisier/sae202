@@ -117,20 +117,20 @@ include_once('header.php');
                         
                         <div class="btn-group">
                             <?php if (!$commentaire['approuve']): ?>
-                                <a href="/admin/commentaire-approuver?id=<?= $commentaire['id'] ?>" 
+                                <a href="/gestion/commentaire-approuver?id=<?= $commentaire['id'] ?>" 
                                    class="btn btn-success btn-sm"
                                    data-confirm="Approuver ce commentaire ? Il sera visible sur le site public.">
                                     <i class="fas fa-check me-1"></i>
                                     Approuver
                                 </a>
-                                <a href="/admin/commentaire-rejeter?id=<?= $commentaire['id'] ?>" 
+                                <a href="/gestion/commentaire-rejeter?id=<?= $commentaire['id'] ?>" 
                                    class="btn btn-danger btn-sm"
                                    data-confirm="Rejeter définitivement ce commentaire ?">
                                     <i class="fas fa-times me-1"></i>
                                     Rejeter
                                 </a>
                             <?php else: ?>
-                                <a href="/admin/commentaire-rejeter?id=<?= $commentaire['id'] ?>" 
+                                <a href="/gestion/commentaire-rejeter?id=<?= $commentaire['id'] ?>" 
                                    class="btn btn-outline-danger btn-sm"
                                    data-confirm="Retirer ce commentaire du site public ?">
                                     <i class="fas fa-eye-slash me-1"></i>

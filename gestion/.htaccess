@@ -1,6 +1,6 @@
-# Authentification Apache Basic (solution de secours)
+# Authentification Apache Basic pour /gestion
 AuthType Basic
-AuthName "Administration sae202"
+AuthName "Administration sae202 - Gestion"
 AuthUserFile "/home/mmi24c01/htpassword.mmi"
 Require valid-user
 

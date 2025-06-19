@@ -27,8 +27,8 @@ if (!isLoggedIn() || !isAdmin()) {
 $request_uri = $_SERVER['REQUEST_URI'];
 $path = parse_url($request_uri, PHP_URL_PATH);
 
-// Suppression du préfixe /admin
-$path = str_replace('/admin', '', $path);
+// Suppression du préfixe /gestion
+$path = str_replace('/gestion', '', $path);
 $path = trim($path, '/');
 
 // Si pas de chemin spécifié, redirection vers le dashboard
@@ -80,7 +80,7 @@ switch ($path) {
             
             include 'utilisateur_detail.php';
         } else {
-            header('Location: /admin/utilisateurs');
+            header('Location: /gestion/utilisateurs');
             exit;
         }
         break;
@@ -108,7 +108,7 @@ switch ($path) {
             
             include 'message_detail.php';
         } else {
-            header('Location: /admin/messages');
+            header('Location: /gestion/messages');
             exit;
         }
         break;
@@ -130,7 +130,7 @@ switch ($path) {
                 $reponse = trim($_POST['reponse']);
                 if (!empty($reponse)) {
                     if (Message::reply($message_id, $reponse)) {
-                        header('Location: /admin/message?id=' . $message_id);
+                        header('Location: /gestion/message?id=' . $message_id);
                         exit;
                     } else {
                         $error = "Erreur lors de l'envoi de la réponse";
@@ -142,7 +142,7 @@ switch ($path) {
             
             include 'message_repondre.php';
         } else {
-            header('Location: /admin/messages');
+            header('Location: /gestion/messages');
             exit;
         }
         break;
@@ -158,12 +158,12 @@ switch ($path) {
         if (isset($_GET['id'])) {
             $comment_id = (int)$_GET['id'];
             if (Comment::approve($comment_id)) {
-                header('Location: /admin/commentaires?success=approved');
+                header('Location: /gestion/commentaires?success=approved');
             } else {
-                header('Location: /admin/commentaires?error=approve_failed');
+                header('Location: /gestion/commentaires?error=approve_failed');
             }
         } else {
-            header('Location: /admin/commentaires');
+            header('Location: /gestion/commentaires');
         }
         exit;
         break;
@@ -173,12 +173,12 @@ switch ($path) {
         if (isset($_GET['id'])) {
             $comment_id = (int)$_GET['id'];
             if (Comment::reject($comment_id)) {
-                header('Location: /admin/commentaires?success=rejected');
+                header('Location: /gestion/commentaires?success=rejected');
             } else {
-                header('Location: /admin/commentaires?error=reject_failed');
+                header('Location: /gestion/commentaires?error=reject_failed');
             }
         } else {
-            header('Location: /admin/commentaires');
+            header('Location: /gestion/commentaires');
         }
         exit;
         break;

@@ -28,7 +28,7 @@ function inscription() {
         if (empty($mot_de_passe)) $erreurs[] = "Le mot de passe est requis";
         if (strlen($mot_de_passe) < 6) $erreurs[] = "Le mot de passe doit contenir au moins 6 caractères";
         if ($mot_de_passe !== $mot_de_passe_confirm) $erreurs[] = "Les mots de passe ne correspondent pas";
-        if ($age < 12 || $age > 120) $erreurs[] = "L'âge doit être compris entre 12 et 120 ans";
+        if ($age < 16 || $age > 120) $erreurs[] = "L'âge doit être compris entre 16 et 120 ans";
         
         if (empty($erreurs)) {
             if (User::register($nom, $prenom, $email, $mot_de_passe, $telephone, $age)) {

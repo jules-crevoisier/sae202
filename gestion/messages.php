@@ -148,14 +148,14 @@ include_once('header.php');
                         </div>
                         
                         <div class="btn-group">
-                            <a href="/admin/message?id=<?= $message['id'] ?>" 
+                            <a href="/gestion/message?id=<?= $message['id'] ?>" 
                                class="btn btn-outline-primary btn-sm">
                                 <i class="fas fa-eye me-1"></i>
                                 Voir
                             </a>
                             
                             <?php if (empty($message['reponse'])): ?>
-                                <a href="/admin/message-repondre?id=<?= $message['id'] ?>" 
+                                <a href="/gestion/message-repondre?id=<?= $message['id'] ?>" 
                                    class="btn btn-primary btn-sm">
                                     <i class="fas fa-reply me-1"></i>
                                     Répondre
@@ -168,7 +168,7 @@ include_once('header.php');
                                 Email
                             </a>
                             
-                            <a href="/admin/message-supprimer?id=<?= $message['id'] ?>" 
+                            <a href="/gestion/message-supprimer?id=<?= $message['id'] ?>" 
                                class="btn btn-outline-danger btn-sm"
                                data-confirm="Supprimer définitivement ce message ?">
                                 <i class="fas fa-trash me-1"></i>
