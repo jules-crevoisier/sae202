@@ -147,6 +147,21 @@ switch ($path) {
         }
         break;
         
+    case 'message-supprimer':
+        // Supprimer un message
+        if (isset($_GET['id'])) {
+            $message_id = (int)$_GET['id'];
+            if (Message::delete($message_id)) {
+                header('Location: /gestion/messages?success=deleted');
+            } else {
+                header('Location: /gestion/messages?error=delete_failed');
+            }
+        } else {
+            header('Location: /gestion/messages');
+        }
+        exit;
+        break;
+        
     case 'commentaires':
         // Liste des commentaires
         $commentaires = Comment::getAll();

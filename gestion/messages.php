@@ -16,6 +16,27 @@ include_once('header.php');
                     message(s) non lu(s)
                 </div>
             </div>
+            
+            <!-- Messages de feedback -->
+            <?php if (isset($_GET['success'])): ?>
+                <?php if ($_GET['success'] === 'deleted'): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Succès !</strong> Le message a été supprimé avec succès.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+            
+            <?php if (isset($_GET['error'])): ?>
+                <?php if ($_GET['error'] === 'delete_failed'): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <strong>Erreur !</strong> Impossible de supprimer le message. Veuillez réessayer.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -269,6 +290,18 @@ document.addEventListener('DOMContentLoaded', function() {
                     message.classList.add('d-none');
                 }
             });
+        });
+    });
+    
+    // Gestion de la confirmation de suppression
+    const liensSupprimer = document.querySelectorAll('a[data-confirm]');
+    liensSupprimer.forEach(lien => {
+        lien.addEventListener('click', function(e) {
+            const message = this.getAttribute('data-confirm');
+            if (!confirm(message)) {
+                e.preventDefault();
+                return false;
+            }
         });
     });
 });
