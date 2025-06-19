@@ -1,17 +1,17 @@
     <footer class="footer-modern mt-auto">
-        <div class="container">
-            <!-- Contenu principal du footer -->
-            <div class="row py-5">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="footer-brand">
-                        <h4 class="footer-title">
-                            <i class="fas fa-mask text-accent me-2" aria-hidden="true"></i>
-                            Murder Party
-                        </h4>
-                        <p class="footer-description">
-                            Un événement mystérieux et immersif qui vous plongera dans une enquête palpitante. 
-                            Découvrez qui est le coupable dans cette soirée inoubliable.
-                        </p>
+        <div class="main-container">
+            <div class="footer-content">
+                <!-- Logo et description -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/assets/img/logo.svg" alt="Les Derniers Fils" />
+                    </div>
+                    <p class="footer-description">
+                        Un événement mystérieux et immersif qui vous plongera dans une enquête palpitante. 
+                        Découvrez qui est le coupable dans cette soirée inoubliable.
+                    </p>
+                    <div class="footer-follow">
+                        <h6>Suivez-nous</h6>
                         <div class="footer-social">
                             <a href="#" class="social-link" aria-label="Facebook" title="Suivez-nous sur Facebook">
                                 <i class="fab fa-facebook-f" aria-hidden="true"></i>
@@ -19,121 +19,56 @@
                             <a href="#" class="social-link" aria-label="Instagram" title="Suivez-nous sur Instagram">
                                 <i class="fab fa-instagram" aria-hidden="true"></i>
                             </a>
-                            <a href="#" class="social-link" aria-label="Twitter" title="Suivez-nous sur Twitter">
-                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                            <a href="#" class="social-link" aria-label="YouTube" title="Suivez-nous sur YouTube">
+                                <i class="fab fa-youtube" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-6 mb-4">
-                    <h5 class="footer-section-title">Navigation</h5>
-                    <ul class="footer-links">
-                        <li><a href="/" class="footer-link">
-                            <i class="fas fa-home me-2" aria-hidden="true"></i>Accueil
-                        </a></li>
-                        <li><a href="/concept" class="footer-link">
-                            <i class="fas fa-lightbulb me-2" aria-hidden="true"></i>Concept
-                        </a></li>
-                        <li><a href="/infos" class="footer-link">
-                            <i class="fas fa-info-circle me-2" aria-hidden="true"></i>Infos pratiques
-                        </a></li>
-                        <?php if (isLoggedIn()): ?>
-                        <li><a href="/profil" class="footer-link">
-                            <i class="fas fa-user me-2" aria-hidden="true"></i>Mon profil
-                        </a></li>
-                        <li><a href="/messagerie" class="footer-link">
-                            <i class="fas fa-envelope me-2" aria-hidden="true"></i>Messagerie
-                        </a></li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 mb-4">
+                <!-- Contact -->
+                <div class="footer-section">
                     <h5 class="footer-section-title">Contact</h5>
                     <div class="footer-contact">
                         <div class="contact-item">
-                            <i class="fas fa-envelope text-accent me-3" aria-hidden="true"></i>
-                            <div>
-                                <strong>Email</strong>
-                                <br>
-                                <a href="mailto:contact@murderparty.local" class="footer-link">
-                                    contact@murderparty.local
-                                </a>
-                            </div>
+                            <span>+33 4 25 67 00 23</span>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-phone text-accent me-3" aria-hidden="true"></i>
-                            <div>
-                                <strong>Téléphone</strong>
-                                <br>
-                                <a href="tel:0325000000" class="footer-link">
-                                    03 25 XX XX XX
-                                </a>
-                            </div>
+                            <a href="mailto:lesderniersflls@contact.fr" class="footer-link">
+                                lesderniersflls@contact.fr
+                            </a>
                         </div>
                         <div class="contact-item">
-                            <i class="fas fa-map-marker-alt text-accent me-3" aria-hidden="true"></i>
-                            <div>
-                                <strong>Adresse</strong>
-                                <br>
-                                <span class="text-muted">Troyes, France</span>
-                            </div>
+                            <span>Mairie de Rosières</span>
+                            <span>10700 Rosières-Saint-Sébastienne</span>
                         </div>
+                    </div>
+                    <div class="footer-newsletter">
+                        <a href="/auth/inscription" class="btn-newsletter">S'inscrire à la Newsletter</a>
                     </div>
                 </div>
                 
-                <div class="col-lg-3 col-md-6 mb-4">
+                <!-- Liens Utiles -->
+                <div class="footer-section">
+                    <h5 class="footer-section-title">Liens Utiles</h5>
+                    <ul class="footer-links">
+                        <li><a href="/" class="footer-link">Accueil</a></li>
+                        <li><a href="/concept" class="footer-link">Concept</a></li>
+                        <li><a href="/infos" class="footer-link">Infos pratiques</a></li>
+                        <li><a href="/auth/connexion" class="footer-link">Connexion</a></li>
+                        <li><a href="/auth/inscription" class="footer-link">Inscription</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Informations -->
+                <div class="footer-section">
                     <h5 class="footer-section-title">Informations</h5>
                     <ul class="footer-links">
-                        <li><a href="/mentions" class="footer-link">
-                            <i class="fas fa-file-contract me-2" aria-hidden="true"></i>Mentions légales
-                        </a></li>
-                        <?php if (!isLoggedIn()): ?>
-                        <li><a href="/auth/inscription" class="footer-link">
-                            <i class="fas fa-user-plus me-2" aria-hidden="true"></i>S'inscrire
-                        </a></li>
-                        <li><a href="/auth/connexion" class="footer-link">
-                            <i class="fas fa-sign-in-alt me-2" aria-hidden="true"></i>Se connecter
-                        </a></li>
-                        <?php endif; ?>
-                        <?php if (isAdmin()): ?>
-                        <li><a href="/admin" class="footer-link footer-link-admin">
-                            <i class="fas fa-cogs me-2" aria-hidden="true"></i>Administration
-                        </a></li>
-                        <?php endif; ?>
+                        <li><a href="/mentions" class="footer-link">Mentions légales</a></li>
+                        <li><a href="/politique-confidentialite" class="footer-link">Politique de Confidentialité</a></li>
+                        <li><a href="/plan-du-site" class="footer-link">Plan du site</a></li>
+                        <li><a href="/cookies" class="footer-link">Cookies</a></li>
                     </ul>
-                    
-                    <div class="footer-badge mt-3">
-                        <div class="badge-modern">
-                            <i class="fas fa-award me-2" aria-hidden="true"></i>
-                            <div>
-                                <strong>SAE202</strong>
-                                <br>
-                                <small>Projet étudiant</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Séparateur -->
-            <hr class="footer-divider">
-            
-            <!-- Copyright et informations légales -->
-            <div class="row py-3">
-                <div class="col-md-6">
-                    <p class="footer-copyright mb-0">
-                        © <?= date('Y') ?> Murder Party Events
-                        <span class="mx-2">•</span>
-                        <span class="badge badge-version">v2.0</span>
-                    </p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <p class="footer-credits mb-0">
-                        <i class="fas fa-graduation-cap me-1 text-accent" aria-hidden="true"></i>
-                        Développé par les étudiants MMI Troyes
-                    </p>
                 </div>
             </div>
         </div>
@@ -201,96 +136,136 @@
     </script>
     
     <style>
-        /* Styles du footer moderne avec la nouvelle palette */
+        /* Footer moderne - Style exact de l'image */
         .footer-modern {
-            background: var(--gradient-elegant);
-            color: var(--text-light);
-            position: relative;
-            overflow: hidden;
+            background: #742939;
+            color: white;
+            padding: 3rem 0;
             margin-top: 4rem;
         }
         
-        .footer-modern::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="footerPattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,252,239,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23footerPattern)"/></svg>');
-            pointer-events: none;
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
         
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        /* Section Logo et description */
         .footer-brand {
-            position: relative;
-            z-index: 1;
+            max-width: 400px;
         }
         
-        .footer-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 800;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-light);
+        .footer-logo {
+            margin-bottom: 1.5rem;
         }
         
-        .footer-title .text-accent {
-            color: var(--rust-light) !important;
+        .footer-logo img {
+            height: 60px;
+            width: auto;
+            max-width: 200px;
+            object-fit: contain;
+        }
+        
+        .footer-logo svg,
+        .footer-logo svg * {
+            fill: white !important;
         }
         
         .footer-description {
-            color: rgba(255, 252, 239, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             line-height: 1.6;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-size: 0.95rem;
+        }
+        
+        .footer-follow h6 {
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
         
         .footer-social {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
         }
         
         .social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 12px;
-            background: rgba(175, 116, 129, 0.2);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--old-rose-light);
+            color: white;
             text-decoration: none;
-            transition: var(--transition-smooth);
-            border: 1px solid rgba(175, 116, 129, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .social-link:hover {
-            background: var(--old-rose-light);
-            color: var(--caput-mortuum);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
         }
         
+        /* Sections du footer */
         .footer-section-title {
-            color: var(--rust-light);
+            color: white;
             font-weight: 700;
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        .footer-section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 30px;
-            height: 2px;
-            background: var(--gradient-accent);
-            border-radius: 1px;
+        .footer-contact {
+            margin-bottom: 2rem;
         }
         
+        .contact-item {
+            margin-bottom: 0.75rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .contact-item span {
+            display: block;
+        }
+        
+        .footer-newsletter {
+            margin-top: 1.5rem;
+        }
+        
+        .btn-newsletter {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn-newsletter:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Liens */
         .footer-links {
             list-style: none;
             padding: 0;
@@ -302,231 +277,90 @@
         }
         
         .footer-link {
-            color: rgba(255, 252, 239, 0.8);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            transition: var(--transition-smooth);
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            display: block;
             padding: 0.25rem 0;
         }
         
         .footer-link:hover {
-            color: var(--old-rose-light);
+            color: white;
             text-decoration: none;
             transform: translateX(3px);
         }
         
-        .footer-link i {
-            color: var(--old-rose);
-            width: 16px;
-        }
-        
-        .footer-link-admin {
-            background: rgba(169, 72, 3, 0.2);
-            padding: 0.5rem 0.75rem;
-            border-radius: 8px;
-            border: 1px solid rgba(169, 72, 3, 0.3);
-        }
-        
-        .footer-link-admin:hover {
-            background: var(--rust-light);
-            color: var(--text-light);
-            transform: translateX(0) translateY(-1px);
-        }
-        
-        .footer-contact {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-            padding: 0.5rem 0;
-        }
-        
-        .contact-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .contact-item i {
-            color: var(--rust-light) !important;
-            font-size: 1.1rem;
-            margin-top: 0.125rem;
-        }
-        
-        .contact-item strong {
-            color: var(--old-rose-light);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
-        .contact-item .footer-link {
-            color: rgba(255, 252, 239, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .contact-item .text-muted {
-            color: rgba(255, 252, 239, 0.6) !important;
-            font-size: 0.9rem;
-        }
-        
-        .footer-badge {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .badge-modern {
-            background: rgba(175, 116, 129, 0.15);
-            border: 1px solid rgba(175, 116, 129, 0.3);
-            border-radius: 12px;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: var(--transition-smooth);
-        }
-        
-        .badge-modern:hover {
-            background: rgba(175, 116, 129, 0.25);
-            transform: translateY(-2px);
-        }
-        
-        .badge-modern i {
-            color: var(--rust-light);
-            font-size: 1.2rem;
-        }
-        
-        .badge-modern strong {
-            color: var(--old-rose-light);
-            font-size: 0.9rem;
-        }
-        
-        .badge-modern small {
-            color: rgba(255, 252, 239, 0.7);
-            font-size: 0.8rem;
-        }
-        
-        .footer-divider {
-            border-color: rgba(175, 116, 129, 0.3);
-            margin: 2rem 0 1rem 0;
-        }
-        
-        .footer-copyright {
-            color: rgba(255, 252, 239, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .footer-credits {
-            color: rgba(255, 252, 239, 0.8);
-            font-size: 0.9rem;
-        }
-        
-        .footer-credits .text-accent {
-            color: var(--rust-light) !important;
-        }
-        
-        .badge-version {
-            background: var(--gradient-accent);
-            color: var(--text-light);
-            font-size: 0.75rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-        }
-        
-        /* Animations pour le footer */
-        .footer-modern .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
-        }
-        
-        .footer-modern .animate-on-scroll.fade-in-up {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
         /* Responsive */
-        @media (max-width: 768px) {
-            .footer-modern {
-                margin-top: 2rem;
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
             }
             
-            .footer-title {
-                font-size: 1.3rem;
+            .footer-brand {
+                grid-column: 1 / -1;
                 text-align: center;
-            }
-            
-            .footer-description {
-                text-align: center;
-                font-size: 0.9rem;
+                max-width: 100%;
+                margin-bottom: 2rem;
             }
             
             .footer-social {
                 justify-content: center;
             }
-            
-            .footer-section-title {
-                text-align: center;
-                font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-modern {
+                padding: 2rem 0;
             }
             
-            .footer-section-title::after {
-                left: 50%;
-                transform: translateX(-50%);
+            .main-container {
+                padding: 0 1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .footer-brand {
+                margin-bottom: 1.5rem;
+            }
+            
+            .footer-logo img {
+                height: 50px;
+            }
+            
+            .footer-description {
+                font-size: 0.9rem;
+            }
+            
+            .footer-section-title {
+                font-size: 1rem;
+                margin-bottom: 1rem;
             }
             
             .footer-links {
                 text-align: center;
             }
             
-            .footer-link {
-                justify-content: center;
-            }
-            
             .footer-contact {
                 text-align: center;
-            }
-            
-            .contact-item {
-                justify-content: center;
-                text-align: left;
-            }
-            
-            .footer-credits {
-                text-align: center !important;
-                margin-top: 1rem;
             }
         }
         
         @media (max-width: 576px) {
             .social-link {
-                width: 40px;
-                height: 40px;
+                width: 35px;
+                height: 35px;
             }
             
-            .badge-modern {
-                padding: 0.75rem;
-                flex-direction: column;
-                text-align: center;
-                gap: 0.5rem;
+            .btn-newsletter {
+                width: 100%;
+                max-width: 250px;
             }
-            
-            .footer-copyright,
-            .footer-credits {
-                text-align: center;
-                font-size: 0.8rem;
-            }
-        }
-        
-        /* Navigation au clavier */
-        .keyboard-navigation .footer-link:focus,
-        .keyboard-navigation .social-link:focus {
-            outline: 2px solid var(--old-rose-light);
-            outline-offset: 2px;
         }
     </style>
 </body>

@@ -4,616 +4,419 @@ require_once('view/autres_pages/header.php');
 ?>
 
 <style>
-    /* Styles pour la page d'inscription avec la nouvelle palette */
-    .min-vh-80 {
-        min-height: 80vh;
-    }
-    
-    .auth-header {
-        margin-bottom: 3rem;
-    }
-    
-    .auth-icon {
-        width: 80px;
-        height: 80px;
-        background: var(--gradient-secondary);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-light);
-        font-size: 2rem;
-        margin: 0 auto;
-        box-shadow: var(--shadow-lg);
-        animation: pulse-mystery 3s ease-in-out infinite;
-    }
-    
-    .auth-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-    }
-    
-    .auth-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-    
-    .auth-card {
-        background: var(--bg-primary);
-        border-radius: 24px;
-        box-shadow: var(--shadow-xl);
-        border: 1px solid rgba(175, 116, 129, 0.1);
+    /* Page d'inscription - Style exact de l'image */
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: url('/assets/img/imageHeroFond.png') center/cover;
         position: relative;
-        overflow: hidden;
     }
-    
-    .auth-card::before {
+
+    body::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
-        background: var(--gradient-accent);
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
     }
-    
-    .auth-card-body {
-        padding: 3rem 2.5rem;
-    }
-    
-    .form-group-modern {
+
+    .main-content {
         position: relative;
-        margin-bottom: 1.5rem;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
-    
-    .form-label-modern {
-        color: var(--text-primary);
-        font-weight: 600;
-        font-size: 0.95rem;
-        margin-bottom: 0.75rem;
+
+    /* Section principale */
+    .auth-section {
+        flex: 1;
         display: flex;
         align-items: center;
+        padding: 2rem 0;
     }
-    
-    .form-label-modern i {
-        color: var(--old-rose);
-        margin-right: 0.5rem;
+
+    .container-custom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        width: 100%;
     }
-    
+
+    /* Ornement décoratif */
+    .ornament-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .ornament-header img {
+        height: 100px;
+        width: auto;
+        opacity: 0.8;
+    }
+
+    /* Layout en deux colonnes */
+    .auth-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    /* Colonne gauche - Texte de bienvenue */
+    .welcome-section {
+        color: white;
+    }
+
+    .welcome-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .welcome-subtitle {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        margin-bottom: 0;
+        max-width: 450px;
+    }
+
+    /* Colonne droite - Formulaire */
+    .form-section {
+        background: rgba(255, 248, 240, 0.95);
+        border-radius: 15px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .form-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #742939;
+        margin-bottom: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: 600;
+        color: #742939;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
     .input-wrapper {
         position: relative;
     }
-    
-    .form-control-modern {
+
+    .form-control {
         width: 100%;
-        padding: 1rem 3rem 1rem 1rem;
-        border: 2px solid rgba(175, 116, 129, 0.2);
-        border-radius: 12px;
-        background: var(--bg-primary);
-        color: var(--text-primary);
+        padding: 1rem 2.5rem 1rem 1rem;
+        border: 2px solid #D4A574;
+        border-radius: 8px;
+        background: white;
+        color: #333;
         font-size: 1rem;
-        transition: var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        box-sizing: border-box;
     }
-    
-    .form-control-modern:focus {
+
+    .form-control:focus {
         outline: none;
-        border-color: var(--old-rose);
-        box-shadow: 0 0 0 3px rgba(175, 116, 129, 0.1);
-        background: var(--bg-primary);
+        border-color: #742939;
+        box-shadow: 0 0 0 3px rgba(116, 41, 57, 0.1);
     }
-    
-    .form-control-modern::placeholder {
-        color: var(--text-muted);
+
+    .form-control::placeholder {
+        color: #999;
     }
-    
+
     .input-icon {
         position: absolute;
         right: 1rem;
         top: 50%;
         transform: translateY(-50%);
-        color: var(--old-rose);
+        color: #D4A574;
         font-size: 0.9rem;
         pointer-events: none;
     }
-    
-    .form-text {
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
     }
-    
-    .form-check-modern {
-        background: rgba(175, 116, 129, 0.05);
-        border-radius: 12px;
+
+    .form-check {
+        background: rgba(212, 165, 116, 0.1);
+        border-radius: 8px;
         padding: 1rem;
-        margin-bottom: 2rem;
-        border: 1px solid rgba(175, 116, 129, 0.1);
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(212, 165, 116, 0.3);
     }
-    
-    .form-check-input:checked {
-        background-color: var(--old-rose);
-        border-color: var(--old-rose);
+
+    .form-check input[type="checkbox"] {
+        margin-right: 0.5rem;
+        accent-color: #742939;
     }
-    
-    .form-check-input:focus {
-        border-color: var(--old-rose);
-        box-shadow: 0 0 0 0.25rem rgba(175, 116, 129, 0.25);
-    }
-    
-    .form-check-label {
-        color: var(--text-secondary);
+
+    .form-check label {
+        color: #666;
         font-size: 0.9rem;
-        line-height: 1.5;
-    }
-    
-    .form-check-label a {
-        color: var(--rust);
-        text-decoration: none;
-        font-weight: 600;
-    }
-    
-    .form-check-label a:hover {
-        color: var(--rust-light);
-        text-decoration: underline;
-    }
-    
-    .auth-footer {
-        margin-top: 2rem;
-    }
-    
-    .auth-footer-text {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
+        line-height: 1.4;
         margin: 0;
     }
-    
-    .auth-link {
-        color: var(--rust);
+
+    .form-check label a {
+        color: #A94803;
         text-decoration: none;
         font-weight: 600;
-        transition: var(--transition-smooth);
     }
-    
-    .auth-link:hover {
-        color: var(--rust-light);
+
+    .form-check label a:hover {
         text-decoration: underline;
     }
-    
-    /* Info card */
-    .info-card {
-        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
-        border: 1px solid rgba(175, 116, 129, 0.2);
-        border-radius: 16px;
-        padding: 1.5rem;
+
+    .btn-register {
+        width: 100%;
+        background: #A94803;
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .btn-register:hover {
+        background: #8a3803;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(169, 72, 3, 0.3);
+    }
+
+    .auth-footer {
+        text-align: center;
         margin-top: 2rem;
-        box-shadow: var(--shadow-sm);
+        color: #666;
+        font-size: 0.95rem;
     }
-    
-    .info-card h5 {
-        color: var(--wine);
-        font-weight: 700;
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
+
+    .auth-footer a {
+        color: #A94803;
+        text-decoration: none;
+        font-weight: 600;
     }
-    
-    .info-card h5 i {
-        color: var(--rust);
-        margin-right: 0.5rem;
+
+    .auth-footer a:hover {
+        text-decoration: underline;
     }
-    
-    .info-item {
-        display: flex;
-        align-items: center;
-        color: var(--text-secondary);
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .info-item:last-child {
-        margin-bottom: 0;
-    }
-    
-    .info-item i {
-        color: var(--old-rose);
-        margin-right: 0.5rem;
-        width: 16px;
-    }
-    
-    /* Validation states */
-    .form-control-modern.is-valid {
-        border-color: #28a745;
-        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
-    }
-    
-    .form-control-modern.is-invalid {
-        border-color: var(--wine);
-        box-shadow: 0 0 0 3px rgba(122, 41, 58, 0.1);
-    }
-    
-    .valid-feedback {
-        color: #28a745;
-        font-size: 0.85rem;
-        margin-top: 0.5rem;
-    }
-    
-    .invalid-feedback {
-        color: var(--wine);
-        font-size: 0.85rem;
-        margin-top: 0.5rem;
-    }
-    
+
     /* Responsive */
     @media (max-width: 768px) {
-        .auth-card-body {
-            padding: 2rem 1.5rem;
+        .auth-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
         }
-        
-        .auth-title {
-            font-size: 2rem;
+
+        .welcome-title {
+            font-size: 2.5rem;
         }
-        
-        .auth-subtitle {
-            font-size: 1rem;
+
+        .form-section {
+            padding: 2rem;
         }
-        
-        .form-group-modern {
-            margin-bottom: 1.25rem;
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .ornament-header img {
+            height: 80px;
         }
     }
-    
+
     @media (max-width: 576px) {
-        .auth-icon {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
+        .welcome-title {
+            font-size: 2rem;
         }
-        
-        .auth-title {
-            font-size: 1.75rem;
+
+        .form-section {
+            padding: 1.5rem;
         }
-        
-        .form-control-modern {
-            padding: 0.875rem 2.5rem 0.875rem 0.875rem;
+
+        .container-custom {
+            padding: 0 1rem;
         }
     }
 </style>
 
-<div class="container">
-    <div class="row justify-content-center align-items-center min-vh-80">
-        <div class="col-lg-8 col-xl-7">
-            <!-- En-tête de la page -->
-            <div class="auth-header text-center mb-5 animate-on-scroll">
-                <div class="auth-icon mb-4">
-                    <i class="fas fa-user-plus" aria-hidden="true"></i>
-                </div>
-                <h1 class="auth-title mb-3">
-                    Rejoignez l'aventure
-                </h1>
-                <p class="auth-subtitle">
-                    Créez votre compte pour participer à nos Murder Party et vivez des expériences d'enquête inoubliables.
-                </p>
+<div class="main-content">
+    <section class="auth-section">
+        <div class="container-custom">
+            <!-- Ornement décoratif -->
+            <div class="ornament-header">
+                <img src="/assets/img/ornementHeader.png" alt="Ornement décoratif" />
             </div>
 
-            <!-- Alertes de succès -->
-            <?php if ($succes): ?>
-                <div class="alert alert-modern alert-success alert-dismissible fade show animate-on-scroll" role="alert">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-check-circle fa-2x me-3" aria-hidden="true"></i>
-                        <div>
-                            <strong>Félicitations !</strong><br>
-                            Votre inscription a été enregistrée avec succès. Vous pouvez maintenant vous 
-                            <a href="/auth/connexion" class="alert-link">connecter</a>.
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            <div class="auth-layout">
+                <!-- Colonne gauche - Rejoignez l'aventure -->
+                <div class="welcome-section">
+                    <h1 class="welcome-title">Rejoignez<br>l'aventure</h1>
+                    <p class="welcome-subtitle">
+                        Créez votre compte pour vous inscrire à nos Murder Party et vivre des 
+                        soirées inoubliables.
+                    </p>
                 </div>
-            <?php endif; ?>
 
-            <!-- Alertes d'erreur -->
-            <?php if (!empty($erreurs)): ?>
-                <div class="alert alert-modern alert-danger alert-dismissible fade show animate-on-scroll" role="alert">
-                    <div class="d-flex align-items-start">
-                        <i class="fas fa-exclamation-triangle fa-2x me-3 mt-1" aria-hidden="true"></i>
-                        <div>
-                            <strong>Erreur d'inscription</strong><br>
-                            Veuillez corriger les problèmes suivants :
-                            <ul class="mb-0 mt-2">
-                                <?php foreach ($erreurs as $erreur): ?>
-                                    <li><?= securise($erreur) ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
-                </div>
-            <?php endif; ?>
-
-            <!-- Formulaire d'inscription -->
-            <div class="auth-card animate-on-scroll">
-                <div class="auth-card-body">
-                    <form method="POST" action="/auth/inscription" class="auth-form" novalidate>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label for="prenom" class="form-label-modern">
-                                        <i class="fas fa-user" aria-hidden="true"></i>
-                                        Prénom *
-                                    </label>
-                                    <div class="input-wrapper">
-                                        <input type="text" 
-                                               class="form-control-modern" 
-                                               id="prenom" 
-                                               name="prenom" 
-                                               value="<?= securise($_POST['prenom'] ?? '') ?>"
-                                               placeholder="Votre prénom"
-                                               required>
-                                        <div class="input-icon">
-                                            <i class="fas fa-user" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
+                <!-- Colonne droite - Formulaire d'inscription -->
+                <div class="form-section">
+                    <h2 class="form-title">Inscription</h2>
+                    
+                    <form method="POST" action="/auth/inscription">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="prenom" class="form-label">Prénom</label>
+                                <div class="input-wrapper">
+                                    <input type="text" 
+                                           id="prenom" 
+                                           name="prenom" 
+                                           class="form-control" 
+                                           placeholder="Votre prénom"
+                                           required>
+                                    <i class="fas fa-user input-icon"></i>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label for="nom" class="form-label-modern">
-                                        <i class="fas fa-user" aria-hidden="true"></i>
-                                        Nom *
-                                    </label>
-                                    <div class="input-wrapper">
-                                        <input type="text" 
-                                               class="form-control-modern" 
-                                               id="nom" 
-                                               name="nom" 
-                                               value="<?= securise($_POST['nom'] ?? '') ?>"
-                                               placeholder="Votre nom"
-                                               required>
-                                        <div class="input-icon">
-                                            <i class="fas fa-user" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
+                            
+                            <div class="form-group">
+                                <label for="nom" class="form-label">Nom</label>
+                                <div class="input-wrapper">
+                                    <input type="text" 
+                                           id="nom" 
+                                           name="nom" 
+                                           class="form-control" 
+                                           placeholder="Votre nom"
+                                           required>
+                                    <i class="fas fa-user input-icon"></i>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group-modern">
-                            <label for="email" class="form-label-modern">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                                Adresse email *
-                            </label>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Adresse email</label>
                             <div class="input-wrapper">
                                 <input type="email" 
-                                       class="form-control-modern" 
                                        id="email" 
                                        name="email" 
-                                       value="<?= securise($_POST['email'] ?? '') ?>"
+                                       class="form-control" 
                                        placeholder="votre@email.com"
                                        required>
-                                <div class="input-icon">
-                                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <small class="form-text">
-                                Cette adresse sera utilisée pour vous connecter
-                            </small>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label for="mot_de_passe" class="form-label-modern">
-                                        <i class="fas fa-lock" aria-hidden="true"></i>
-                                        Mot de passe *
-                                    </label>
-                                    <div class="input-wrapper">
-                                        <input type="password" 
-                                               class="form-control-modern" 
-                                               id="mot_de_passe" 
-                                               name="mot_de_passe" 
-                                               placeholder="Votre mot de passe"
-                                               minlength="6"
-                                               required>
-                                        <div class="input-icon">
-                                            <i class="fas fa-lock" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <small class="form-text">
-                                        Au moins 6 caractères
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label for="mot_de_passe_confirm" class="form-label-modern">
-                                        <i class="fas fa-lock" aria-hidden="true"></i>
-                                        Confirmer le mot de passe *
-                                    </label>
-                                    <div class="input-wrapper">
-                                        <input type="password" 
-                                               class="form-control-modern" 
-                                               id="mot_de_passe_confirm" 
-                                               name="mot_de_passe_confirm" 
-                                               placeholder="Confirmer le mot de passe"
-                                               minlength="6"
-                                               required>
-                                        <div class="input-icon">
-                                            <i class="fas fa-lock" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                <i class="fas fa-envelope input-icon"></i>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label for="telephone" class="form-label-modern">
-                                        <i class="fas fa-phone" aria-hidden="true"></i>
-                                        Téléphone
-                                    </label>
-                                    <div class="input-wrapper">
-                                        <input type="tel" 
-                                               class="form-control-modern" 
-                                               id="telephone" 
-                                               name="telephone" 
-                                               value="<?= securise($_POST['telephone'] ?? '') ?>"
-                                               placeholder="06 12 34 56 78">
-                                        <div class="input-icon">
-                                            <i class="fas fa-phone" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <small class="form-text">
-                                        Optionnel - pour vous contacter si nécessaire
-                                    </small>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group-modern">
-                                    <label for="age" class="form-label-modern">
-                                        <i class="fas fa-birthday-cake" aria-hidden="true"></i>
-                                        Âge *
-                                    </label>
-                                    <div class="input-wrapper">
-                                        <input type="number" 
-                                               class="form-control-modern" 
-                                               id="age" 
-                                               name="age" 
-                                               value="<?= intval($_POST['age'] ?? '') ?>"
-                                               placeholder="Votre âge"
-                                               min="12" 
-                                               max="120"
-                                               required>
-                                        <div class="input-icon">
-                                            <i class="fas fa-birthday-cake" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                    <small class="form-text">
-                                        Minimum 12 ans pour participer
-                                    </small>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-check-modern">
-                            <div class="form-check">
-                                <input class="form-check-input" 
-                                       type="checkbox" 
-                                       id="conditions" 
-                                       name="conditions" 
+                        <div class="form-group">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <div class="input-wrapper">
+                                <input type="password" 
+                                       id="password" 
+                                       name="mot_de_passe" 
+                                       class="form-control" 
+                                       placeholder="••••••••"
                                        required>
-                                <label class="form-check-label" for="conditions">
-                                    J'accepte les <a href="/mentions" target="_blank">conditions d'utilisation</a> 
-                                    et la politique de confidentialité *
-                                </label>
+                                <i class="fas fa-lock input-icon"></i>
                             </div>
                         </div>
 
-                        <div class="d-grid gap-3">
-                            <button type="submit" class="btn btn-modern-primary btn-lg">
-                                <i class="fas fa-user-plus me-2" aria-hidden="true"></i>
-                                Créer mon compte
-                            </button>
+                        <div class="form-group">
+                            <label for="password_confirm" class="form-label">Confirmation Mot de passe</label>
+                            <div class="input-wrapper">
+                                <input type="password" 
+                                       id="password_confirm" 
+                                       name="mot_de_passe_confirm" 
+                                       class="form-control" 
+                                       placeholder="••••••••"
+                                       required>
+                                <i class="fas fa-lock input-icon"></i>
+                            </div>
                         </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telephone" class="form-label">Téléphone</label>
+                                <div class="input-wrapper">
+                                    <input type="tel" 
+                                           id="telephone" 
+                                           name="telephone" 
+                                           class="form-control" 
+                                           placeholder="06 12 34 56 78">
+                                    <i class="fas fa-phone input-icon"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="age" class="form-label">Âge</label>
+                                <div class="input-wrapper">
+                                    <input type="number" 
+                                           id="age" 
+                                           name="age" 
+                                           class="form-control" 
+                                           placeholder="25"
+                                           min="16"
+                                           required>
+                                    <i class="fas fa-calendar input-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">
+                                J'accepte les <a href="/mentions-legales">conditions d'utilisation</a> et la <a href="/politique-confidentialite">politique de confidentialité</a> *
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <label for="newsletter">
+                                Vous souhaitez recevoir nos communications ?
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn-register">
+                            S'inscrire
+                        </button>
                     </form>
-                </div>
-            </div>
 
-            <!-- Lien de connexion -->
-            <div class="auth-footer text-center mt-4 animate-on-scroll">
-                <p class="auth-footer-text">
-                    Vous avez déjà un compte ? 
-                    <a href="/auth/connexion" class="auth-link">
-                        <i class="fas fa-sign-in-alt me-1" aria-hidden="true"></i>
-                        Se connecter
-                    </a>
-                </p>
-            </div>
-
-            <!-- Informations supplémentaires -->
-            <div class="info-card animate-on-scroll">
-                <h5>
-                    <i class="fas fa-info-circle" aria-hidden="true"></i>
-                    Pourquoi s'inscrire ?
-                </h5>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="info-item">
-                            <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                            Réserver votre place aux événements
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-item">
-                            <i class="fas fa-envelope" aria-hidden="true"></i>
-                            Accéder à la messagerie privée
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-item">
-                            <i class="fas fa-comment" aria-hidden="true"></i>
-                            Laisser des commentaires et avis
-                        </div>
+                    <div class="auth-footer">
+                        <p>Déjà un compte ? <a href="/auth/connexion">Se connecter</a></p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
-
-<script>
-    // Validation du mot de passe en temps réel
-    document.getElementById('mot_de_passe_confirm').addEventListener('input', function() {
-        const password = document.getElementById('mot_de_passe').value;
-        const confirmPassword = this.value;
-        
-        if (password !== confirmPassword) {
-            this.setCustomValidity('Les mots de passe ne correspondent pas');
-            this.classList.add('is-invalid');
-            this.classList.remove('is-valid');
-        } else {
-            this.setCustomValidity('');
-            this.classList.remove('is-invalid');
-            this.classList.add('is-valid');
-        }
-    });
-    
-    // Validation de l'email
-    document.getElementById('email').addEventListener('input', function() {
-        const email = this.value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (email && emailRegex.test(email)) {
-            this.classList.remove('is-invalid');
-            this.classList.add('is-valid');
-        } else if (email) {
-            this.classList.add('is-invalid');
-            this.classList.remove('is-valid');
-        } else {
-            this.classList.remove('is-invalid', 'is-valid');
-        }
-    });
-    
-    // Validation des champs requis
-    document.querySelectorAll('.form-control-modern[required]').forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.value.trim()) {
-                this.classList.remove('is-invalid');
-                this.classList.add('is-valid');
-            } else {
-                this.classList.add('is-invalid');
-                this.classList.remove('is-valid');
-            }
-        });
-    });
-</script>
 
 <?php require_once('view/autres_pages/footer.php'); ?> 

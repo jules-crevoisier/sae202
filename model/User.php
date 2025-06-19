@@ -32,10 +32,10 @@ class User {
         
         if ($user && password_verify($mot_de_passe, $user['mot_de_passe'])) {
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_nom'] = $user['nom'];
-            $_SESSION['user_prenom'] = $user['prenom'];
-            $_SESSION['user_email'] = $user['email'];
-            $_SESSION['is_admin'] = $user['is_admin'];
+            $_SESSION['nom'] = $user['nom'];
+            $_SESSION['prenom'] = $user['prenom'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['is_admin'] ? 'admin' : 'user';
             return true;
         }
         

@@ -4,501 +4,779 @@ require_once('view/autres_pages/header.php');
 ?>
 
 <style>
-    /* Styles pour la page infos pratiques avec la nouvelle palette */
-    .info-header {
-        padding: 3rem 0;
-        text-align: center;
-        margin-bottom: 3rem;
-    }
+    /* Page Infos Pratiques - Reproduction exacte du design de l'image */
     
-    .info-title {
-        font-size: 3rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-    }
-    
-    .info-subtitle {
-        font-size: 1.2rem;
-        color: var(--text-secondary);
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    
-    .info-section {
-        margin-bottom: 3rem;
-    }
-    
-    .info-card {
-        background: var(--bg-primary);
-        border: 1px solid rgba(175, 116, 129, 0.1);
-        border-radius: 20px;
-        box-shadow: var(--shadow-md);
-        transition: var(--transition-smooth);
-        overflow: hidden;
+    /* Hero Section - même style que concept.php */
+    .hero-infos {
+        background: url('/assets/img/imageHeroFond.png') center/cover;
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
-        height: 100%;
+        margin-top: 0;
     }
     
-    .info-card::before {
+    .hero-infos::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
-        background: var(--gradient-secondary);
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
     }
-    
-    .info-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-lg);
+
+    .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 4rem;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        text-align: center;
+        position: relative;
+        z-index: 2;
     }
-    
-    .info-card-body {
-        padding: 2.5rem;
+
+    /* Section principale avec carte en background */
+    .main-section {
+        position: relative;
+        padding: 4rem 0;
+        min-height: 600px;
+        overflow: hidden;
+    }
+
+    .map-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .map-background iframe {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        filter: brightness(0.7) contrast(1.1);
+        pointer-events: auto;
+    }
+
+    .container-custom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+        margin-bottom: 4rem;
+        max-width: 600px;
+    }
+
+    /* Section Lieu et accès (overlay sur la carte) */
+    .location-section {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .section-title {
-        color: var(--wine);
-        font-weight: 700;
+        font-family: 'Playfair Display', serif;
         font-size: 1.8rem;
+        font-weight: 700;
+        color: #8B4513;
         margin-bottom: 2rem;
-        display: flex;
-        align-items: center;
+        text-transform: uppercase;
     }
-    
-    .section-title i {
-        color: var(--rust);
-        margin-right: 1rem;
-        font-size: 1.5rem;
+
+    .location-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
-    
-    .schedule-item {
+
+    .location-item {
         display: flex;
         align-items: flex-start;
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        background: rgba(175, 116, 129, 0.05);
-        border-radius: 12px;
-        border-left: 4px solid var(--old-rose);
-        transition: var(--transition-smooth);
+        margin-bottom: 1.5rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid #E8E8E8;
     }
-    
-    .schedule-item:hover {
-        background: rgba(175, 116, 129, 0.1);
-        transform: translateX(5px);
+
+    .location-item:last-child {
+        border-bottom: none;
     }
-    
-    .schedule-icon {
-        background: var(--gradient-primary);
-        color: var(--text-light);
-        width: 60px;
-        height: 60px;
+
+    .location-icon {
+        background: #8B4513;
+        color: white;
+        width: 35px;
+        height: 35px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
-        box-shadow: var(--shadow-md);
+        margin-right: 1rem;
         flex-shrink: 0;
+        font-size: 0.9rem;
     }
     
-    .schedule-content h5 {
-        color: var(--text-primary);
+    .location-content h4 {
+        font-size: 1rem;
         font-weight: 600;
-        margin-bottom: 0.75rem;
-        font-size: 1.1rem;
-    }
-    
-    .schedule-content p {
-        color: var(--text-secondary);
-        margin: 0;
-        line-height: 1.6;
-    }
-    
-    .time-card {
-        background: var(--gradient-elegant);
-        color: var(--text-light);
-        border-radius: 16px;
-        padding: 2rem;
-        text-align: center;
-        box-shadow: var(--shadow-lg);
-        height: 100%;
-    }
-    
-    .time-card i {
-        color: var(--rust-light);
-        margin-bottom: 1.5rem;
-    }
-    
-    .time-card h5 {
-        color: var(--text-light);
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-    }
-    
-    .time-card p {
-        color: rgba(255, 252, 239, 0.9);
-        margin-bottom: 0.75rem;
-        font-size: 1.1rem;
-    }
-    
-    .time-card strong {
-        color: var(--old-rose-light);
-    }
-    
-    .time-card hr {
-        border-color: rgba(175, 116, 129, 0.3);
-        margin: 1.5rem 0;
-    }
-    
-    .time-card small {
-        color: rgba(255, 252, 239, 0.8);
-        font-style: italic;
-    }
-    
-    .location-info {
-        background: rgba(175, 116, 129, 0.05);
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        border-left: 4px solid var(--old-rose);
-    }
-    
-    .location-info h5 {
-        color: var(--wine);
-        font-weight: 600;
-        margin-bottom: 1rem;
-    }
-    
-    .location-info h6 {
-        color: var(--text-primary);
-        font-weight: 600;
-        margin-top: 1.5rem;
-        margin-bottom: 0.75rem;
-    }
-    
-    .location-info p {
-        color: var(--text-secondary);
-        margin-bottom: 0.5rem;
-    }
-    
-    .location-info ul {
-        margin-bottom: 1rem;
-    }
-    
-    .location-info li {
-        color: var(--text-secondary);
+        color: #333;
         margin-bottom: 0.25rem;
     }
     
-    .checklist {
-        list-style: none;
-        padding: 0;
+    .location-content p {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0;
+        line-height: 1.4;
     }
-    
-    .checklist li {
+
+
+
+    /* Section Programme */
+    .program-section {
+        background: white;
+        padding: 3rem 0;
+        margin: 2rem 0;
+    }
+
+    .program-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #8B4513;
+        text-align: center;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+    }
+
+
+
+    /* Timeline verticale */
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: #8B4513;
+        transform: translateX(-50%);
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
         display: flex;
         align-items: center;
-        margin-bottom: 1rem;
-        padding: 0.75rem;
-        background: rgba(175, 116, 129, 0.05);
+    }
+
+    .timeline-item:nth-child(odd) {
+        flex-direction: row;
+    }
+
+    .timeline-item:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .timeline-content {
+        background: white;
+        border: 2px solid #8B4513;
         border-radius: 8px;
-        transition: var(--transition-smooth);
+        padding: 1.5rem;
+        width: 45%;
+        position: relative;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    
-    .checklist li:hover {
-        background: rgba(175, 116, 129, 0.1);
-        transform: translateX(3px);
+
+    .timeline-item:nth-child(odd) .timeline-content::before {
+        content: '';
+        position: absolute;
+        right: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-left: 10px solid #8B4513;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
     }
-    
-    .checklist li i {
-        color: var(--old-rose);
-        margin-right: 0.75rem;
-        width: 20px;
+
+    .timeline-item:nth-child(even) .timeline-content::before {
+        content: '';
+        position: absolute;
+        left: -10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-right: 10px solid #8B4513;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
     }
-    
-    .alert-info-custom {
-        background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
-        border: 1px solid rgba(175, 116, 129, 0.2);
-        border-radius: 12px;
-        padding: 1.25rem 1.5rem;
-        margin-bottom: 1.5rem;
+
+    .timeline-icon {
+        background: #8B4513;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        border: 3px solid white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
-    
-    .alert-info-custom i {
-        color: var(--rust);
-        margin-right: 0.5rem;
-    }
-    
-    .alert-info-custom strong {
-        color: var(--wine);
-    }
-    
-    .contact-card {
-        background: var(--gradient-elegant);
-        color: var(--text-light);
-        border-radius: 16px;
-        padding: 2rem;
-        text-align: center;
-        box-shadow: var(--shadow-lg);
-        margin-top: 2rem;
-    }
-    
-    .contact-card h4 {
-        color: var(--text-light);
-        margin-bottom: 1.5rem;
+
+    .timeline-time {
         font-weight: 700;
+        color: #8B4513;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
     }
     
-    .contact-card p {
-        color: rgba(255, 252, 239, 0.9);
-        margin-bottom: 1.5rem;
+    .timeline-title {
+        font-weight: 600;
+        color: #333;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
     }
-    
-    .contact-card .btn {
-        margin: 0.25rem;
+
+    .timeline-description {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin: 0;
+    }
+
+    /* Section FAQ */
+    .faq-section {
+        background: #742939;
+        color: white;
+        padding: 4rem 0;
+    }
+
+    .faq-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        text-align: center;
+        margin-bottom: 3rem;
+        text-transform: uppercase;
+    }
+
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .faq-accordion {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+    }
+
+    .faq-header {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: background 0.3s ease;
+    }
+
+    .faq-header:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .faq-question {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: white;
+        margin: 0;
+    }
+
+    .faq-toggle {
+        color: white;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .faq-accordion.active .faq-toggle {
+        transform: rotate(180deg);
+    }
+
+    .faq-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .faq-accordion.active .faq-content {
+        max-height: 200px;
+    }
+
+    .faq-answer {
+        padding: 1.5rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Section CTA avec ornements */
+    .cta-section {
+        background: #FFF8F0;
+        padding: 4rem 0;
+        position: relative;
+    }
+
+    .cta-ornaments {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        right: 20px;
+        bottom: 20px;
+        pointer-events: none;
+    }
+
+    .cta-ornament {
+        position: absolute;
+        opacity: 0.3;
+    }
+
+    .cta-ornament img {
+        height: 80px;
+        width: auto;
+    }
+
+    .cta-ornament.top-left {
+        top: 0;
+        left: 0;
+        transform: rotate(-90deg);
+    }
+
+    .cta-ornament.top-right {
+        top: 0;
+        right: 0;
+        transform: rotate(0deg);
+    }
+
+    .cta-ornament.bottom-left {
+        bottom: 0;
+        left: 0;
+        transform: rotate(180deg);
+    }
+
+    .cta-ornament.bottom-right {
+        bottom: 0;
+        right: 0;
+        transform: rotate(90deg);
+    }
+
+    .cta-content {
+        background: #742939;
+        border-radius: 15px;
+        padding: 3rem;
+        text-align: center;
+        color: white;
+        max-width: 600px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    .cta-logo {
+        margin-bottom: 2rem;
+    }
+
+    .cta-logo img {
+        height: 50px;
+        width: auto;
+        filter: brightness(0) invert(1);
+    }
+
+    .cta-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    .cta-text {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .btn-cta {
+        padding: 1rem 2rem;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-cta-primary {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-cta-primary:hover {
+        background: rgba(255, 255, 255, 0.3);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .btn-cta-secondary {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .btn-cta-secondary:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive */
+         @media (max-width: 768px) {
+         .hero-title {
+             font-size: 2.5rem;
+         }
+
+        .main-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .map-container {
+            height: 300px;
+        }
+
+        .timeline::before {
+            left: 30px;
+        }
+
+        .timeline-item {
+            flex-direction: row !important;
+            padding-left: 70px;
+        }
+
+        .timeline-content {
+            width: 100%;
+        }
+
+        .timeline-icon {
+            left: 30px;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item .timeline-content::before {
+            left: -10px !important;
+            right: auto !important;
+            border-left: none !important;
+            border-right: 10px solid #8B4513 !important;
+        }
+
+        .cta-content {
+            padding: 2rem;
+            margin: 0 1rem;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-cta {
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+        }
     }
 </style>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 mx-auto">
-            <!-- Header de la page -->
-            <div class="info-header animate-on-scroll">
-                <h1 class="info-title">
-                    <i class="fas fa-info-circle text-accent"></i> Informations pratiques
-                </h1>
-                <p class="info-subtitle">Tout ce que vous devez savoir pour participer</p>
+<!-- Hero Section -->
+<section class="hero-infos">
+    <h1 class="hero-title">Informations pratiques</h1>
+</section>
+
+<!-- Section principale avec carte en background -->
+<section class="main-section">
+    <!-- Carte Google Maps en arrière-plan -->
+    <div class="map-background">
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10621.919343871708!2d4.1065923!3d48.2743839!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47ee990455555555%3A0x6965dcc61e374165!2sMarques%20Avenue%20Troyes!5e0!3m2!1sfr!2sfr!4v1750332558907!5m2!1sfr!2sfr" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
-            <!-- Informations générales -->
-            <section class="info-section animate-on-scroll">
-                <div class="info-card">
-                    <div class="info-card-body">
-                        <h2 class="section-title">
-                            <i class="fas fa-map-marker-alt"></i> Lieu et Accès
-                        </h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="location-info">
-                                    <h5><i class="fas fa-castle me-2"></i>Château de Vaux</h5>
-                                    <p class="mb-3">
-                                        <i class="fas fa-map-marker-alt text-accent me-2"></i>
-                                        123 Route du Château<br>
-                                        10000 Troyes, France
-                                    </p>
-                                    
-                                    <h6><i class="fas fa-car me-2"></i>En voiture</h6>
-                                    <ul class="mb-3">
-                                        <li>Autoroute A5, sortie 20 "Troyes Centre"</li>
-                                        <li>Suivre "Château de Vaux" sur 8 km</li>
-                                        <li>Parking gratuit sur place (50 places)</li>
-                                    </ul>
-                                    
-                                    <h6><i class="fas fa-bus me-2"></i>En transport en commun</h6>
-                                    <ul class="mb-0">
-                                        <li>Gare SNCF de Troyes (ligne Paris-Mulhouse)</li>
-                                        <li>Bus ligne 12 direction "Vaux" (arrêt "Château")</li>
-                                        <li>Navette gratuite depuis la gare à 18h30</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="time-card">
-                                    <i class="fas fa-clock fa-3x"></i>
-                                    <h5>Horaires</h5>
-                                    <p><strong>Accueil :</strong> 19h00</p>
-                                    <p><strong>Début :</strong> 19h30</p>
-                                    <p><strong>Fin :</strong> 23h00</p>
-                                    <hr>
-                                    <small>
-                                        Merci d'arriver à l'heure pour ne pas manquer le début de l'intrigue !
-                                    </small>
-                                </div>
-                            </div>
+    <div class="container-custom">
+        <div class="main-grid">
+            <!-- Colonne gauche - Lieu et accès (overlay) -->
+            <div class="location-section">
+                <h2 class="section-title">Lieu et accès</h2>
+                <p style="color: #8B4513; font-style: italic; margin-bottom: 2rem;">Les derniers fils</p>
+                
+                <ul class="location-list">
+                    <li class="location-item">
+                        <div class="location-icon">
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
+                        <div class="location-content">
+                            <h4>Château de Vaux-sur-Seine (Adresse)</h4>
+                            <p>123 Route du Château, 10000 Troyes</p>
+                        </div>
+                    </li>
+                    
+                    <li class="location-item">
+                        <div class="location-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="location-content">
+                            <h4>03 25 XX XX XX</h4>
+                                </div>
+                    </li>
+                    
+                    <li class="location-item">
+                        <div class="location-icon">
+                            <i class="fas fa-car"></i>
+                            </div>
+                        <div class="location-content">
+                            <h4>En voiture</h4>
+                            <p>Autoroute A5, sortie 20 "Troyes Centre"<br>
+                            Suivre "Château de Vaux" sur 8 km<br>
+                            Parking gratuit sur place (50 places)</p>
+                                </div>
+                    </li>
+                    
+                    <li class="location-item">
+                        <div class="location-icon">
+                            <i class="fas fa-train"></i>
+                            </div>
+                        <div class="location-content">
+                            <h4>En transport en commun</h4>
+                            <p>Gare SNCF de Troyes (ligne Paris-Mulhouse)<br>
+                            Bus ligne 12 direction "Vaux" (arrêt "Château")<br>
+                            Navette gratuite depuis la gare à 18h30</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+
                     </div>
                 </div>
             </section>
 
-            <!-- Programme de la soirée -->
-            <section class="info-section animate-on-scroll">
-                <div class="info-card">
-                    <div class="info-card-body">
-                        <h2 class="section-title">
-                            <i class="fas fa-calendar-alt"></i> Programme de la soirée
-                        </h2>
-                        <div class="row">
-                            <div class="col-md-6 mb-4">
-                                <div class="schedule-item">
-                                    <div class="schedule-icon">
+<!-- Section Programme -->
+<section class="program-section">
+    <div class="container-custom">
+                 <h2 class="program-title">Programme de la soirée</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-icon">
                                         <i class="fas fa-handshake"></i>
                                     </div>
-                                    <div class="flex-grow-1 ms-3 schedule-content">
-                                        <h5>19h00 - 19h30 : Accueil</h5>
-                                        <p>Arrivée des participants, distribution des rôles et costumes, cocktail de bienvenue</p>
+                <div class="timeline-content">
+                    <div class="timeline-time">19h00 - 19h30</div>
+                    <div class="timeline-title">Accueil</div>
+                    <p class="timeline-description">Arrivée des participants, distribution des rôles et costumes, cocktail de bienvenue</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="schedule-item">
-                                    <div class="schedule-icon">
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
                                         <i class="fas fa-users"></i>
                                     </div>
-                                    <div class="flex-grow-1 ms-3 schedule-content">
-                                        <h5>19h30 - 20h00 : Immersion</h5>
-                                        <p>Présentation des personnages, mise en situation et début de l'intrigue</p>
+                <div class="timeline-content">
+                    <div class="timeline-time">19h30 - 20h00</div>
+                    <div class="timeline-title">Immersion</div>
+                    <p class="timeline-description">Présentation des personnages, mise en situation et début de l'intrigue</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="schedule-item">
-                                    <div class="schedule-icon">
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
                                         <i class="fas fa-skull"></i>
                                     </div>
-                                    <div class="flex-grow-1 ms-3 schedule-content">
-                                        <h5>20h00 - 20h15 : Le Crime</h5>
-                                        <p>Découverte du meurtre et début de l'enquête</p>
+                <div class="timeline-content">
+                    <div class="timeline-time">20h00 - 20h15</div>
+                    <div class="timeline-title">Le Crime</div>
+                    <p class="timeline-description">Découverte du meurtre et début de l'enquête</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="schedule-item">
-                                    <div class="schedule-icon">
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
                                         <i class="fas fa-utensils"></i>
                                     </div>
-                                    <div class="flex-grow-1 ms-3 schedule-content">
-                                        <h5>20h15 - 22h00 : Dîner-enquête</h5>
-                                        <p>Repas thématique avec investigation, interrogatoires et révélations</p>
+                <div class="timeline-content">
+                    <div class="timeline-time">20h15 - 22h00</div>
+                    <div class="timeline-title">Dîner-enquête</div>
+                    <p class="timeline-description">Repas thématique avec investigation, interrogatoires et révélations</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="schedule-item">
-                                    <div class="schedule-icon">
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
                                         <i class="fas fa-search"></i>
                                     </div>
-                                    <div class="flex-grow-1 ms-3 schedule-content">
-                                        <h5>22h00 - 22h30 : Accusations</h5>
-                                        <p>Chaque participant expose sa théorie et désigne le coupable</p>
+                <div class="timeline-content">
+                    <div class="timeline-time">22h00 - 22h30</div>
+                    <div class="timeline-title">Accusations</div>
+                    <p class="timeline-description">Chaque participant expose sa théorie et désigne le coupable</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="schedule-item">
-                                    <div class="schedule-icon">
+            
+            <div class="timeline-item">
+                <div class="timeline-icon">
                                         <i class="fas fa-trophy"></i>
                                     </div>
-                                    <div class="flex-grow-1 ms-3 schedule-content">
-                                        <h5>22h30 - 23h00 : Dénouement</h5>
-                                        <p>Révélation de la solution, remise des prix et pot de l'amitié</p>
-                                    </div>
-                                </div>
+                <div class="timeline-content">
+                    <div class="timeline-time">22h30 - 23h00</div>
+                    <div class="timeline-title">Dénouement</div>
+                    <p class="timeline-description">Révélation de la solution, remise des prix et pot de l'amitié</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Ce qu'il faut apporter -->
-            <section class="info-section animate-on-scroll">
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="info-card">
-                            <div class="info-card-body">
-                                <h3 class="section-title">
-                                    <i class="fas fa-suitcase"></i> À apporter
-                                </h3>
-                                <ul class="checklist">
-                                    <li><i class="fas fa-check"></i> Costume d'époque (années 1920) si possible</li>
-                                    <li><i class="fas fa-check"></i> Carnet et stylo pour vos notes</li>
-                                    <li><i class="fas fa-check"></i> Bonne humeur et esprit d'équipe</li>
-                                    <li><i class="fas fa-check"></i> Pièce d'identité</li>
-                                </ul>
+<!-- Section FAQ -->
+<section class="faq-section">
+    <div class="faq-container">
+        <h2 class="faq-title">FAQ</h2>
+        
+        <div class="faq-accordion" onclick="toggleFAQ(this)">
+            <div class="faq-header">
+                <h3 class="faq-question">Informations importantes</h3>
+                <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-content">
+                <div class="faq-answer">
+                    <p><strong>Nombre de participants :</strong> 6 à 12 personnes maximum pour garantir une expérience optimale</p>
+                    <p><strong>Âge minimum :</strong> 16 ans (les mineurs doivent être accompagnés d'un adulte)</p>
+                    <p><strong>Boissons alcoolisées :</strong> Servies avec modération, alternatives sans alcool disponibles</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="info-card">
-                            <div class="info-card-body">
-                                <h3 class="section-title">
-                                    <i class="fas fa-gift"></i> Fourni sur place
-                                </h3>
-                                <ul class="checklist">
-                                    <li><i class="fas fa-check"></i> Fiche personnage détaillée</li>
-                                    <li><i class="fas fa-check"></i> Accessoires de costume</li>
-                                    <li><i class="fas fa-check"></i> Repas complet et boissons</li>
-                                    <li><i class="fas fa-check"></i> Indices et documents d'enquête</li>
-                                </ul>
+        
+        <div class="faq-accordion" onclick="toggleFAQ(this)">
+            <div class="faq-header">
+                <h3 class="faq-question">À apporter</h3>
+                <span class="faq-toggle">▼</span>
                             </div>
+            <div class="faq-content">
+                <div class="faq-answer">
+                    <p>✓ Costume d'époque (années 1920) si possible</p>
+                    <p>✓ Carnet et stylo pour vos notes</p>
+                    <p>✓ Bonne humeur et esprit d'équipe</p>
+                    <p>✓ Pièce d'identité</p>
+                </div>
+                        </div>
+                        </div>
+                        
+        <div class="faq-accordion" onclick="toggleFAQ(this)">
+            <div class="faq-header">
+                <h3 class="faq-question">Fourni sur place</h3>
+                <span class="faq-toggle">▼</span>
+                        </div>
+            <div class="faq-content">
+                <div class="faq-answer">
+                    <p>✓ Fiche personnage détaillée</p>
+                    <p>✓ Accessoires de costume</p>
+                    <p>✓ Repas complet et boissons</p>
+                    <p>✓ Indices et documents d'enquête</p>
+                        </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Infos importantes -->
-            <section class="info-section animate-on-scroll">
-                <div class="info-card">
-                    <div class="info-card-body">
-                        <h2 class="section-title">
-                            <i class="fas fa-exclamation-circle"></i> Informations importantes
-                        </h2>
-                        
-                        <div class="alert-info-custom">
-                            <i class="fas fa-users"></i>
-                            <strong>Nombre de participants :</strong> 6 à 12 personnes maximum pour garantir une expérience optimale
-                        </div>
-                        
-                        <div class="alert-info-custom">
-                            <i class="fas fa-birthday-cake"></i>
-                            <strong>Âge minimum :</strong> 16 ans (les mineurs doivent être accompagnés d'un adulte)
-                        </div>
-                        
-                        <div class="alert-info-custom">
-                            <i class="fas fa-wine-glass"></i>
-                            <strong>Boissons alcoolisées :</strong> Servies avec modération, alternatives sans alcool disponibles
-                        </div>
-                        
-                        <div class="alert-info-custom">
-                            <i class="fas fa-utensils"></i>
-                            <strong>Régimes spéciaux :</strong> Merci de nous signaler vos allergies ou régimes alimentaires lors de l'inscription
-                        </div>
-                        
-                        <div class="alert-info-custom">
-                            <i class="fas fa-camera"></i>
-                            <strong>Photos :</strong> Prises de vue autorisées pour immortaliser cette soirée unique !
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Contact -->
-            <div class="contact-card animate-on-scroll">
-                <h4>
-                    <i class="fas fa-envelope me-2"></i>
-                    Des questions ?
-                </h4>
-                <p>
-                    Notre équipe est à votre disposition pour répondre à toutes vos questions 
-                    et vous aider à préparer cette soirée inoubliable.
-                </p>
-                <div>
-                    <a href="mailto:contact@murderparty.local" class="btn btn-modern-light btn-lg">
-                        <i class="fas fa-envelope me-2"></i>
-                        Nous contacter
-                    </a>
-                    <?php if (!isLoggedIn()): ?>
-                    <a href="/auth/inscription" class="btn btn-modern-outline-light btn-lg">
-                        <i class="fas fa-user-plus me-2"></i>
-                        S'inscrire
-                    </a>
-                    <?php endif; ?>
-                </div>
+<!-- Section CTA avec ornements -->
+<section class="cta-section">
+    <div class="cta-ornaments">
+        <div class="cta-ornament top-left">
+            <img src="/assets/img/ornementCoint.png" alt="Ornement" />
+        </div>
+        <div class="cta-ornament top-right">
+            <img src="/assets/img/ornementCoint.png" alt="Ornement" />
+        </div>
+        <div class="cta-ornament bottom-left">
+            <img src="/assets/img/ornementCoint.png" alt="Ornement" />
+        </div>
+        <div class="cta-ornament bottom-right">
+            <img src="/assets/img/ornementCoint.png" alt="Ornement" />
+        </div>
+    </div>
+    
+    <div class="container-custom">
+        <div class="cta-content">
+            <div class="cta-logo">
+                <img src="/assets/img/logo.svg" alt="Logo" />
+            </div>
+            
+            <h2 class="cta-title">Des questions ?</h2>
+            <p class="cta-text">
+                Notre équipe est à votre disposition pour répondre à 
+                toutes vos questions et vous aider à préparer cette 
+                soirée inoubliable.
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="mailto:contact@murderparty.local" class="btn-cta btn-cta-primary">Envoyer Maintenant</a>
+                <a href="/auth/inscription" class="btn-cta btn-cta-secondary">Nous contacter</a>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<script>
+function toggleFAQ(element) {
+    element.classList.toggle('active');
+}
+</script>
 
 <?php require_once('view/autres_pages/footer.php'); ?> 

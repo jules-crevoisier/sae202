@@ -4,35 +4,90 @@ require_once('view/autres_pages/header.php');
 ?>
 
 <style>
-    /* Styles pour la page commentaires avec la nouvelle palette */
-    .comments-header {
-        padding: 3rem 0;
+    /* Styles pour la page commentaires avec direction artistique du site */
+    body {
+
+        min-height: 100vh;
+    }
+    
+    .main-content {
+        padding-top: 120px;
+        position: relative;
+    }
+    
+    .main-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: repeating-linear-gradient(
+            90deg,
+            rgba(116, 41, 57, 0.03) 0px,
+            rgba(116, 41, 57, 0.03) 1px,
+            transparent 1px,
+            transparent 20px
+        );
+        pointer-events: none;
+    }
+    
+    .container-custom {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    /* Ornement décoratif */
+    .ornament-header {
+        text-align: center;
         margin-bottom: 3rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .ornament-header img {
+        height: 120px;
+        width: auto;
+        opacity: 0.8;
+        filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1847%) hue-rotate(314deg) brightness(95%) contrast(89%);
+    }
+    .comments-header {
+        text-align: center;
+        padding: 2rem 0 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        z-index: 1;
     }
     
     .comments-title {
+        font-family: 'Playfair Display', serif;
         font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
+        font-weight: 700;
+        color: #742939;
         margin-bottom: 1rem;
+        text-transform: uppercase;
     }
     
     .comments-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
+        font-size: 1.2rem;
+        color: #8B4513;
+        font-style: italic;
         max-width: 600px;
+        margin: 0 auto;
     }
     
     .comments-card {
-        background: var(--bg-primary);
-        border: 1px solid rgba(175, 116, 129, 0.1);
-        border-radius: 20px;
-        box-shadow: var(--shadow-md);
-        transition: var(--transition-smooth);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(116, 41, 57, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(116, 41, 57, 0.1);
+        transition: all 0.3s ease;
         overflow: hidden;
         position: relative;
         margin-bottom: 2rem;
         height: 100%;
+        backdrop-filter: blur(10px);
     }
     
     .comments-card::before {
@@ -42,12 +97,13 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         height: 4px;
-        background: var(--gradient-secondary);
+        background: linear-gradient(135deg, #742939, #A94803);
     }
     
     .comments-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(116, 41, 57, 0.15);
+        border-color: rgba(116, 41, 57, 0.2);
     }
     
     .comments-card-body {
@@ -55,7 +111,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .section-title-comments {
-        color: var(--wine);
+        color: #742939;
         font-weight: 700;
         font-size: 1.5rem;
         margin-bottom: 2rem;
@@ -64,7 +120,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .section-title-comments i {
-        color: var(--rust);
+        color: #A94803;
         margin-right: 1rem;
         font-size: 1.3rem;
     }
@@ -74,7 +130,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .form-label-comments {
-        color: var(--text-primary);
+        color: #742939;
         font-weight: 600;
         font-size: 0.95rem;
         margin-bottom: 0.75rem;
@@ -83,19 +139,19 @@ require_once('view/autres_pages/header.php');
     }
     
     .form-label-comments i {
-        color: var(--old-rose);
+        color: #A94803;
         margin-right: 0.5rem;
         width: 16px;
     }
     
     .form-control-comments {
-        border: 2px solid rgba(175, 116, 129, 0.2);
+        border: 2px solid rgba(116, 41, 57, 0.2);
         border-radius: 12px;
-        background: var(--bg-primary);
-        color: var(--text-primary);
+        background: white;
+        color: #333;
         font-size: 1rem;
-        transition: var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.05);
         padding: 1rem;
         resize: vertical;
         min-height: 120px;
@@ -103,13 +159,13 @@ require_once('view/autres_pages/header.php');
     
     .form-control-comments:focus {
         outline: none;
-        border-color: var(--old-rose);
-        box-shadow: 0 0 0 3px rgba(175, 116, 129, 0.1);
-        background: var(--bg-primary);
+        border-color: #A94803;
+        box-shadow: 0 0 0 3px rgba(169, 72, 3, 0.1);
+        background: white;
     }
     
     .form-text-comments {
-        color: var(--text-muted);
+        color: #8B4513;
         font-size: 0.85rem;
         margin-top: 0.5rem;
         display: flex;
@@ -118,18 +174,19 @@ require_once('view/autres_pages/header.php');
     }
     
     .comment-item {
-        background: var(--bg-primary);
-        border: 1px solid rgba(175, 116, 129, 0.1);
+        background: white;
+        border: 1px solid rgba(116, 41, 57, 0.1);
         border-radius: 12px;
         padding: 1.5rem;
         margin-bottom: 1rem;
-        transition: var(--transition-smooth);
+        transition: all 0.3s ease;
         position: relative;
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.05);
     }
     
     .comment-item:hover {
-        box-shadow: var(--shadow-sm);
-        border-color: rgba(175, 116, 129, 0.2);
+        box-shadow: 0 4px 15px rgba(116, 41, 57, 0.1);
+        border-color: rgba(116, 41, 57, 0.2);
     }
     
     .comment-item.published {
@@ -138,7 +195,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .comment-item.pending {
-        border-left: 4px solid var(--rust);
+        border-left: 4px solid #A94803;
         background: linear-gradient(135deg, rgba(169, 72, 3, 0.05) 0%, rgba(169, 72, 3, 0.02) 100%);
     }
     
@@ -152,7 +209,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .comment-date {
-        color: var(--text-muted);
+        color: #8B4513;
         font-size: 0.85rem;
         display: flex;
         align-items: center;
@@ -177,12 +234,12 @@ require_once('view/autres_pages/header.php');
     
     .comment-status.pending {
         background: rgba(169, 72, 3, 0.1);
-        color: var(--rust);
+        color: #A94803;
         border: 1px solid rgba(169, 72, 3, 0.2);
     }
     
     .comment-content {
-        color: var(--text-secondary);
+        color: #5a5a5a;
         line-height: 1.6;
         margin-bottom: 1rem;
         font-size: 0.95rem;
@@ -199,37 +256,39 @@ require_once('view/autres_pages/header.php');
     .empty-state-comments {
         text-align: center;
         padding: 3rem 2rem;
+        background: white;
     }
     
     .empty-state-icon-comments {
-        color: var(--old-rose);
+        color: #A94803;
         margin-bottom: 1.5rem;
         opacity: 0.7;
     }
     
     .empty-state-title-comments {
-        color: var(--text-primary);
+        color: #742939;
         font-weight: 600;
         margin-bottom: 1rem;
         font-size: 1.3rem;
     }
     
     .empty-state-description-comments {
-        color: var(--text-secondary);
+        color: #8B4513;
         font-size: 0.95rem;
         line-height: 1.5;
     }
     
     .info-card-comments {
-        background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
-        border: 1px solid rgba(175, 116, 129, 0.2);
+        background: white;
+        border: 1px solid rgba(116, 41, 57, 0.2);
         border-radius: 16px;
         padding: 1.5rem;
         margin-top: 2rem;
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.1);
     }
     
     .info-card-comments h6 {
-        color: var(--wine);
+        color: #742939;
         font-weight: 700;
         margin-bottom: 1rem;
         display: flex;
@@ -237,12 +296,12 @@ require_once('view/autres_pages/header.php');
     }
     
     .info-card-comments h6 i {
-        color: var(--rust);
+        color: #A94803;
         margin-right: 0.5rem;
     }
     
     .info-card-comments p {
-        color: var(--text-secondary);
+        color: #5a5a5a;
         margin-bottom: 0.75rem;
         font-size: 0.9rem;
         line-height: 1.5;
@@ -253,15 +312,16 @@ require_once('view/autres_pages/header.php');
     }
     
     .info-card-comments strong {
-        color: var(--wine);
+        color: #742939;
     }
     
     .stats-card-comments {
-        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
-        border: 1px solid rgba(175, 116, 129, 0.2);
+        background: white;
+        border: 1px solid rgba(116, 41, 57, 0.2);
         border-radius: 16px;
         padding: 2rem;
         margin-top: 2rem;
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.1);
     }
     
     .stat-item-comments {
@@ -277,10 +337,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .stat-number-comments.primary {
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #742939;
     }
     
     .stat-number-comments.success {
@@ -288,15 +345,15 @@ require_once('view/autres_pages/header.php');
     }
     
     .stat-number-comments.warning {
-        color: var(--rust);
+        color: #A94803;
     }
     
     .stat-number-comments.info {
-        color: var(--old-rose);
+        color: #A94803;
     }
     
     .stat-label-comments {
-        color: var(--text-secondary);
+        color: #8B4513;
         font-size: 0.85rem;
         font-weight: 500;
     }
@@ -311,11 +368,32 @@ require_once('view/autres_pages/header.php');
     }
     
     .moderation-info {
-        color: var(--text-muted);
+        color: #8B4513;
         font-size: 0.85rem;
         display: flex;
         align-items: center;
         gap: 0.25rem;
+    }
+    
+    /* Boutons stylisés */
+    .btn-modern-primary {
+        background: #A94803;
+        border-color: #A94803;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-modern-primary:hover {
+        background: #742939;
+        border-color: #742939;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(116, 41, 57, 0.3);
     }
     
     @media (max-width: 768px) {
@@ -347,18 +425,20 @@ require_once('view/autres_pages/header.php');
     }
 </style>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 mx-auto">
-            <!-- Header de la page -->
-            <div class="comments-header animate-on-scroll">
-                <h1 class="comments-title">
-                    <i class="fas fa-comments text-accent me-3"></i>Mes commentaires
-                </h1>
-                <p class="comments-subtitle">
-                    Partagez votre expérience et consultez vos commentaires précédents
-                </p>
-            </div>
+<div class="main-content">
+    <div class="container-custom">
+        <!-- Ornement décoratif -->
+        <div class="ornament-header">
+            <img src="/assets/img/ornement1Couleur.png" alt="Ornement décoratif" />
+        </div>
+        
+        <!-- Header de la page -->
+        <div class="comments-header">
+            <h1 class="comments-title">Mes commentaires</h1>
+            <p class="comments-subtitle">
+                Partagez votre expérience et consultez vos commentaires précédents
+            </p>
+        </div>
 
             <!-- Alertes -->
             <?php if (!empty($erreurs)): ?>
@@ -392,11 +472,11 @@ require_once('view/autres_pages/header.php');
                 </div>
             <?php endif; ?>
 
-            <div class="row">
-                <!-- Formulaire d'ajout de commentaire -->
-                <div class="col-lg-6 mb-4">
-                    <div class="comments-card animate-on-scroll">
-                        <div class="comments-card-body">
+                            <div class="row" style="display: flex; align-items: stretch;">
+                                  <!-- Formulaire d'ajout de commentaire -->
+                    <div class="col-lg-6 mb-4" style="display: flex;">
+                      <div class="comments-card animate-on-scroll" style="flex: 1; display: flex; flex-direction: column;">
+                          <div class="comments-card-body" style="flex: 1;">
                             <h3 class="section-title-comments">
                                 <i class="fas fa-plus"></i> Ajouter un commentaire
                             </h3>
@@ -431,17 +511,6 @@ require_once('view/autres_pages/header.php');
                                 </div>
                             </form>
                         </div>
-                    </div>
-
-                    <!-- Informations sur la modération -->
-                    <div class="info-card-comments animate-on-scroll">
-                        <h6>
-                            <i class="fas fa-info-circle"></i>
-                            À propos des commentaires
-                        </h6>
-                        <p><strong>Modération :</strong> Tous les commentaires sont vérifiés avant publication pour maintenir un environnement respectueux.</p>
-                        <p><strong>Délai :</strong> Comptez 24-48h pour la validation de votre commentaire.</p>
-                        <p><strong>Règles :</strong> Restez courtois, constructif et respectueux envers les autres participants.</p>
                     </div>
                 </div>
 
@@ -498,43 +567,7 @@ require_once('view/autres_pages/header.php');
                 </div>
             </div>
 
-            <!-- Statistiques -->
-            <?php if (!empty($mes_commentaires ?? [])): ?>
-            <div class="stats-card-comments animate-on-scroll">
-                <div class="row">
-                    <div class="col-md-3 col-6">
-                        <div class="stat-item-comments">
-                            <span class="stat-number-comments primary"><?= count($mes_commentaires) ?></span>
-                            <span class="stat-label-comments">Total commentaires</span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="stat-item-comments">
-                            <span class="stat-number-comments success">
-                                <?= count(array_filter($mes_commentaires, function($c) { return $c['approuve']; })) ?>
-                            </span>
-                            <span class="stat-label-comments">Publiés</span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="stat-item-comments">
-                            <span class="stat-number-comments warning">
-                                <?= count(array_filter($mes_commentaires, function($c) { return !$c['approuve']; })) ?>
-                            </span>
-                            <span class="stat-label-comments">En attente</span>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-6">
-                        <div class="stat-item-comments">
-                            <span class="stat-number-comments info">
-                                <?= !empty($mes_commentaires) ? date('d/m', strtotime($mes_commentaires[0]['date_creation'])) : '-' ?>
-                            </span>
-                            <span class="stat-label-comments">Dernier commentaire</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
+            
         </div>
     </div>
 </div>

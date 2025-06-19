@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerName MMI.sae202.ovh
+    ServerName mmi24c01.sae202.ovh
     ServerAdmin prof@mmi-troyes.fr
     DocumentRoot /var/www/sae202
     DirectoryIndex index.php
@@ -9,7 +9,7 @@
         AuthType Basic
         AuthBasicProvider file
         AuthName "Administration sae202"
-        AuthUserFile "/home/MMI/htpassword.mmi"
+        AuthUserFile "/home/mmi24c01/htpassword.mmi"
         <RequireAny>
             Require ip 195.83.128.43 194.199.63.200 194.199.63.199
             Require valid-user

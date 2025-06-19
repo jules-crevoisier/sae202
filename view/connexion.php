@@ -4,469 +4,315 @@ require_once('view/autres_pages/header.php');
 ?>
 
 <style>
-    /* Styles pour la page de connexion avec la nouvelle palette */
-    .min-vh-80 {
-        min-height: 80vh;
-    }
-    
-    .auth-header {
-        margin-bottom: 3rem;
-    }
-    
-    .auth-icon {
-        width: 80px;
-        height: 80px;
-        background: var(--gradient-primary);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-light);
-        font-size: 2rem;
-        margin: 0 auto;
-        box-shadow: var(--shadow-wine);
-        animation: pulse-mystery 3s ease-in-out infinite;
-    }
-    
-    .auth-title {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
-    }
-    
-    .auth-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
-        line-height: 1.6;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    .auth-card {
-        background: var(--bg-primary);
-        border-radius: 24px;
-        box-shadow: var(--shadow-xl);
-        border: 1px solid rgba(175, 116, 129, 0.1);
+    /* Page de connexion - Style exact de l'image */
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: url('/assets/img/imageHeroFond.png') center/cover;
         position: relative;
-        overflow: hidden;
     }
-    
-    .auth-card::before {
+
+    body::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
-        background: var(--gradient-secondary);
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
     }
-    
-    .auth-card-body {
-        padding: 3rem 2.5rem;
-    }
-    
-    .form-group-modern {
+
+    .main-content {
         position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
-    
-    .form-label-modern {
-        color: var(--text-primary);
-        font-weight: 600;
-        font-size: 0.95rem;
-        margin-bottom: 0.75rem;
+
+    /* Section principale */
+    .auth-section {
+        flex: 1;
         display: flex;
         align-items: center;
+        padding: 2rem 0;
     }
-    
-    .form-label-modern i {
-        color: var(--old-rose);
+
+    .container-custom {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        width: 100%;
     }
-    
+
+    /* Ornement décoratif */
+    .ornament-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .ornament-header img {
+        height: 100px;
+        width: auto;
+        opacity: 0.8;
+    }
+
+    /* Layout en deux colonnes */
+    .auth-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    /* Colonne gauche - Texte de bienvenue */
+    .welcome-section {
+        color: white;
+    }
+
+    .welcome-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .welcome-subtitle {
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.6;
+        margin-bottom: 0;
+        max-width: 400px;
+    }
+
+    /* Colonne droite - Formulaire */
+    .form-section {
+        background: rgba(255, 248, 240, 0.95);
+        border-radius: 15px;
+        padding: 2.5rem;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .form-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #742939;
+        margin-bottom: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: 600;
+        color: #742939;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+
     .input-wrapper {
         position: relative;
     }
-    
-    .form-control-modern {
+
+    .form-control {
         width: 100%;
-        padding: 1rem 3rem 1rem 1rem;
-        border: 2px solid rgba(175, 116, 129, 0.2);
-        border-radius: 12px;
-        background: var(--bg-primary);
-        color: var(--text-primary);
+        padding: 1rem 2.5rem 1rem 1rem;
+        border: 2px solid #D4A574;
+        border-radius: 8px;
+        background: white;
+        color: #333;
         font-size: 1rem;
-        transition: var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        box-sizing: border-box;
     }
-    
-    .form-control-modern:focus {
+
+    .form-control:focus {
         outline: none;
-        border-color: var(--old-rose);
-        box-shadow: 0 0 0 3px rgba(175, 116, 129, 0.1);
-        background: var(--bg-primary);
+        border-color: #742939;
+        box-shadow: 0 0 0 3px rgba(116, 41, 57, 0.1);
     }
-    
-    .form-control-modern::placeholder {
-        color: var(--text-muted);
+
+    .form-control::placeholder {
+        color: #999;
     }
-    
+
     .input-icon {
         position: absolute;
         right: 1rem;
         top: 50%;
         transform: translateY(-50%);
-        color: var(--old-rose);
+        color: #D4A574;
         font-size: 0.9rem;
         pointer-events: none;
     }
-    
-    .password-toggle {
-        position: absolute;
-        right: 0.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        color: var(--text-muted);
-        padding: 0.5rem;
-        border-radius: 6px;
-        transition: var(--transition-smooth);
-        cursor: pointer;
-    }
-    
-    .password-toggle:hover {
-        color: var(--old-rose);
-        background: rgba(175, 116, 129, 0.1);
-    }
-    
-    .form-text {
-        color: var(--text-muted);
-        font-size: 0.85rem;
+
+    .forgot-password {
+        text-align: right;
         margin-top: 0.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
     }
-    
-    .auth-footer {
-        margin-top: 2rem;
-    }
-    
-    .auth-footer-text {
-        color: var(--text-secondary);
-        font-size: 0.95rem;
-        margin: 0;
-    }
-    
-    .auth-link {
-        color: var(--rust);
+
+    .forgot-password a {
+        color: #A94803;
         text-decoration: none;
-        font-weight: 600;
-        transition: var(--transition-smooth);
+        font-size: 0.9rem;
+        font-weight: 500;
     }
-    
-    .auth-link:hover {
-        color: var(--rust-light);
+
+    .forgot-password a:hover {
         text-decoration: underline;
     }
-    
-    /* Compte de démonstration */
-    .demo-card {
-        background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
-        border: 1px solid rgba(175, 116, 129, 0.2);
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-top: 2rem;
-        box-shadow: var(--shadow-sm);
-    }
-    
-    .demo-header {
-        display: flex;
-        align-items: center;
-        color: var(--wine);
-        font-weight: 600;
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-    }
-    
-    .demo-header i {
-        color: var(--rust);
-    }
-    
-    .demo-account {
-        background: var(--bg-primary);
-        border: 1px solid rgba(175, 116, 129, 0.1);
-        border-radius: 8px;
+
+    .btn-login {
+        width: 100%;
+        background: #A94803;
+        color: white;
         padding: 1rem;
-        margin-bottom: 0.75rem;
-    }
-    
-    .demo-account:last-of-type {
-        margin-bottom: 1rem;
-    }
-    
-    .demo-label {
-        color: var(--text-primary);
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
         font-weight: 600;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
     }
-    
-    .demo-label i {
-        color: var(--old-rose);
-    }
-    
-    .demo-credentials {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: 'Courier New', monospace;
-        font-size: 0.85rem;
-    }
-    
-    .demo-email {
-        color: var(--rust);
-        background: rgba(169, 72, 3, 0.1);
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        font-weight: 500;
-    }
-    
-    .demo-password {
-        color: var(--wine);
-        background: rgba(122, 41, 58, 0.1);
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        font-weight: 500;
-    }
-    
-    .demo-separator {
-        color: var(--text-muted);
-        font-weight: bold;
-    }
-    
-    .demo-note {
-        color: var(--text-muted);
-        font-size: 0.8rem;
-        font-style: italic;
-        display: block;
-        text-align: center;
-        margin-top: 0.5rem;
-    }
-    
-    /* Animations et effets */
-    .form-control-modern:focus + .input-icon {
-        color: var(--old-rose);
-        transform: translateY(-50%) scale(1.1);
-    }
-    
-    .btn-modern-primary:hover {
+
+    .btn-login:hover {
+        background: #8a3803;
         transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(169, 72, 3, 0.3);
     }
-    
+
+    .auth-footer {
+        text-align: center;
+        margin-top: 2rem;
+        color: #666;
+        font-size: 0.95rem;
+    }
+
+    .auth-footer a {
+        color: #A94803;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
-        .auth-card-body {
-            padding: 2rem 1.5rem;
+        .auth-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
         }
-        
-        .auth-title {
-            font-size: 2rem;
+
+        .welcome-title {
+            font-size: 2.5rem;
         }
-        
-        .auth-subtitle {
-            font-size: 1rem;
+
+        .form-section {
+            padding: 2rem;
         }
-        
-        .demo-credentials {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.25rem;
-        }
-        
-        .demo-separator {
-            display: none;
+
+        .ornament-header img {
+            height: 80px;
         }
     }
-    
+
     @media (max-width: 576px) {
-        .auth-icon {
-            width: 60px;
-            height: 60px;
-            font-size: 1.5rem;
+        .welcome-title {
+            font-size: 2rem;
         }
-        
-        .auth-title {
-            font-size: 1.75rem;
+
+        .form-section {
+            padding: 1.5rem;
         }
-        
-        .form-control-modern {
-            padding: 0.875rem 2.5rem 0.875rem 0.875rem;
+
+        .container-custom {
+            padding: 0 1rem;
         }
     }
 </style>
 
-<div class="container">
-    <div class="row justify-content-center align-items-center min-vh-80">
-        <div class="col-md-8 col-lg-6 col-xl-5">
-            <!-- En-tête de la page -->
-            <div class="auth-header text-center mb-5 animate-on-scroll">
-                <div class="auth-icon mb-4">
-                    <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
-                </div>
-                <h1 class="auth-title mb-3">
-                    Bienvenue de retour
-                </h1>
-                <p class="auth-subtitle">
-                    Connectez-vous pour accéder à votre espace personnel et gérer votre participation à la Murder Party.
-                </p>
+<div class="main-content">
+    <section class="auth-section">
+        <div class="container-custom">
+            <!-- Ornement décoratif -->
+            <div class="ornament-header">
+                <img src="/assets/img/ornementHeader.png" alt="Ornement décoratif" />
             </div>
 
-            <!-- Alertes d'erreur -->
-            <?php if (!empty($erreurs)): ?>
-                <div class="alert alert-modern alert-danger alert-dismissible fade show animate-on-scroll" role="alert">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-exclamation-triangle fa-2x me-3" aria-hidden="true"></i>
-                        <div>
-                            <strong>Erreur de connexion</strong>
-                            <br>
-                            <?php foreach ($erreurs as $erreur): ?>
-                                <?= securise($erreur) ?>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            <div class="auth-layout">
+                <!-- Colonne gauche - Bienvenue -->
+                <div class="welcome-section">
+                    <h1 class="welcome-title">Bienvenue</h1>
+                    <p class="welcome-subtitle">
+                        Connectez-vous pour accéder à votre espace personnel et réserver 
+                        votre participation à la Murder Party.
+                    </p>
                 </div>
-            <?php endif; ?>
 
-            <!-- Formulaire de connexion -->
-            <div class="auth-card animate-on-scroll">
-                <div class="auth-card-body">
-                    <form method="POST" action="/auth/connexion" class="auth-form">
-                        <div class="form-group-modern mb-4">
-                            <label for="email" class="form-label-modern">
-                                <i class="fas fa-envelope me-2" aria-hidden="true"></i>
-                                Adresse email
-                            </label>
+                <!-- Colonne droite - Formulaire de connexion -->
+                <div class="form-section">
+                    <h2 class="form-title">Connexion</h2>
+                    
+                    <form method="POST" action="/auth/connexion">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Adresse email</label>
                             <div class="input-wrapper">
                                 <input type="email" 
-                                       class="form-control-modern" 
                                        id="email" 
                                        name="email" 
-                                       value="<?= securise($_POST['email'] ?? '') ?>"
+                                       class="form-control" 
                                        placeholder="votre@email.com"
-                                       required
-                                       aria-describedby="email-help">
-                                <div class="input-icon">
-                                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                                </div>
+                                       required>
+                                <i class="fas fa-envelope input-icon"></i>
                             </div>
-                            <small id="email-help" class="form-text">
-                                Utilisez l'adresse email avec laquelle vous vous êtes inscrit
-                            </small>
                         </div>
 
-                        <div class="form-group-modern mb-5">
-                            <label for="mot_de_passe" class="form-label-modern">
-                                <i class="fas fa-lock me-2" aria-hidden="true"></i>
-                                Mot de passe
-                            </label>
+                        <div class="form-group">
+                            <label for="password" class="form-label">Mot de passe</label>
                             <div class="input-wrapper">
                                 <input type="password" 
-                                       class="form-control-modern" 
-                                       id="mot_de_passe" 
+                                       id="password" 
                                        name="mot_de_passe" 
-                                       placeholder="Votre mot de passe"
-                                       required
-                                       aria-describedby="password-help">
-                                <div class="input-icon">
-                                    <i class="fas fa-lock" aria-hidden="true"></i>
-                                </div>
-                                <button type="button" class="password-toggle" onclick="togglePassword()" aria-label="Afficher/masquer le mot de passe">
-                                    <i class="fas fa-eye" id="password-toggle-icon" aria-hidden="true"></i>
-                                </button>
+                                       class="form-control" 
+                                       placeholder="••••••••"
+                                       required>
+                                <i class="fas fa-lock input-icon"></i>
                             </div>
-                            <small id="password-help" class="form-text">
-                                Votre mot de passe est sécurisé et chiffré
-                            </small>
+                            <div class="forgot-password">
+                                <a href="/auth/mot-de-passe-oublie">Mot de passe oublié ?</a>
+                            </div>
                         </div>
 
-                        <div class="d-grid gap-3">
-                            <button type="submit" class="btn btn-modern-primary btn-lg">
-                                <i class="fas fa-sign-in-alt me-2" aria-hidden="true"></i>
-                                Se connecter
-                            </button>
-                        </div>
+                        <button type="submit" class="btn-login">
+                            Se connecter
+                        </button>
                     </form>
-                </div>
-            </div>
 
-            <!-- Lien d'inscription -->
-            <div class="auth-footer text-center mt-4 animate-on-scroll">
-                <p class="auth-footer-text">
-                    Pas encore de compte ? 
-                    <a href="/auth/inscription" class="auth-link">
-                        <i class="fas fa-user-plus me-1" aria-hidden="true"></i>
-                        Créer un compte
-                    </a>
-                </p>
-            </div>
-
-            <!-- Compte de démonstration -->
-            <div class="demo-card animate-on-scroll">
-                <div class="demo-header">
-                    <i class="fas fa-info-circle me-2" aria-hidden="true"></i>
-                    <span>Compte de démonstration</span>
-                </div>
-                <div class="demo-content">
-                    <div class="demo-account">
-                        <div class="demo-label">
-                            <i class="fas fa-crown me-2" aria-hidden="true"></i>
-                            Administrateur
-                        </div>
-                        <div class="demo-credentials">
-                            <span class="demo-email">admin@sae202.local</span>
-                            <span class="demo-separator">•</span>
-                            <span class="demo-password">password</span>
-                        </div>
+                    <div class="auth-footer">
+                        <p>Pas encore de compte ? <a href="/auth/inscription">Créer un compte</a></p>
                     </div>
-                    <div class="demo-account">
-                        <div class="demo-label">
-                            <i class="fas fa-user me-2" aria-hidden="true"></i>
-                            Utilisateur
-                        </div>
-                        <div class="demo-credentials">
-                            <span class="demo-email">jean.dupont@email.com</span>
-                            <span class="demo-separator">•</span>
-                            <span class="demo-password">password</span>
-                        </div>
-                    </div>
-                    <small class="demo-note">
-                        Utilisez ces comptes pour tester toutes les fonctionnalités du site
-                    </small>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
-
-<script>
-    function togglePassword() {
-        const passwordField = document.getElementById('mot_de_passe');
-        const toggleIcon = document.getElementById('password-toggle-icon');
-        
-        if (passwordField.type === 'password') {
-            passwordField.type = 'text';
-            toggleIcon.classList.remove('fa-eye');
-            toggleIcon.classList.add('fa-eye-slash');
-        } else {
-            passwordField.type = 'password';
-            toggleIcon.classList.remove('fa-eye-slash');
-            toggleIcon.classList.add('fa-eye');
-        }
-    }
-</script>
 
 <?php require_once('view/autres_pages/footer.php'); ?> 

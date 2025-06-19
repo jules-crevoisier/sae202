@@ -4,34 +4,89 @@ require_once('view/autres_pages/header.php');
 ?>
 
 <style>
-    /* Styles pour la page nouveau message avec la nouvelle palette */
-    .message-header {
-        padding: 3rem 0;
+    /* Styles pour la page nouveau message avec direction artistique du site */
+    body {
+
+        min-height: 100vh;
+    }
+    
+    .main-content {
+        padding-top: 120px;
+        position: relative;
+    }
+    
+    .main-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: repeating-linear-gradient(
+            90deg,
+            rgba(116, 41, 57, 0.03) 0px,
+            rgba(116, 41, 57, 0.03) 1px,
+            transparent 1px,
+            transparent 20px
+        );
+        pointer-events: none;
+    }
+    
+    .container-custom {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    /* Ornement décoratif */
+    .ornament-header {
+        text-align: center;
         margin-bottom: 3rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .ornament-header img {
+        height: 120px;
+        width: auto;
+        opacity: 0.8;
+        filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1847%) hue-rotate(314deg) brightness(95%) contrast(89%);
+    }
+    .message-header {
+        text-align: center;
+        padding: 2rem 0 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        z-index: 1;
     }
     
     .message-title {
+        font-family: 'Playfair Display', serif;
         font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
+        font-weight: 700;
+        color: #742939;
         margin-bottom: 1rem;
+        text-transform: uppercase;
     }
     
     .message-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
+        font-size: 1.2rem;
+        color: #8B4513;
+        font-style: italic;
         max-width: 600px;
+        margin: 0 auto;
     }
     
     .message-card {
-        background: var(--bg-primary);
-        border: 1px solid rgba(175, 116, 129, 0.1);
-        border-radius: 20px;
-        box-shadow: var(--shadow-md);
-        transition: var(--transition-smooth);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(116, 41, 57, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(116, 41, 57, 0.1);
+        transition: all 0.3s ease;
         overflow: hidden;
         position: relative;
         margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
     }
     
     .message-card::before {
@@ -41,12 +96,13 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         height: 4px;
-        background: var(--gradient-secondary);
+        background: linear-gradient(135deg, #742939, #A94803);
     }
     
     .message-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(116, 41, 57, 0.15);
+        border-color: rgba(116, 41, 57, 0.2);
     }
     
     .message-card-body {
@@ -54,7 +110,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .section-title-message {
-        color: var(--wine);
+        color: #742939;
         font-weight: 700;
         font-size: 1.5rem;
         margin-bottom: 2rem;
@@ -63,7 +119,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .section-title-message i {
-        color: var(--rust);
+        color: #A94803;
         margin-right: 1rem;
         font-size: 1.3rem;
     }
@@ -73,7 +129,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .form-label-message {
-        color: var(--text-primary);
+        color: #742939;
         font-weight: 600;
         font-size: 0.95rem;
         margin-bottom: 0.75rem;
@@ -82,49 +138,49 @@ require_once('view/autres_pages/header.php');
     }
     
     .form-label-message i {
-        color: var(--old-rose);
+        color: #A94803;
         margin-right: 0.5rem;
         width: 16px;
     }
     
     .form-control-message {
-        border: 2px solid rgba(175, 116, 129, 0.2);
+        border: 2px solid rgba(116, 41, 57, 0.2);
         border-radius: 12px;
-        background: var(--bg-primary);
-        color: var(--text-primary);
+        background: white;
+        color: #333;
         font-size: 1rem;
-        transition: var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.05);
         padding: 1rem;
     }
     
     .form-control-message:focus {
         outline: none;
-        border-color: var(--old-rose);
-        box-shadow: 0 0 0 3px rgba(175, 116, 129, 0.1);
-        background: var(--bg-primary);
+        border-color: #A94803;
+        box-shadow: 0 0 0 3px rgba(169, 72, 3, 0.1);
+        background: white;
     }
     
     .form-select-message {
-        border: 2px solid rgba(175, 116, 129, 0.2);
+        border: 2px solid rgba(116, 41, 57, 0.2);
         border-radius: 12px;
-        background: var(--bg-primary);
-        color: var(--text-primary);
+        background: white;
+        color: #333;
         font-size: 1rem;
-        transition: var(--transition-smooth);
-        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.05);
         padding: 1rem;
     }
     
     .form-select-message:focus {
         outline: none;
-        border-color: var(--old-rose);
-        box-shadow: 0 0 0 3px rgba(175, 116, 129, 0.1);
-        background: var(--bg-primary);
+        border-color: #A94803;
+        box-shadow: 0 0 0 3px rgba(169, 72, 3, 0.1);
+        background: white;
     }
     
     .form-text-message {
-        color: var(--text-muted);
+        color: #8B4513;
         font-size: 0.85rem;
         margin-top: 0.5rem;
         display: flex;
@@ -372,34 +428,36 @@ require_once('view/autres_pages/header.php');
     }
 </style>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 mx-auto">
-            <!-- Breadcrumb -->
-            <nav aria-label="breadcrumb" class="animate-on-scroll">
-                <ol class="breadcrumb breadcrumb-message">
-                    <li class="breadcrumb-item">
-                        <a href="/messagerie">
-                            <i class="fas fa-envelope me-1"></i>
-                            Messagerie
-                        </a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        <i class="fas fa-plus me-1"></i>
-                        Nouveau message
-                    </li>
-                </ol>
-            </nav>
+<div class="main-content">
+    <div class="container-custom">
+        <!-- Ornement décoratif -->
+        <div class="ornament-header">
+            <img src="/assets/img/ornement1Couleur.png" alt="Ornement décoratif" />
+        </div>
+        
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" style="margin-bottom: 2rem;">
+            <ol class="breadcrumb breadcrumb-message" style="background: transparent; padding: 0;">
+                <li class="breadcrumb-item">
+                    <a href="/messagerie" style="color: #A94803; text-decoration: none;">
+                        <i class="fas fa-envelope me-1"></i>
+                        Messagerie
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #742939;">
+                    <i class="fas fa-plus me-1"></i>
+                    Nouveau message
+                </li>
+            </ol>
+        </nav>
 
-            <!-- Header de la page -->
-            <div class="message-header animate-on-scroll">
-                <h1 class="message-title">
-                    <i class="fas fa-plus text-accent me-3"></i>Nouveau message
-                </h1>
-                <p class="message-subtitle">
-                    Contactez directement les organisateurs pour toutes vos questions
-                </p>
-            </div>
+        <!-- Header de la page -->
+        <div class="message-header">
+            <h1 class="message-title">Nouveau message</h1>
+            <p class="message-subtitle">
+                Contactez directement les organisateurs pour toutes vos questions
+            </p>
+        </div>
 
             <!-- Alertes -->
             <?php if (!empty($erreurs)): ?>
@@ -507,81 +565,6 @@ require_once('view/autres_pages/header.php');
                             </div>
                         </form>
                     </div>
-                </div>
-
-                <!-- Conseils pour un message efficace -->
-                <div class="tips-card animate-on-scroll">
-                    <div class="tips-card-header">
-                        <h6>
-                            <i class="fas fa-lightbulb"></i>
-                            Conseils pour un message efficace
-                        </h6>
-                    </div>
-                    <div class="tips-card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6 class="tips-section-title">✅ À faire :</h6>
-                                <ul class="tips-list do">
-                                    <li>
-                                        <span class="icon">✓</span>
-                                        <span>Choisir le bon sujet dans la liste</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✓</span>
-                                        <span>Être précis et détaillé dans votre demande</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✓</span>
-                                        <span>Mentionner les dates importantes</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✓</span>
-                                        <span>Indiquer vos contraintes spécifiques</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✓</span>
-                                        <span>Utiliser un ton poli et respectueux</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <h6 class="tips-section-title">❌ À éviter :</h6>
-                                <ul class="tips-list dont">
-                                    <li>
-                                        <span class="icon">✗</span>
-                                        <span>Messages trop courts ou vagues</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✗</span>
-                                        <span>Plusieurs sujets dans un seul message</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✗</span>
-                                        <span>Informations personnelles sensibles</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✗</span>
-                                        <span>Demandes urgentes de dernière minute</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon">✗</span>
-                                        <span>Langage familier ou inapproprié</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Informations supplémentaires -->
-                <div class="info-card-message animate-on-scroll">
-                    <h6>
-                        <i class="fas fa-info-circle"></i>
-                        Informations importantes
-                    </h6>
-                    <p><strong>Confidentialité :</strong> Vos messages sont privés et ne sont visibles que par vous et les organisateurs.</p>
-                    <p><strong>Suivi :</strong> Vous recevrez une notification par email dès qu'une réponse sera disponible.</p>
-                    <p><strong>Urgence :</strong> Pour les urgences le jour J, préférez un contact téléphonique direct.</p>
                 </div>
             <?php endif; ?>
         </div>

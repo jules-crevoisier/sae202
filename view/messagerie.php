@@ -4,34 +4,89 @@ require_once('view/autres_pages/header.php');
 ?>
 
 <style>
-    /* Styles pour la page messagerie avec la nouvelle palette */
-    .messagerie-header {
-        padding: 3rem 0;
+    /* Styles pour la page messagerie avec direction artistique du site */
+    body {
+
+        min-height: 100vh;
+    }
+    
+    .main-content {
+        padding-top: 120px;
+        position: relative;
+    }
+    
+    .main-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: repeating-linear-gradient(
+            90deg,
+            rgba(116, 41, 57, 0.03) 0px,
+            rgba(116, 41, 57, 0.03) 1px,
+            transparent 1px,
+            transparent 20px
+        );
+        pointer-events: none;
+    }
+    
+    .container-custom {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    /* Ornement décoratif */
+    .ornament-header {
+        text-align: center;
         margin-bottom: 3rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .ornament-header img {
+        height: 120px;
+        width: auto;
+        opacity: 0.8;
+        filter: brightness(0) saturate(100%) invert(23%) sepia(18%) saturate(1847%) hue-rotate(314deg) brightness(95%) contrast(89%);
+    }
+    
+    .messagerie-header {
+        text-align: center;
+        padding: 2rem 0 3rem;
+        margin-bottom: 3rem;
+        position: relative;
+        z-index: 1;
     }
     
     .messagerie-title {
+        font-family: 'Playfair Display', serif;
         font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
+        font-weight: 700;
+        color: #742939;
         margin-bottom: 1rem;
+        text-transform: uppercase;
     }
     
     .messagerie-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-secondary);
+        font-size: 1.2rem;
+        color: #8B4513;
+        font-style: italic;
         max-width: 600px;
+        margin: 0 auto;
     }
     
     .messagerie-card {
-        background: var(--bg-primary);
-        border: 1px solid rgba(175, 116, 129, 0.1);
-        border-radius: 20px;
-        box-shadow: var(--shadow-md);
-        transition: var(--transition-smooth);
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(116, 41, 57, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(116, 41, 57, 0.1);
+        transition: all 0.3s ease;
         overflow: hidden;
         position: relative;
         margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
     }
     
     .messagerie-card::before {
@@ -41,12 +96,13 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         height: 4px;
-        background: var(--gradient-secondary);
+        background: linear-gradient(135deg, #742939, #A94803);
     }
     
     .messagerie-card:hover {
-        transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(116, 41, 57, 0.15);
+        border-color: rgba(116, 41, 57, 0.2);
     }
     
     .messagerie-card-body {
@@ -59,31 +115,31 @@ require_once('view/autres_pages/header.php');
     }
     
     .empty-state-icon {
-        color: var(--old-rose);
+        color: #A94803;
         margin-bottom: 2rem;
         opacity: 0.7;
     }
     
     .empty-state-title {
-        color: var(--text-primary);
+        color: #742939;
         font-weight: 600;
         margin-bottom: 1rem;
         font-size: 1.5rem;
     }
     
     .empty-state-description {
-        color: var(--text-secondary);
+        color: #8B4513;
         margin-bottom: 2rem;
         font-size: 1.1rem;
         line-height: 1.6;
     }
     
     .stat-card {
-        background: var(--bg-primary);
-        border: 1px solid rgba(175, 116, 129, 0.1);
+        background: white;
+        border: 1px solid rgba(116, 41, 57, 0.1);
         border-radius: 16px;
-        box-shadow: var(--shadow-sm);
-        transition: var(--transition-smooth);
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.1);
+        transition: all 0.3s ease;
         text-align: center;
         padding: 2rem 1.5rem;
         height: 100%;
@@ -91,8 +147,8 @@ require_once('view/autres_pages/header.php');
     
     .stat-card:hover {
         transform: translateY(-3px);
-        box-shadow: var(--shadow-md);
-        border-color: rgba(175, 116, 129, 0.2);
+        box-shadow: 0 4px 15px rgba(116, 41, 57, 0.15);
+        border-color: rgba(116, 41, 57, 0.2);
     }
     
     .stat-number {
@@ -103,10 +159,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .stat-number.primary {
-        background: var(--gradient-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #742939;
     }
     
     .stat-number.success {
@@ -114,17 +167,17 @@ require_once('view/autres_pages/header.php');
     }
     
     .stat-number.warning {
-        color: var(--rust);
+        color: #A94803;
     }
     
     .stat-label {
-        color: var(--text-secondary);
+        color: #8B4513;
         font-size: 0.9rem;
         font-weight: 500;
     }
     
     .section-title-messagerie {
-        color: var(--wine);
+        color: #742939;
         font-weight: 700;
         font-size: 1.5rem;
         margin-bottom: 2rem;
@@ -133,16 +186,17 @@ require_once('view/autres_pages/header.php');
     }
     
     .section-title-messagerie i {
-        color: var(--rust);
+        color: #A94803;
         margin-right: 1rem;
         font-size: 1.3rem;
     }
     
     .message-item {
         padding: 1.5rem;
-        border-bottom: 1px solid rgba(175, 116, 129, 0.1);
-        transition: var(--transition-smooth);
+        border-bottom: 1px solid rgba(116, 41, 57, 0.1);
+        transition: all 0.3s ease;
         position: relative;
+        background: white;
     }
     
     .message-item:last-child {
@@ -150,7 +204,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .message-item:hover {
-        background: rgba(175, 116, 129, 0.05);
+        background: rgba(116, 41, 57, 0.05);
     }
     
     .message-item.has-response {
@@ -172,7 +226,7 @@ require_once('view/autres_pages/header.php');
     
     .message-status-icon.pending {
         background: rgba(169, 72, 3, 0.1);
-        color: var(--rust);
+        color: #A94803;
     }
     
     .message-status-icon.replied {
@@ -181,24 +235,24 @@ require_once('view/autres_pages/header.php');
     }
     
     .message-title {
-        color: var(--text-primary);
+        color: #742939;
         font-weight: 600;
         margin-bottom: 0.5rem;
         font-size: 1.1rem;
     }
     
     .message-title a {
-        color: var(--text-primary);
+        color: #742939;
         text-decoration: none;
-        transition: var(--transition-smooth);
+        transition: all 0.3s ease;
     }
     
     .message-title a:hover {
-        color: var(--wine);
+        color: #A94803;
     }
     
     .message-excerpt {
-        color: var(--text-secondary);
+        color: #5a5a5a;
         margin-bottom: 1rem;
         line-height: 1.5;
         font-size: 0.95rem;
@@ -209,12 +263,12 @@ require_once('view/autres_pages/header.php');
         align-items: center;
         gap: 1rem;
         font-size: 0.85rem;
-        color: var(--text-muted);
+        color: #8B4513;
         flex-wrap: wrap;
     }
     
     .message-meta i {
-        color: var(--old-rose);
+        color: #A94803;
         margin-right: 0.25rem;
     }
     
@@ -230,7 +284,7 @@ require_once('view/autres_pages/header.php');
     
     .message-badge.pending {
         background: rgba(169, 72, 3, 0.1);
-        color: var(--rust);
+        color: #A94803;
         border: 1px solid rgba(169, 72, 3, 0.2);
     }
     
@@ -247,15 +301,16 @@ require_once('view/autres_pages/header.php');
     }
     
     .info-card-messagerie {
-        background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
-        border: 1px solid rgba(175, 116, 129, 0.2);
+        background: white;
+        border: 1px solid rgba(116, 41, 57, 0.2);
         border-radius: 16px;
         padding: 2rem;
         margin-top: 2rem;
+        box-shadow: 0 2px 10px rgba(116, 41, 57, 0.1);
     }
     
     .info-card-messagerie h6 {
-        color: var(--wine);
+        color: #742939;
         font-weight: 700;
         margin-bottom: 1.5rem;
         display: flex;
@@ -263,7 +318,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .info-card-messagerie h6 i {
-        color: var(--rust);
+        color: #A94803;
         margin-right: 0.5rem;
     }
     
@@ -274,7 +329,7 @@ require_once('view/autres_pages/header.php');
     }
     
     .info-list li {
-        color: var(--text-secondary);
+        color: #5a5a5a;
         margin-bottom: 0.5rem;
         padding-left: 1.5rem;
         position: relative;
@@ -283,7 +338,7 @@ require_once('view/autres_pages/header.php');
     
     .info-list li::before {
         content: '•';
-        color: var(--old-rose);
+        color: #A94803;
         font-weight: bold;
         position: absolute;
         left: 0;
@@ -322,32 +377,30 @@ require_once('view/autres_pages/header.php');
     }
 </style>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10 mx-auto">
-            <!-- Header de la page -->
-            <div class="messagerie-header animate-on-scroll">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div>
-                        <h1 class="messagerie-title">
-                            <i class="fas fa-envelope text-accent me-3"></i>Ma messagerie
-                        </h1>
-                        <p class="messagerie-subtitle">
-                            Communiquez avec les organisateurs et suivez vos échanges
-                        </p>
-                    </div>
-                    <div class="header-actions">
-                        <a href="/messagerie/nouveau" class="btn btn-modern-primary btn-lg">
-                            <i class="fas fa-plus me-2"></i>
-                            Nouveau message
-                        </a>
-                    </div>
-                </div>
+<div class="main-content">
+    <div class="container-custom">
+        <!-- Ornement décoratif -->
+        <div class="ornament-header">
+            <img src="/assets/img/ornement1Couleur.png" alt="Ornement décoratif" />
+        </div>
+        
+        <!-- Header de la page -->
+        <div class="messagerie-header">
+            <h1 class="messagerie-title">Ma messagerie</h1>
+            <p class="messagerie-subtitle">
+                Communiquez avec les organisateurs et suivez vos échanges
+            </p>
+            <div class="mt-3">
+                <a href="/messagerie/nouveau" class="btn" style="background: #A94803; color: white; padding: 0.8rem 2rem; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">
+                    <i class="fas fa-plus me-2"></i>
+                    Nouveau message
+                </a>
             </div>
+        </div>
 
-            <?php if (empty($messages)): ?>
-            <!-- État vide -->
-            <div class="messagerie-card animate-on-scroll">
+        <?php if (empty($messages)): ?>
+        <!-- État vide -->
+        <div class="messagerie-card">
                 <div class="empty-state">
                     <i class="fas fa-envelope-open fa-5x empty-state-icon"></i>
                     <h4 class="empty-state-title">Aucun message pour le moment</h4>
@@ -363,8 +416,8 @@ require_once('view/autres_pages/header.php');
             </div>
             <?php else: ?>
             
-            <!-- Statistiques -->
-            <div class="row mb-4 animate-on-scroll">
+        <!-- Statistiques -->
+        <div class="row mb-4">
                 <div class="col-md-4 mb-3">
                     <div class="stat-card">
                         <span class="stat-number primary"><?= count($messages) ?></span>
@@ -389,8 +442,8 @@ require_once('view/autres_pages/header.php');
                 </div>
             </div>
 
-            <!-- Liste des messages -->
-            <div class="messagerie-card animate-on-scroll">
+        <!-- Liste des messages -->
+        <div class="messagerie-card">
                 <div class="messagerie-card-body">
                     <h3 class="section-title-messagerie">
                         <i class="fas fa-list"></i> Mes conversations
@@ -465,37 +518,6 @@ require_once('view/autres_pages/header.php');
                 </div>
             </div>
             <?php endif; ?>
-
-            <!-- Informations et aide -->
-            <div class="info-card-messagerie animate-on-scroll">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h6>
-                            <i class="fas fa-question-circle"></i>
-                            Comment ça marche ?
-                        </h6>
-                        <ul class="info-list">
-                            <li>Envoyez vos questions aux organisateurs</li>
-                            <li>Vous recevrez une réponse dans cette messagerie</li>
-                            <li>Consultez régulièrement vos messages</li>
-                            <li>Toutes vos conversations sont sauvegardées</li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <h6>
-                            <i class="fas fa-lightbulb"></i>
-                            Sujets fréquents
-                        </h6>
-                        <ul class="info-list">
-                            <li>Questions sur le déroulement de la soirée</li>
-                            <li>Allergies alimentaires et régimes spéciaux</li>
-                            <li>Informations transport et accès au lieu</li>
-                            <li>Costumes et accessoires recommandés</li>
-                            <li>Annulation ou modification de réservation</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
