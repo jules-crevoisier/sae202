@@ -36,6 +36,7 @@ class User {
             $_SESSION['prenom'] = $user['prenom'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['is_admin'] ? 'admin' : 'user';
+            $_SESSION['is_admin'] = $user['is_admin'];
             return true;
         }
         
