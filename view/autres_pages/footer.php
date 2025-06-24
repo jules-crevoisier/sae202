@@ -142,6 +142,8 @@
             color: white;
             padding: 3rem 0;
             margin-top: 4rem;
+            position: relative;
+            z-index: 10;
         }
         
         .main-container {

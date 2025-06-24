@@ -296,14 +296,16 @@ require_once('view/autres_pages/header.php');
     }
 
     .story-image {
-        background: #ddd;
-        height: 200px;
+        height: 250px;
         border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #888;
-        font-style: italic;
+        overflow: hidden;
+    }
+
+    .story-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
     }
 
     /* Section Les personnages */
@@ -334,16 +336,20 @@ require_once('view/autres_pages/header.php');
         margin: 0 auto;
     }
 
-    .character-placeholder {
-        background: #ddd;
+    .character-card {
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .character-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .character-card img {
+        width: 100%;
         height: 180px;
+        object-fit: contain;
         border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #888;
-        font-style: italic;
-        font-size: 0.9rem;
     }
 
     /* Section Mystère à résoudre */
@@ -689,7 +695,7 @@ require_once('view/autres_pages/header.php');
             </p>
                             </div>
         <div class="story-image">
-            <span>Image scénario<br/>Placeholder</span>
+            <img src="/assets/img/Image_scénario_Placeholder.png" alt="Image du scénario" />
                                     </div>
                                 </div>
 </section>
@@ -701,14 +707,26 @@ require_once('view/autres_pages/header.php');
             <h2 class="characters-title">Les personnages</h2>
                             </div>
         
-        <div class="characters-grid">
-            <div class="character-placeholder">Personnage 1</div>
-            <div class="character-placeholder">Personnage 2</div>
-            <div class="character-placeholder">Personnage 3</div>
-            <div class="character-placeholder">Personnage 4</div>
-            <div class="character-placeholder">Personnage 5</div>
-            <div class="character-placeholder">Personnage 6</div>
-                    </div>
+                <div class="characters-grid">
+            <div class="character-card">
+                <img src="/assets/img/perso1.svg" alt="Personnage 1" />
+            </div>
+            <div class="character-card">
+                <img src="/assets/img/perso2.svg" alt="Personnage 2" />
+            </div>
+            <div class="character-card">
+                <img src="/assets/img/perso3.svg" alt="Personnage 3" />
+            </div>
+            <div class="character-card">
+                <img src="/assets/img/perso4.svg" alt="Personnage 4" />
+            </div>
+            <div class="character-card">
+                <img src="/assets/img/perso5.svg" alt="Personnage 5" />
+            </div>
+            <div class="character-card">
+                <img src="/assets/img/perso6.svg" alt="Personnage 6" />
+            </div>
+        </div>
                 </div>
             </section>
 

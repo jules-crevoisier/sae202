@@ -17,6 +17,10 @@ require_once('view/autres_pages/header.php');
         margin-top: 0;
     }
     
+    .pricing-container-list {
+        width: 100%;
+    }
+
     .hero-infos::before {
         content: '';
         position: absolute;
@@ -352,6 +356,114 @@ require_once('view/autres_pages/header.php');
         border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    /* Section Tarifs */
+    .pricing-section {
+        background: #742939;
+        color: white;
+        padding: 4rem 0;
+    }
+
+    .pricing-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    .pricing-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        text-align: center;
+        margin-bottom: 3rem;
+        text-transform: uppercase;
+    }
+
+    .pricing-list {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 0;
+        margin-bottom: 2rem;
+        overflow: hidden;
+    }
+
+    .pricing-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: background 0.3s ease;
+        width: 100%;
+    }
+
+    .pricing-item:last-child {
+        border-bottom: none;
+    }
+
+    .pricing-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .pricing-category {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+    }
+
+    .pricing-details {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
+    }
+
+    .pricing-amount {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #d4a574;
+        text-align: right;
+    }
+
+    .pricing-groups {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 1rem 0;
+        width: 100%;
+    }
+
+    .pricing-group {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        border-radius: 6px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .pricing-group-size {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 0.25rem;
+    }
+
+    .pricing-group-price {
+        font-weight: 700;
+        color: #d4a574;
+        font-size: 1.1rem;
+    }
+
+    .pricing-note {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.8);
+        font-style: italic;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-top: 2rem;
+    }
+
     /* Section CTA avec ornements */
     .cta-section {
         background: #FFF8F0;
@@ -535,6 +647,35 @@ require_once('view/autres_pages/header.php');
             width: 100%;
             max-width: 280px;
             text-align: center;
+        }
+
+        .pricing-container {
+            padding: 0 1rem;
+        }
+
+        .pricing-title {
+            font-size: 2rem;
+        }
+
+        .pricing-item {
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 1.2rem;
+        }
+
+        .pricing-amount {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .pricing-groups {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            margin-top: 1rem;
+        }
+
+        .pricing-group {
+            padding: 0.8rem;
         }
     }
 </style>
@@ -734,6 +875,69 @@ require_once('view/autres_pages/header.php');
                     </div>
                 </div>
             </section>
+
+<!-- Section Tarifs -->
+<section class="pricing-section">
+    <div class="pricing-container">
+        <h2 class="pricing-title">Les tarifs</h2>
+        
+        <div class="pricing-list">
+            <div class="pricing-item">
+                <div class="pricing-container-list">
+                    <div class="pricing-category">Tarif Normal</div>
+                    <div class="pricing-details">Tarifs dégressifs selon la taille du groupe</div>
+                    <div class="pricing-groups">
+                        <div class="pricing-group">
+                            <div class="pricing-group-size">Groupe de 7</div>
+                            <div class="pricing-group-price">24,99€/pers</div>
+                        </div>
+                        <div class="pricing-group">
+                            <div class="pricing-group-size">Groupe de 10</div>
+                            <div class="pricing-group-price">23,99€/pers</div>
+                        </div>
+                        <div class="pricing-group">
+                            <div class="pricing-group-size">Groupe de 15</div>
+                            <div class="pricing-group-price">22,99€/pers</div>
+                        </div>
+                        <div class="pricing-group">
+                            <div class="pricing-group-size">Groupe de 20</div>
+                            <div class="pricing-group-price">21,99€/pers</div>
+                        </div>
+                        <div class="pricing-group">
+                            <div class="pricing-group-size">Groupe de 25</div>
+                            <div class="pricing-group-price">20,99€/pers</div>
+                        </div>
+                        <div class="pricing-group">
+                            <div class="pricing-group-size">Groupe de 30</div>
+                            <div class="pricing-group-price">19,99€/pers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing-item">
+                <div>
+                    <div class="pricing-category">Tarif Étudiant</div>
+                    <div class="pricing-details">Avec justificatif valide</div>
+                </div>
+                <div class="pricing-amount">19,99€/pers</div>
+            </div>
+            
+            <div class="pricing-item">
+                <div>
+                    <div class="pricing-category">Soirée Weekend</div>
+                    <div class="pricing-details">De 20h à minuit - Apéro dînatoire prévu</div>
+                </div>
+                <div class="pricing-amount">29,99€/pers</div>
+            </div>
+        </div>
+        
+        <p class="pricing-note">
+            * Tarifs dégressifs selon la taille du groupe pour les réservations "Normal"<br>
+            * Justificatif étudiant requis pour bénéficier du tarif réduit
+        </p>
+    </div>
+</section>
 
 <!-- Section CTA avec ornements -->
 <section class="cta-section">

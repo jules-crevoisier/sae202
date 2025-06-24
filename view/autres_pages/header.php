@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $page_title ?? 'Murder Party - Événement Mystère' ?></title>
     
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/assets/favicon/site.webmanifest">
+    <meta name="theme-color" content="#742939">
+    <meta name="msapplication-TileColor" content="#742939">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -381,7 +392,7 @@
     <div class="header-container">
         <header class="main-header">
             <div class="header-logo">
-                <img src="/assets/img/ornementHeader.png" alt="Logo Ornement" />
+                <img src="/assets/img/logo.svg" alt="Logo" />
             </div>
             <nav class="header-menu">
                 <a href="/" class="<?= ($_SERVER['REQUEST_URI'] == '/' ? 'active' : '') ?>">Accueil</a>

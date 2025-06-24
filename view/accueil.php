@@ -162,26 +162,22 @@ require_once('view/autres_pages/header.php');
         margin-bottom: 0;
     }
 
-    /* Rectangle central placeholder */
-    .central-rectangle {
+    /* Vidéo centrale */
+    .video-container {
         width: 100%;
         max-width: 800px;
-        height: 300px;
-        background: rgba(175, 116, 129, 0.2);
-        border: 2px dashed rgba(116, 41, 57, 0.3);
-        border-radius: 10px;
         margin: 3rem auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(116, 41, 57, 0.3);
     }
 
-    .central-rectangle::before {
-        content: 'Espace réservé pour contenu visuel';
-        color: rgba(116, 41, 57, 0.6);
-        font-style: italic;
-        font-size: 1rem;
+    .video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 15px;
     }
 
     .intro-story {
@@ -210,13 +206,7 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: repeating-linear-gradient(
-            90deg,
-            rgba(116, 41, 57, 0.03) 0px,
-            rgba(116, 41, 57, 0.03) 1px,
-            transparent 1px,
-            transparent 20px
-        );
+
         pointer-events: none;
     }
 
@@ -241,13 +231,6 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: repeating-linear-gradient(
-            90deg,
-            rgba(116, 41, 57, 0.03) 0px,
-            rgba(116, 41, 57, 0.03) 1px,
-            transparent 1px,
-            transparent 20px
-        );
         pointer-events: none;
     }
 
@@ -430,13 +413,6 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: repeating-linear-gradient(
-            90deg,
-            rgba(116, 41, 57, 0.03) 0px,
-            rgba(116, 41, 57, 0.03) 1px,
-            transparent 1px,
-            transparent 20px
-        );
         pointer-events: none;
     }
 
@@ -493,24 +469,29 @@ require_once('view/autres_pages/header.php');
         grid-template-rows: repeat(2, 1fr);
         gap: 1rem;
         margin: 3rem auto;
-        height: 350px;
         max-width: 900px;
     }
 
-    .character-placeholder {
-        background: rgba(175, 116, 129, 0.3);
-        border: 2px dashed rgba(116, 41, 57, 0.4);
-        border-radius: 10px;
+    .character-card {
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 0.3s ease;
         position: relative;
+        border-radius: 10px;
+        overflow: hidden;
     }
 
-    .character-placeholder:hover {
-        background: rgba(175, 116, 129, 0.4);
-        border-color: rgba(116, 41, 57, 0.6);
+    .character-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .character-card img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
     }
 
     .placeholder-text {
@@ -526,7 +507,15 @@ require_once('view/autres_pages/header.php');
         border-radius: 120px 0px 0px 0px !important;
     }
 
+    .top-left-rounded img {
+        border-radius: 120px 0px 0px 0px !important;
+    }
+
     .bottom-right-rounded {
+        border-radius: 0px 0px 120px 0px !important;
+    }
+
+    .bottom-right-rounded img {
         border-radius: 0px 0px 120px 0px !important;
     }
 
@@ -587,7 +576,6 @@ require_once('view/autres_pages/header.php');
         .characters-grid {
             grid-template-columns: repeat(2, 1fr);
             grid-template-rows: repeat(4, 1fr);
-            height: 450px;
             margin: 2rem auto;
             max-width: 100%;
         }
@@ -631,13 +619,9 @@ require_once('view/autres_pages/header.php');
             font-size: 1rem;
         }
 
-        .central-rectangle {
-            height: 200px;
+        .video-container {
             margin: 2rem auto;
-        }
-
-        .central-rectangle::before {
-            font-size: 0.9rem;
+            max-width: 95%;
         }
 
         .main-container {
@@ -1286,13 +1270,6 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: repeating-linear-gradient(
-            90deg,
-            rgba(116, 41, 57, 0.03) 0px,
-            rgba(116, 41, 57, 0.03) 1px,
-            transparent 1px,
-            transparent 20px
-        );
         pointer-events: none;
     }
 
@@ -1434,13 +1411,6 @@ require_once('view/autres_pages/header.php');
         left: 0;
         right: 0;
         bottom: 0;
-        background-image: repeating-linear-gradient(
-            90deg,
-            rgba(116, 41, 57, 0.03) 0px,
-            rgba(116, 41, 57, 0.03) 1px,
-            transparent 1px,
-            transparent 20px
-        );
         pointer-events: none;
     }
 
@@ -1479,9 +1449,6 @@ require_once('view/autres_pages/header.php');
         box-shadow: 0 4px 15px rgba(116, 41, 57, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border: 1px solid rgba(116, 41, 57, 0.1);
-        display: flex;
-        align-items: center;
-        gap: 1rem;
     }
 
     .testimonial-card:hover {
@@ -1489,20 +1456,8 @@ require_once('view/autres_pages/header.php');
         box-shadow: 0 8px 25px rgba(116, 41, 57, 0.15);
     }
 
-    .testimonial-avatar {
-        flex-shrink: 0;
-    }
-
-    .testimonial-avatar img {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid #742939;
-    }
-
     .testimonial-content {
-        flex-grow: 1;
+        width: 100%;
     }
 
     .testimonial-name {
@@ -1529,11 +1484,19 @@ require_once('view/autres_pages/header.php');
     .testimonial-rating {
         display: flex;
         gap: 2px;
+        margin-bottom: 0.5rem;
     }
 
     .testimonial-rating i {
         color: #D4A574;
         font-size: 0.8rem;
+    }
+
+    .testimonial-date {
+        font-size: 0.8rem;
+        color: #999;
+        font-style: italic;
+        margin: 0;
     }
 
     /* Section Call to Action Final */
@@ -1770,10 +1733,7 @@ require_once('view/autres_pages/header.php');
             color: #ffffff !important;
         }
 
-        .testimonial-avatar img {
-            width: 50px;
-            height: 50px;
-        }
+
 
         .final-cta-title {
             font-size: 1.7rem;
@@ -1824,10 +1784,13 @@ require_once('view/autres_pages/header.php');
             <p class="intro-subtitle">Les retrouvailles révèlent des secrets. Rien ne se passera comme prévu.</p>
                 </div>
         
-        <!-- Rectangle central placeholder -->
-        <div class="central-rectangle">
-            <!-- Placeholder pour image ou contenu -->
-            </div>
+                <!-- Vidéo de présentation -->
+        <div class="video-container">
+            <video controls preload="metadata" poster="/assets/img/imageHeroFond.png">
+                <source src="/assets/video/Novake - DerniersFils - Cécile Lochus - Valentin BABIC - Jules Crevoisier - Lison Gely - Charlotte Som de araujo (1).mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la lecture de vidéos HTML5.
+            </video>
+        </div>
             
         <div class="intro-story">
             <p class="story-line">Une soirée d'adieux qui tourne au drame.</p>
@@ -1878,8 +1841,7 @@ require_once('view/autres_pages/header.php');
                     <i class="fas fa-euro-sign"></i>
                 </div>
                 <h3 class="card-title">Tarif</h3>
-                <p class="card-info">25€ par personne</p>
-                <p class="card-detail">Repas inclus</p>
+                <p class="card-info">à partir de 19,99€ par personne</p>
             </div>
         </div>
         
@@ -1913,41 +1875,41 @@ require_once('view/autres_pages/header.php');
             <p class="characters-subtitle">Ils seront présents lors de la dernière réunion</p>
                                 </div>
         
-        <div class="characters-grid">
+                <div class="characters-grid">
             <!-- Première ligne -->
-            <div class="character-placeholder grid-1 top-left-rounded">
-                <span class="placeholder-text">Personnage</span>
-                            </div>
-                            
-            <div class="character-placeholder grid-2">
-                <span class="placeholder-text">Personnage</span>
-                                    </div>
+            <div class="character-card grid-1 top-left-rounded">
+                <img src="/assets/img/persoaccueil1.png" alt="Personnage 1" />
+            </div>
             
-            <div class="character-placeholder grid-3">
-                <span class="placeholder-text">Personnage</span>
-                                    </div>
+            <div class="character-card grid-2">
+                <img src="/assets/img/persoaccueil2.png" alt="Personnage 2" />
+            </div>
+            
+            <div class="character-card grid-3">
+                <img src="/assets/img/persoaccueil3.png" alt="Personnage 3" />
+            </div>
             
             <div class="concept-button-container grid-4">
                 <a href="/concept" class="btn-concept">Concept</a>
-                                </div>
+            </div>
             
             <!-- Deuxième ligne -->
-            <div class="character-placeholder grid-5">
-                <span class="placeholder-text">Personnage</span>
-                            </div>
-                            
-            <div class="character-placeholder grid-6">
-                <span class="placeholder-text">Personnage</span>
-                                    </div>
+            <div class="character-card grid-5">
+                <img src="/assets/img/persoaccueil4.png" alt="Personnage 4" />
+            </div>
             
-            <div class="character-placeholder grid-7">
-                <span class="placeholder-text">Personnage</span>
-                                    </div>
+            <div class="character-card grid-6">
+                <img src="/assets/img/persoaccueil5.png" alt="Personnage 5" />
+            </div>
             
-            <div class="character-placeholder grid-8 bottom-right-rounded">
-                <span class="placeholder-text">Personnage</span>
-                                </div>
-                            </div>
+            <div class="character-card grid-7">
+                <img src="/assets/img/persoaccueil6.png" alt="Personnage 6" />
+            </div>
+            
+            <div class="character-card grid-8 bottom-right-rounded">
+                <img src="/assets/img/persoaccueil7.png" alt="Personnage 7" />
+            </div>
+        </div>
                         </div>
 </section>
 
@@ -2023,60 +1985,33 @@ require_once('view/autres_pages/header.php');
                         </div>
         
         <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-avatar">
-                    <img src="/assets/img/avatar1.jpg" alt="Murder Party A." />
-                        </div>
-                <div class="testimonial-content">
-                    <h4 class="testimonial-name">Murder Party A.</h4>
-                    <p class="testimonial-role">Participant</p>
-                    <p class="testimonial-text">Une soirée inoubliable ! L'intrigue était captivante et l'ambiance parfaite. Je recommande vivement cette expérience unique.</p>
-                        <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-avatar">
-                    <img src="/assets/img/avatar2.jpg" alt="Jean D." />
-            </div>
-                <div class="testimonial-content">
-                    <h4 class="testimonial-name">Jean D.</h4>
-                    <p class="testimonial-role">Participant</p>
-                    <p class="testimonial-text">Un jeu immersif formidable ! L'organisation était impeccable et l'enquête nous a tenus en haleine jusqu'au bout.</p>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-        </div>
-                </div>
-                        </div>
-                        
-            <div class="testimonial-card">
-                <div class="testimonial-avatar">
-                    <img src="/assets/img/avatar3.jpg" alt="Pierre D." />
-                </div>
-                <div class="testimonial-content">
-                    <h4 class="testimonial-name">Pierre D.</h4>
-                    <p class="testimonial-role">Participant</p>
-                    <p class="testimonial-text">Excellente soirée de divertissement ! Le scénario était bien pensé et les costumes ont ajouté une dimension théâtrale.</p>
-                    <div class="testimonial-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <?php if (!empty($commentaires_approuves)): ?>
+                <?php foreach ($commentaires_approuves as $commentaire): ?>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <h4 class="testimonial-name"><?= htmlspecialchars($commentaire['prenom'] . ' ' . substr($commentaire['nom'], 0, 1) . '.') ?></h4>
+                            <p class="testimonial-role">Participant</p>
+                            <p class="testimonial-text"><?= htmlspecialchars($commentaire['contenu']) ?></p>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="testimonial-date">Le <?= date('d/m/Y', strtotime($commentaire['date_creation'])) ?></p>
                         </div>
                     </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <h4 class="testimonial-name">Aucun témoignage</h4>
+                        <p class="testimonial-role">-</p>
+                        <p class="testimonial-text">Soyez le premier à laisser un commentaire sur votre expérience !</p>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
     </section>
 

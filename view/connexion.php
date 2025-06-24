@@ -15,13 +15,14 @@ require_once('view/autres_pages/header.php');
 
     body::before {
         content: '';
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
         background: rgba(0, 0, 0, 0.7);
         z-index: 1;
+        pointer-events: none;
     }
 
     .main-content {
@@ -37,7 +38,7 @@ require_once('view/autres_pages/header.php');
         flex: 1;
         display: flex;
         align-items: center;
-        padding: 2rem 0;
+        padding: 6rem 0 2rem 0;
     }
 
     .container-custom {
@@ -59,12 +60,13 @@ require_once('view/autres_pages/header.php');
         opacity: 0.8;
     }
 
+
+
     /* Layout en deux colonnes */
     .auth-layout {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 4rem;
-        align-items: center;
     }
 
     /* Colonne gauche - Texte de bienvenue */
@@ -250,11 +252,11 @@ require_once('view/autres_pages/header.php');
 </style>
 
 <div class="main-content">
-    <section class="auth-section">
+        <section class="auth-section">
         <div class="container-custom">
             <!-- Ornement décoratif -->
             <div class="ornament-header">
-                <img src="/assets/img/ornementHeader.png" alt="Ornement décoratif" />
+                <img src="/assets/img/ornement1.png" alt="Ornement décoratif" />
             </div>
 
             <div class="auth-layout">
