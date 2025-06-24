@@ -434,7 +434,7 @@
                             </a>
                             <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                                 <div class="dropdown-divider"></div>
-                                                        <a href="/gestion">
+                                                        <a href="/admin">
                             <i class="fas fa-tachometer-alt"></i>
                             Administration
                         </a>
@@ -486,7 +486,7 @@
                 <a href="/messagerie"><i class="fas fa-envelope"></i>Messagerie</a>
                 <a href="/commentaire"><i class="fas fa-comments"></i>Mes commentaires</a>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                                            <a href="/gestion"><i class="fas fa-tachometer-alt"></i>Administration</a>
+                                            <a href="/admin"><i class="fas fa-tachometer-alt"></i>Administration</a>
                 <?php endif; ?>
                 <a href="/auth/deconnexion"><i class="fas fa-sign-out-alt"></i>Déconnexion</a>
             <?php else: ?>

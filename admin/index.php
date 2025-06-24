@@ -27,8 +27,9 @@ if (!isLoggedIn() || !isAdmin()) {
 $request_uri = $_SERVER['REQUEST_URI'];
 $path = parse_url($request_uri, PHP_URL_PATH);
 
-// Suppression du préfixe /gestion
-$path = str_replace('/gestion', '', $path);
+// Suppression du préfixe /admin et /admin (alias)
+$path = str_replace('/admin', '', $path);
+$path = str_replace('/admin', '', $path);
 $path = trim($path, '/');
 
 // Si pas de chemin spécifié, redirection vers le dashboard
@@ -80,7 +81,7 @@ switch ($path) {
             
             include 'utilisateur_detail.php';
         } else {
-            header('Location: /gestion/utilisateurs');
+            header('Location: /admin/utilisateurs');
             exit;
         }
         break;
@@ -108,7 +109,7 @@ switch ($path) {
             
             include 'message_detail.php';
         } else {
-            header('Location: /gestion/messages');
+            header('Location: /admin/messages');
             exit;
         }
         break;
@@ -130,7 +131,7 @@ switch ($path) {
                 $reponse = trim($_POST['reponse']);
                 if (!empty($reponse)) {
                     if (Message::reply($message_id, $reponse)) {
-                        header('Location: /gestion/message?id=' . $message_id);
+                        header('Location: /admin/message?id=' . $message_id);
                         exit;
                     } else {
                         $error = "Erreur lors de l'envoi de la réponse";
@@ -142,7 +143,7 @@ switch ($path) {
             
             include 'message_repondre.php';
         } else {
-            header('Location: /gestion/messages');
+            header('Location: /admin/messages');
             exit;
         }
         break;
@@ -152,12 +153,12 @@ switch ($path) {
         if (isset($_GET['id'])) {
             $message_id = (int)$_GET['id'];
             if (Message::delete($message_id)) {
-                header('Location: /gestion/messages?success=deleted');
+                header('Location: /admin/messages?success=deleted');
             } else {
-                header('Location: /gestion/messages?error=delete_failed');
+                header('Location: /admin/messages?error=delete_failed');
             }
         } else {
-            header('Location: /gestion/messages');
+            header('Location: /admin/messages');
         }
         exit;
         break;
@@ -173,12 +174,12 @@ switch ($path) {
         if (isset($_GET['id'])) {
             $comment_id = (int)$_GET['id'];
             if (Comment::approve($comment_id)) {
-                header('Location: /gestion/commentaires?success=approved');
+                header('Location: /admin/commentaires?success=approved');
             } else {
-                header('Location: /gestion/commentaires?error=approve_failed');
+                header('Location: /admin/commentaires?error=approve_failed');
             }
         } else {
-            header('Location: /gestion/commentaires');
+            header('Location: /admin/commentaires');
         }
         exit;
         break;
@@ -188,12 +189,12 @@ switch ($path) {
         if (isset($_GET['id'])) {
             $comment_id = (int)$_GET['id'];
             if (Comment::reject($comment_id)) {
-                header('Location: /gestion/commentaires?success=rejected');
+                header('Location: /admin/commentaires?success=rejected');
             } else {
-                header('Location: /gestion/commentaires?error=reject_failed');
+                header('Location: /admin/commentaires?error=reject_failed');
             }
         } else {
-            header('Location: /gestion/commentaires');
+            header('Location: /admin/commentaires');
         }
         exit;
         break;

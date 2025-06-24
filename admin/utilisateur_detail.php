@@ -11,7 +11,7 @@ include_once('header.php');
                 <h1>
                     <i class="fas fa-user"></i> Détails de l'utilisateur
                 </h1>
-                <a href="/gestion/utilisateurs" class="btn btn-outline-secondary">
+                <a href="/admin/utilisateurs" class="btn btn-outline-secondary">
                     <i class="fas fa-arrow-left me-2"></i>
                     Retour à la liste
                 </a>
@@ -209,12 +209,12 @@ include_once('header.php');
 
                                     <?php if (!$commentaire['approuve']): ?>
                                     <div class="mt-2">
-                                        <a href="/gestion/commentaire-approuver?id=<?= $commentaire['id'] ?>" 
+                                        <a href="/admin/commentaire-approuver?id=<?= $commentaire['id'] ?>" 
                                            class="btn btn-success btn-sm me-2">
                                             <i class="fas fa-check me-1"></i>
                                             Approuver
                                         </a>
-                                        <a href="/gestion/commentaire-rejeter?id=<?= $commentaire['id'] ?>" 
+                                        <a href="/admin/commentaire-rejeter?id=<?= $commentaire['id'] ?>" 
                                            class="btn btn-danger btn-sm">
                                             <i class="fas fa-times me-1"></i>
                                             Rejeter
@@ -287,13 +287,13 @@ include_once('header.php');
                                     <?php endif; ?>
 
                                     <div class="mt-2">
-                                        <a href="/gestion/message?id=<?= $message['id'] ?>" 
+                                        <a href="/admin/message?id=<?= $message['id'] ?>" 
                                            class="btn btn-outline-primary btn-sm me-2">
                                             <i class="fas fa-eye me-1"></i>
                                             Voir détail
                                         </a>
                                         <?php if (empty($message['reponse'])): ?>
-                                        <a href="/gestion/message-repondre?id=<?= $message['id'] ?>" 
+                                        <a href="/admin/message-repondre?id=<?= $message['id'] ?>" 
                                            class="btn btn-primary btn-sm">
                                             <i class="fas fa-reply me-1"></i>
                                             Répondre

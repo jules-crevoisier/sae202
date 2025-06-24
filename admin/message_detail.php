@@ -11,7 +11,7 @@ include_once('header.php');
                 <h1>
                     <i class="fas fa-envelope"></i> Détail du message
                 </h1>
-                <a href="/gestion/messages" class="btn btn-outline-secondary">
+                <a href="/admin/messages" class="btn btn-outline-secondary">
                     <i class="fas fa-arrow-left me-2"></i>
                     Retour à la liste
                 </a>
@@ -121,7 +121,7 @@ include_once('header.php');
                             
                             <div class="btn-group">
                                 <?php if (empty($message['reponse'])): ?>
-                                    <a href="/gestion/message-repondre?id=<?= $message['id'] ?>" 
+                                    <a href="/admin/message-repondre?id=<?= $message['id'] ?>" 
                                        class="btn btn-primary">
                                         <i class="fas fa-reply me-2"></i>
                                         Répondre
@@ -134,7 +134,7 @@ include_once('header.php');
                                     Répondre par email
                                 </a>
                                 
-                                <a href="/gestion/message-supprimer?id=<?= $message['id'] ?>" 
+                                <a href="/admin/message-supprimer?id=<?= $message['id'] ?>" 
                                    class="btn btn-outline-danger"
                                    data-confirm="Supprimer définitivement ce message ?">
                                     <i class="fas fa-trash me-2"></i>

@@ -11,7 +11,7 @@ include_once('header.php');
                 <h1>
                     <i class="fas fa-reply"></i> Répondre au message
                 </h1>
-                <a href="/gestion/messages" class="btn btn-outline-secondary">
+                <a href="/admin/messages" class="btn btn-outline-secondary">
                     <i class="fas fa-arrow-left me-2"></i>
                     Retour à la liste
                 </a>
@@ -54,7 +54,7 @@ include_once('header.php');
                 <i class="fas fa-check-circle me-2"></i>
                 Réponse envoyée avec succès ! L'utilisateur sera notifié.
                 <hr>
-                <a href="/gestion/messages" class="btn btn-success">
+                <a href="/admin/messages" class="btn btn-success">
                     <i class="fas fa-arrow-left me-2"></i>
                     Retour à la messagerie
                 </a>
@@ -120,7 +120,7 @@ include_once('header.php');
                     </h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/gestion/message-repondre?id=<?= $message['id'] ?>">
+                    <form method="POST" action="/admin/message-repondre?id=<?= $message['id'] ?>">
                         <div class="mb-4">
                             <label for="reponse" class="form-label">
                                 <i class="fas fa-comment me-2"></i>
@@ -148,7 +148,7 @@ include_once('header.php');
                             </div>
                             <div class="col-md-6">
                                 <div class="d-flex justify-content-end gap-2">
-                                    <a href="/gestion/messages" class="btn btn-outline-secondary">
+                                    <a href="/admin/messages" class="btn btn-outline-secondary">
                                         <i class="fas fa-times me-2"></i>
                                         Annuler
                                     </a>
@@ -190,7 +190,7 @@ include_once('header.php');
                             <p class="text-muted small">
                                 Si vous avez traité la demande autrement (téléphone, etc.).
                             </p>
-                            <a href="/gestion/message?id=<?= $message['id'] ?>" 
+                            <a href="/admin/message?id=<?= $message['id'] ?>" 
                                class="btn btn-outline-success">
                                 <i class="fas fa-check me-2"></i>
                                 Marquer comme lu

@@ -8,7 +8,7 @@ define('DB_PASS', 'sae202_password_2024'); // Mot de passe de l'utilisateur déd
 // Configuration générale du site
 define('SITE_NAME', 'Murder Party - Événement Mystère');
 define('SITE_URL', 'https://MMI.sae202.ovh');
-define('ADMIN_URL', 'https://MMI.sae202.ovh/gestion');
+define('ADMIN_URL', 'https://MMI.sae202.ovh/admin');
 
 // Paramètres de sécurité
 define('UPLOAD_MAX_SIZE', 204800); // 200Ko en octets

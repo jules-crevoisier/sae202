@@ -1,6 +1,6 @@
-# Authentification Apache Basic pour /gestion
+# Authentification Apache Basic pour /admin
 AuthType Basic
-AuthName "Administration sae202 - Gestion"
+AuthName "Administration sae202 - Admin"
 AuthUserFile "/home/mmi24c01/htpassword.mmi"
 Require valid-user
 

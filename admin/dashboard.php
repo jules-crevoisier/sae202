@@ -341,7 +341,7 @@ include_once('header.php');
                 <div class="card-body pt-3">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="/gestion/utilisateurs" class="action-btn primary">
+                            <a href="/admin/utilisateurs" class="action-btn primary">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-users fa-2x"></i>
@@ -355,7 +355,7 @@ include_once('header.php');
                         </div>
                         
                         <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="/gestion/commentaires" class="action-btn warning">
+                            <a href="/admin/commentaires" class="action-btn warning">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-comments fa-2x"></i>
@@ -372,7 +372,7 @@ include_once('header.php');
                         </div>
                         
                         <div class="col-lg-3 col-md-6 mb-3">
-                            <a href="/gestion/messages" class="action-btn info">
+                            <a href="/admin/messages" class="action-btn info">
                                 <div class="d-flex align-items-center">
                                     <div class="me-3">
                                         <i class="fas fa-envelope fa-2x"></i>
@@ -450,14 +450,14 @@ include_once('header.php');
                             </div>
                             <div class="ms-3">
                                 <div class="btn-group">
-                                    <a href="/gestion/commentaires/approuver/<?= $commentaire['id'] ?>" 
+                                    <a href="/admin/commentaires/approuver/<?= $commentaire['id'] ?>" 
                                        class="btn btn-success btn-sm"
                                        data-bs-toggle="tooltip"
                                        title="Approuver ce commentaire"
                                        data-confirm="Approuver ce commentaire ?">
                                         <i class="fas fa-check"></i>
                                     </a>
-                                    <a href="/gestion/commentaires/rejeter/<?= $commentaire['id'] ?>" 
+                                    <a href="/admin/commentaires/rejeter/<?= $commentaire['id'] ?>" 
                                        class="btn btn-danger btn-sm"
                                        data-bs-toggle="tooltip"
                                        title="Rejeter ce commentaire"
@@ -472,7 +472,7 @@ include_once('header.php');
                     
                     <?php if (count($commentaires_en_attente) > 3): ?>
                     <div class="text-center pt-3">
-                        <a href="/gestion/commentaires" class="btn btn-primary btn-lg">
+                        <a href="/admin/commentaires" class="btn btn-primary btn-lg">
                             <i class="fas fa-eye me-2"></i>
                             Voir tous les commentaires (<?= count($commentaires_en_attente) ?>)
                         </a>

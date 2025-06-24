@@ -4,8 +4,11 @@
     DocumentRoot /var/www/sae202
     DirectoryIndex index.php
     
+    # Alias pour maintenir la compatibilité avec l'ancienne URL /gestion
+    Alias /gestion /var/www/sae202/admin
+    
     # Protection Apache Basic Auth pour l'administration (EN PREMIER)
-    <Directory /var/www/sae202/gestion>
+    <Directory /var/www/sae202/admin>
         AuthType Basic
         AuthBasicProvider file
         AuthName "Administration sae202 - Gestion"
@@ -15,7 +18,7 @@
             Require valid-user
         </RequireAny>
         
-        # Permettre les .htaccess dans le dossier gestion
+        # Permettre les .htaccess dans le dossier admin
         AllowOverride All
         Options Indexes FollowSymLinks
     </Directory>
@@ -26,7 +29,8 @@
         Require all granted
         
         RewriteEngine On
-        # Exclure explicitement le dossier /gestion ET ses sous-dossiers
+        # Exclure explicitement les dossiers /admin et /gestion ET leurs sous-dossiers
+        RewriteCond %{REQUEST_URI} !^/admin(/.*)?$
         RewriteCond %{REQUEST_URI} !^/gestion(/.*)?$
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteCond %{REQUEST_FILENAME} !-d

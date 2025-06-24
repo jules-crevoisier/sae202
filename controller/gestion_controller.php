@@ -16,7 +16,7 @@ function index() {
     $commentaires_en_attente = Comment::getPending();
     $nb_commentaires_attente = count($commentaires_en_attente);
     
-    require_once('gestion/dashboard.php');
+    require_once('admin/dashboard.php');
 }
 
 function utilisateurs() {
@@ -42,7 +42,7 @@ function utilisateurs() {
     if ($action === 'detail' && $utilisateur_id > 0) {
         $utilisateur = User::getById($utilisateur_id);
         if (!$utilisateur) {
-            redirect('/gestion/utilisateurs');
+            redirect('/admin/utilisateurs');
         }
         
         // Récupérer les commentaires de l'utilisateur
@@ -51,14 +51,14 @@ function utilisateurs() {
         // Récupérer les messages de l'utilisateur
         $messages_utilisateur = Message::getByUser($utilisateur_id);
         
-        require_once('gestion/utilisateur_detail.php');
+        require_once('admin/utilisateur_detail.php');
         return;
     }
     
     // Récupérer tous les utilisateurs
     $utilisateurs = User::getAll();
     
-    require_once('gestion/utilisateurs.php');
+    require_once('admin/utilisateurs.php');
 }
 
 function messages() {
@@ -86,7 +86,7 @@ function messages() {
         if ($message) {
             Message::markAsRead($message_id);
         }
-        require_once('gestion/message_detail.php');
+        require_once('admin/message_detail.php');
         return;
     }
     
@@ -96,7 +96,7 @@ function messages() {
         
         $message = Message::getById($message_id);
         if (!$message) {
-            redirect('/gestion/messages');
+            redirect('/admin/messages');
         }
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -117,18 +117,18 @@ function messages() {
             }
         }
         
-        require_once('gestion/message_repondre.php');
+        require_once('admin/message_repondre.php');
         return;
     }
     
     if ($action === 'supprimer' && $message_id > 0) {
         Message::delete($message_id);
-        redirect('/gestion/messages');
+        redirect('/admin/messages');
     }
     
     // Affichage de la liste des messages
     $messages = Message::getAll();
-    require_once('gestion/messages.php');
+    require_once('admin/messages.php');
 }
 
 function commentaires() {
@@ -153,16 +153,16 @@ function commentaires() {
     // Traitement des actions
     if ($action === 'approuver' && $commentaire_id > 0) {
         Comment::approve($commentaire_id);
-        redirect('/gestion/commentaires');
+        redirect('/admin/commentaires');
     }
     
     if ($action === 'rejeter' && $commentaire_id > 0) {
         Comment::reject($commentaire_id);
-        redirect('/gestion/commentaires');
+        redirect('/admin/commentaires');
     }
     
     // Affichage de la liste des commentaires
     $commentaires = Comment::getAll();
-    require_once('gestion/commentaires.php');
+    require_once('admin/commentaires.php');
 }
 ?> 

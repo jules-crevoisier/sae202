@@ -322,7 +322,7 @@ include_once('header.php');
                                                 <i class="fas fa-envelope"></i>
                                             </a>
                                             <?php if (!($utilisateur['is_admin'] ?? false)): ?>
-                                            <a href="/gestion/utilisateur?id=<?= $utilisateur['id'] ?>" 
+                                            <a href="/admin/utilisateur?id=<?= $utilisateur['id'] ?>" 
                                                class="action-btn view" 
                                                data-bs-toggle="tooltip"
                                                title="Voir les détails">
