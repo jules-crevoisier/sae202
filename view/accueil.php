@@ -1787,7 +1787,7 @@ require_once('view/autres_pages/header.php');
                 <!-- Vidéo de présentation -->
         <div class="video-container">
             <video controls preload="metadata" poster="/assets/img/imageHeroFond.png">
-                <source src="/assets/video/Novake - DerniersFils - Cécile Lochus - Valentin BABIC - Jules Crevoisier - Lison Gely - Charlotte Som de araujo (1).mp4" type="video/mp4">
+                <source src="/assets/video/video.mp4" type="video/mp4">
                 Votre navigateur ne supporte pas la lecture de vidéos HTML5.
             </video>
         </div>
@@ -1832,7 +1832,7 @@ require_once('view/autres_pages/header.php');
                     <i class="fas fa-users"></i>
                 </div>
                 <h3 class="card-title">Participants</h3>
-                <p class="card-info">6 à 12 joueurs</p>
+                <p class="card-info">7 à 30 joueurs</p>
                 <p class="card-detail">À partir de 16 ans</p>
             </div>
             

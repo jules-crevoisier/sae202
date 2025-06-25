@@ -825,57 +825,6 @@ require_once('view/autres_pages/header.php');
                 </div>
             </section>
 
-<!-- Section FAQ -->
-<section class="faq-section">
-    <div class="faq-container">
-        <h2 class="faq-title">FAQ</h2>
-        
-        <div class="faq-accordion" onclick="toggleFAQ(this)">
-            <div class="faq-header">
-                <h3 class="faq-question">Informations importantes</h3>
-                <span class="faq-toggle">▼</span>
-            </div>
-            <div class="faq-content">
-                <div class="faq-answer">
-                    <p><strong>Nombre de participants :</strong> 6 à 12 personnes maximum pour garantir une expérience optimale</p>
-                    <p><strong>Âge minimum :</strong> 16 ans (les mineurs doivent être accompagnés d'un adulte)</p>
-                    <p><strong>Boissons alcoolisées :</strong> Servies avec modération, alternatives sans alcool disponibles</p>
-                            </div>
-                        </div>
-                    </div>
-        
-        <div class="faq-accordion" onclick="toggleFAQ(this)">
-            <div class="faq-header">
-                <h3 class="faq-question">À apporter</h3>
-                <span class="faq-toggle">▼</span>
-                            </div>
-            <div class="faq-content">
-                <div class="faq-answer">
-                    <p>✓ Costume d'époque (années 1920) si possible</p>
-                    <p>✓ Carnet et stylo pour vos notes</p>
-                    <p>✓ Bonne humeur et esprit d'équipe</p>
-                    <p>✓ Pièce d'identité</p>
-                </div>
-                        </div>
-                        </div>
-                        
-        <div class="faq-accordion" onclick="toggleFAQ(this)">
-            <div class="faq-header">
-                <h3 class="faq-question">Fourni sur place</h3>
-                <span class="faq-toggle">▼</span>
-                        </div>
-            <div class="faq-content">
-                <div class="faq-answer">
-                    <p>✓ Fiche personnage détaillée</p>
-                    <p>✓ Accessoires de costume</p>
-                    <p>✓ Repas complet et boissons</p>
-                    <p>✓ Indices et documents d'enquête</p>
-                        </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
 <!-- Section Tarifs -->
 <section class="pricing-section">
     <div class="pricing-container">
@@ -938,6 +887,57 @@ require_once('view/autres_pages/header.php');
         </p>
     </div>
 </section>
+
+<!-- Section FAQ -->
+<section class="faq-section">
+    <div class="faq-container">
+        <h2 class="faq-title">FAQ</h2>
+        
+        <div class="faq-accordion" onclick="toggleFAQ(this)">
+            <div class="faq-header">
+                <h3 class="faq-question">Informations importantes</h3>
+                <span class="faq-toggle">▼</span>
+            </div>
+            <div class="faq-content">
+                <div class="faq-answer">
+                    <p><strong>Nombre de participants :</strong> 6 à 12 personnes maximum pour garantir une expérience optimale</p>
+                    <p><strong>Âge minimum :</strong> 16 ans (les mineurs doivent être accompagnés d'un adulte)</p>
+                    <p><strong>Boissons alcoolisées :</strong> Servies avec modération, alternatives sans alcool disponibles</p>
+                            </div>
+                        </div>
+                    </div>
+        
+        <div class="faq-accordion" onclick="toggleFAQ(this)">
+            <div class="faq-header">
+                <h3 class="faq-question">À apporter</h3>
+                <span class="faq-toggle">▼</span>
+                            </div>
+            <div class="faq-content">
+                <div class="faq-answer">
+                    <p>✓ Costume d'époque (années 1920) si possible</p>
+                    <p>✓ Carnet et stylo pour vos notes</p>
+                    <p>✓ Bonne humeur et esprit d'équipe</p>
+                    <p>✓ Pièce d'identité</p>
+                </div>
+                        </div>
+                        </div>
+                        
+        <div class="faq-accordion" onclick="toggleFAQ(this)">
+            <div class="faq-header">
+                <h3 class="faq-question">Fourni sur place</h3>
+                <span class="faq-toggle">▼</span>
+                        </div>
+            <div class="faq-content">
+                <div class="faq-answer">
+                    <p>✓ Fiche personnage détaillée</p>
+                    <p>✓ Accessoires de costume</p>
+                    <p>✓ Repas complet et boissons</p>
+                    <p>✓ Indices et documents d'enquête</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
 <!-- Section CTA avec ornements -->
 <section class="cta-section">
